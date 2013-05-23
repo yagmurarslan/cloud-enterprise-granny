@@ -5,28 +5,13 @@
              version="1.0">
 
     <persistence-unit name="application" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>com.osintegrators.example.Address</class>
-
-        <exclude-unlisted-classes>true</exclude-unlisted-classes>
-        <properties>
-            <!--
-			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
-			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
-			-->
-
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
-            <property name="hibernate.hbm2ddl.auto" value="update" />
-
-
-            <property name="hibernate.ejb.naming_strategy"
-                      value="org.hibernate.cfg.ImprovedNamingStrategy" />
-            <!--
-                        <property name="hibernate.format_sql" value="true" />
-                        <property name="hibernate.show_sql" value="true" />
-            -->
-        </properties>
-
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+  	  	<class>com.osintegrators.example.Address</class>
+  	  	
+  	  	<exclude-unlisted-classes>true</exclude-unlisted-classes>
+  	  	<properties>
+			<property name="eclipselink.ddl-generation" value="create-tables"/>
+		</properties>
     </persistence-unit>
 
 </persistence>
