@@ -1,4 +1,8 @@
-libraries/
-.idea/
-*.iml
-target/
+/bin
+/war
+*.DS_Store
+/target
+/build
+/.settings
+.classpath
+.project

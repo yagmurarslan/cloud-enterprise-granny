@@ -1,42 +1,45 @@
-JavaSpringGranny
-================
+SAP HANA Cloud Platform Samples - enterprise granny
+========
 
-Granny's Addressbook with Java + Spring MVC + PostgreSQL
-Install database
-----------------
-Install the database.
-* NOTE: You may need to setup trusted authentication for localhost. This is done by editing the [pg_hba.conf](http://www.postgresql.org/docs/devel/static/auth-pg-hba-conf.html) file.
-<pre><code> sudo apt-get install postgresql-9.1</code></pre>
-* make a user called postgres and Start the postgresql server. Documentation regarding this can be found [here](http://www.postgresql.org/docs/9.1/static/server-start.html)
-* Create a database called granny by following command <pre><code> </code>CREATE DATABASE granny;</pre>
-* Create a user/role called granny by following command <pre><code> </code>CREATE USER granny WITH password 'granny';</pre>
-* Grant all privileges to the granny user/role by following command <pre><code> GRANT ALL PRIVILEGES ON DATABASE granny to granny; </code></pre>
+This sample is a fork of the original [Granny's Addressbook] (https://github.com/osintegrators/JavaSpringGranny) provided by Open Software Integrators. 
 
-Checkout Project from git
--------------------------
-1. Install git  <code>sudo apt-get install git</code>
-2. Do a <code> git clone https://github.com/osintegrators/JavaSpringGranny.git </code>
-2. Open up your IDE ( Eclipse / STS preffered ) and go to File -> Import -> General -> Existing projects into workspace
+It's currently a work in progress - stay tuned!
 
-Build
------
-4. Perform a Project -> Clean
-5. Right click on the pom.xml and do a Maven -> clean, and a Maven -> install.
-6. Right click on Project and Run As -> Run On server.
-7. You might need to create a new server environment.
+Quick start
+-----------
 
-Run
----
-* This project can be deployed on any of the following
-<br> Tomcat
-<br> vFabric tcServer
-<br> JBoss Application Server
-9. After you create a server, Deploy the project on the server. 
-10. Note: If your IDE does not have the facility to run on an server from within, you can do a mvn package from the command line and deploy the .war file directly on an external server
-11. Browse to <code>http://localhost:8080/JavaSpringGranny/</code>
+Clone the repo, `git clone https://github.com/SAP/cloud-enterprise-granny.git`, or [download the latest release](https://github.com/SAP/cloud-enterprise-granny/archive/master.zip).
 
-License
---------
+
+Versioning
+----------
+
+For transparency and insight into our release cycle, and for striving to maintain backward compatibility, the SAP HANA Cloud Platform- Samples project will be maintained under the Semantic Versioning guidelines as much as possible.
+
+Releases will be numbered with the following format:
+
+`<major>.<minor>.<patch>`
+
+And constructed with the following guidelines:
+
+* Breaking backward compatibility bumps the major (and resets the minor and patch)
+* New additions without breaking backward compatibility bumps the minor (and resets the patch)
+* Bug fixes and misc changes bumps the patch
+
+For more information on SemVer, please visit http://semver.org/
+
+
+Authors
+-------
+
+**Matthias Steiner**
+
++ http://twitter.com/steinermatt
++ http://github.com/steinermatt
+
+
+Copyright and license
+---------------------
 
 Copyright (c) 2012 Open Software Integrators
 
