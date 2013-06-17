@@ -12,7 +12,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.osintegrators.example">
-		<level value="info" />
+		<level value="all" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
