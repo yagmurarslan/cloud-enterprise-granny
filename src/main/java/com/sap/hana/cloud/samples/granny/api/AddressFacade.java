@@ -1,8 +1,10 @@
-package com.osintegrators.example;
+package com.sap.hana.cloud.samples.granny.api;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,68 +15,65 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.List;
-import java.util.Locale;
+import com.osintegrators.example.Address;
+import com.sap.hana.cloud.samples.granny.srv.AddressService;
 
 /**
  * Handles requests for the application home page.
- * 
- * @deprecated Please use {@link com.sap.hana.cloud.samples.granny.api.AddressFacade} instead
  */
-@Controller
-public class HomeController {
-
-	private static final Logger logger = LoggerFactory
-			.getLogger(HomeController.class);
+@Controller()
+@Primary
+public class AddressFacade
+{
 
 	@Autowired
 	AddressService addressService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.debug("in home method");
+	public String home(Locale locale, Model model)
+	{
 
 		return "home";
 	}
-	
 
 	@RequestMapping(value = "/get/{_id}", method = RequestMethod.GET)
-	public @ResponseBody Address get(@PathVariable Long _id) {
-	        logger.debug("in get method");
-	       return addressService.getAddressById(_id);	        
+	public @ResponseBody
+	Address get(@PathVariable Long _id)
+	{
+		return addressService.getAddressById(_id);
 	}
-	
+
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	public void update(@RequestBody Address address) {
-	        logger.debug("in create method");
+	public void update(@RequestBody Address address)
+	{
 
 		addressService.createAddress(address);
 
 	}
-	
 
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.CREATED)
-	public void create(@RequestBody Address address) {
-	        logger.debug("in create method");
+	public void create(@RequestBody Address address)
+	{
 
 		addressService.createAddress(address);
 
 	}
-	
+
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public void delete(@RequestBody Address address) {
-	        logger.debug("in delete method");
-	                
-	       addressService.deleteAddress(address);
+	public void delete(@RequestBody Address address)
+	{
+
+		addressService.deleteAddress(address);
 	}
-	
+
 	@RequestMapping(value = "/addresses", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody List<Address> list() {
-	        logger.debug("in create method");
+	public @ResponseBody
+	List<Address> list()
+	{
 
 		return addressService.getAllAddresses();
 	}

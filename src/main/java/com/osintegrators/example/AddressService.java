@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.osintegrators.example.Address;
 
+/**
+* @deprecated please use {@link com.sap.hana.cloud.samples.granny.srv.AddressService} instead
+*/
 public interface AddressService {
 
 	void createAddress(Address add);
