@@ -10,6 +10,8 @@ Quick start
 
 Clone the repo, `git clone https://github.com/SAP/cloud-enterprise-granny.git`, or [download the latest release](https://github.com/SAP/cloud-enterprise-granny/archive/master.zip).
 
+This sample code comes with a series of blog posts: check out [Enterprise Granny](http://scn.sap.com/docs/DOC-42001) on the SAP Community Network (no registration required!)
+
 
 Versioning
 ----------

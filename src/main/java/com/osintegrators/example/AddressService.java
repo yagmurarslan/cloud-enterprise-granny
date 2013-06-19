@@ -5,7 +5,7 @@ import java.util.List;
 import com.osintegrators.example.Address;
 
 /**
-* @deprecated please use {@link com.sap.hana.cloud.samples.granny.srv.AddressService} instead
+* @deprecated please use {@link com.sap.hana.cloud.samples.granny.srv.ContactService} instead
 */
 public interface AddressService {
 

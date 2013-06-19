@@ -12,17 +12,17 @@ import com.osintegrators.example.Address;
 import com.osintegrators.example.AddressRepository;
 
 /**
- * Default implementation of the {@link AddressService} interface.
+ * Default implementation of the {@link ContactService} interface.
  */
 @Service
 @Primary
-public class AddressServiceImpl extends BaseService implements AddressService
+public class ContactServiceImpl extends BaseService implements ContactService
 {
 	/**
 	 * The {@link Logger} to be used. Declared here so that it shows up in logging console early on.
 	 */
 	@SuppressWarnings("unused")
-    private static final Logger logger = LoggerFactory.getLogger(AddressServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ContactServiceImpl.class);
 	
 	/** 
 	 * The {@link AdressRepository} used for persistence operations. 
@@ -37,8 +37,7 @@ public class AddressServiceImpl extends BaseService implements AddressService
 	{
 		try
 		{
-			throw new NullPointerException("on purpose!");
-			//addressRepository.save(address);
+			addressRepository.save(address);
 		}
 		catch (Exception ex)
 		{

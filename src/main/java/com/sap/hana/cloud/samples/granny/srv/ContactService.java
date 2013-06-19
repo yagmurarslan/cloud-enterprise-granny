@@ -8,7 +8,7 @@ import com.osintegrators.example.Address;
  * Provides CRUD (Create, Read, Update, Delete) operations as well as other
  * life-cycle related functions for {@link Address} objects.
  */
-public interface AddressService
+public interface ContactService
 {
 
 	/**

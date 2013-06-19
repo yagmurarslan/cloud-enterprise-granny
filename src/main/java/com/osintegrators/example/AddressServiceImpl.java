@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.osintegrators.example.Address;
 
 /**
- * @deprecated please use {@link com.sap.hana.cloud.samples.granny.srv.AddressServiceImpl} instead
+ * @deprecated please use {@link com.sap.hana.cloud.samples.granny.srv.ContactServiceImpl} instead
  */
 @Service
 public class AddressServiceImpl implements AddressService {

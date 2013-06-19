@@ -19,7 +19,7 @@ import java.util.Locale;
 /**
  * Handles requests for the application home page.
  * 
- * @deprecated Please use {@link com.sap.hana.cloud.samples.granny.api.AddressFacade} instead
+ * @deprecated Please use {@link com.sap.hana.cloud.samples.granny.web.ContactController} instead
  */
 @Controller
 public class HomeController {
