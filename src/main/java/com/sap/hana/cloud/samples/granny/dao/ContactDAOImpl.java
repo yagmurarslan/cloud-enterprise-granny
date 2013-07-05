@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.sap.hana.cloud.samples.granny.model.Contact;
 
 /**
- * Default implementation of the {@link  ContactDAO} interface based on Spring Data JPA.
+ * Default implementation of the {@link ContactDAO} interface based on Spring Data JPA.
  * 
  * @see http://static.springsource.org/spring-data/data-jpa/docs/current/reference/html/
  */

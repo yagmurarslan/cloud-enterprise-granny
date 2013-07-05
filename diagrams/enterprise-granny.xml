@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><entities>
 	<entity>
-		<entity-name>com.sap.hana.cloud.samples.granny.model.Address</entity-name>
+		<entity-name>com.sap.hana.cloud.samples.granny.model.PhoneNumber</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>190</entity-height>
-		<entity-X-Coordinate>20</entity-X-Coordinate>
-		<entity-Y-Coordinate>210</entity-Y-Coordinate>
+		<entity-height>90</entity-height>
+		<entity-X-Coordinate>450</entity-X-Coordinate>
+		<entity-Y-Coordinate>378</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -33,22 +33,22 @@
 	</entity>
 
 	<entity>
-		<entity-name>com.sap.hana.cloud.samples.granny.model.EmailAddress</entity-name>
+		<entity-name>com.sap.hana.cloud.samples.granny.model.Address</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>90</entity-height>
-		<entity-X-Coordinate>442</entity-X-Coordinate>
-		<entity-Y-Coordinate>190</entity-Y-Coordinate>
+		<entity-height>190</entity-height>
+		<entity-X-Coordinate>20</entity-X-Coordinate>
+		<entity-Y-Coordinate>210</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
 	</entity>
 
 	<entity>
-		<entity-name>com.sap.hana.cloud.samples.granny.model.PhoneNumber</entity-name>
+		<entity-name>com.sap.hana.cloud.samples.granny.model.EmailAddress</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>90</entity-height>
-		<entity-X-Coordinate>450</entity-X-Coordinate>
-		<entity-Y-Coordinate>378</entity-Y-Coordinate>
+		<entity-X-Coordinate>442</entity-X-Coordinate>
+		<entity-Y-Coordinate>190</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>

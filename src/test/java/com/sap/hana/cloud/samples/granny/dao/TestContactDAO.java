@@ -1,12 +1,12 @@
 package com.sap.hana.cloud.samples.granny.dao;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.OptimisticLockException;
 
 import org.junit.After;
 import org.junit.Before;
@@ -17,6 +17,8 @@ import org.springframework.orm.jpa.JpaOptimisticLockingFailureException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import com.sap.hana.cloud.samples.granny.model.Address;
 import com.sap.hana.cloud.samples.granny.model.AddressType;
@@ -35,7 +37,6 @@ public class TestContactDAO
 {
 	@Autowired
 	ContactDAO contactDAO = null;
-
 	
 	@Before
 	public void setUp() throws Exception 
@@ -47,65 +48,87 @@ public class TestContactDAO
 	{
 	}
 
+	/**
+	 * Tests the CRUD operations.
+	 */
 	@Test
+	@Transactional
 	public void testCRUD() 
 	{
+		boolean transactional = TransactionSynchronizationManager.isActualTransactionActive();
+		assertTrue("CRUD operations test should run within a transaction!", transactional);
+		
 		Contact testPerson = createTestContact();
 		
 		long noOfRecords = contactDAO.count();
 		
 		// create
 		Contact contact = contactDAO.save(testPerson);
-		
-		assertNotNull(contact);
+		assertNotNull("Contact should have been created!", contact);
 		assertTrue("Contact should have been created!", (noOfRecords == (contactDAO.count() - 1)));
 		
 		// read
-		Contact anotherContact = contactDAO.findOne(contact.getId());
-		
-		assertNotNull(anotherContact);
+		Contact anotherContactRef = contactDAO.findOne(contact.getId());
+		assertNotNull("Contact should have been read!", anotherContactRef);
 		
 		// update
-		anotherContact.setFirstName("NEO");
+		anotherContactRef.setFirstName("NEO");
 		
-		Contact updatedContact = contactDAO.save(anotherContact);
-		
-		assertTrue("Contact name should be updated!", anotherContact.getFirstName().equals(updatedContact.getFirstName()));
+		Contact updatedContactRef = contactDAO.save(anotherContactRef);
+		assertTrue("Contact name should be updated!", anotherContactRef.getFirstName().equals(updatedContactRef.getFirstName()));
 		
 		// delete
-		contactDAO.delete(updatedContact);
-		
-		assertTrue("Contact should have been created!", (noOfRecords == contactDAO.count()));
+		contactDAO.delete(updatedContactRef);
+		assertTrue("Contact should have been deleted!", (noOfRecords == contactDAO.count()));
 		
 	}
 	
-	@Test(expected=JpaOptimisticLockingFailureException.class)
-	public void testOptimisticLocking() throws JpaOptimisticLockingFailureException
+	/** 
+	 * Tests concurrent modification of an object.
+	 * 
+	 * @throws JpaOptimisticLockingFailureException - In case of a concurrent modification
+	 */
+	public void testOptimisticLocking() 
 	{
+		boolean transactional = TransactionSynchronizationManager.isActualTransactionActive();
+		assertFalse("Optimistic Locking behavior cannot be verified within a transaction!", transactional);
+		
 		Contact testPerson = createTestContact();
 		
 		long noOfRecords = contactDAO.count();
 		
 		// create
 		Contact contact = contactDAO.save(testPerson);
-		
-		assertNotNull(contact);
+		assertNotNull("Contact should have been created!", contact);
 		assertTrue("Contact should have been created!", (noOfRecords == (contactDAO.count() - 1)));
 		
-		// read
-		Contact anotherContact = contactDAO.findOne(contact.getId());
-				
-		assertNotNull(anotherContact);
+		// another user is obtaining a reference to the same contact
+		Contact anotherContactRef = contactDAO.findOne(contact.getId());	
+		assertNotNull("Contact should have been read!", anotherContactRef);
 		
 		// update
-		anotherContact.setFirstName("NEO");
-				
-		Contact updatedContact = contactDAO.save(anotherContact);
-				
-		assertTrue("Contact name should be updated!", anotherContact.getFirstName().equals(updatedContact.getFirstName()));
- 
+		contact.setFirstName("NEO");
+		Contact updatedContact = contactDAO.save(contact);
+		assertTrue("Contact name should be updated!", contact.getFirstName().equals(updatedContact.getFirstName()));
+		
+		// now, the version attribute of the two object references should be different
+		assertTrue("Version numbers should be different!", (anotherContactRef.getVersion() != updatedContact.getVersion()));
+		
 		// 2nd update - should fail
-		contact = contactDAO.save(contact);
+		try
+		{
+			anotherContactRef = contactDAO.save(anotherContactRef);
+			fail("OtimisticLocking excpetion should have been thrown!");
+		}
+		catch (Exception ex)
+		{
+			assertTrue("Expected OptimisticException", ex instanceof JpaOptimisticLockingFailureException);
+		}
+		finally
+		{
+			// clean up the created contact
+			contactDAO.delete(contact);
+		}
 		
 	}
 	
@@ -156,7 +179,4 @@ public class TestContactDAO
 		
 		return contact;
 	}
-	
-
-	
 }
