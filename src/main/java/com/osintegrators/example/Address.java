@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
+/**
+ * @deprecated please use {@link com.sap.hana.cloud.samples.granny.model.Contact} instead
+ */
 @Entity
 @NamedQueries({
 		@NamedQuery(name = "Address.findAll", query = "select a from Address a") })

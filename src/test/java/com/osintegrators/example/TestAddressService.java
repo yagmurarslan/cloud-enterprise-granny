@@ -12,10 +12,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * @author dmistry
- * 
+ * @deprecated In favor of {@link com.sap.hana.cloud.samples.granny.dao.TestContactDAO}
  */
-@ContextConfiguration
-@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration
+//@RunWith(SpringJUnit4ClassRunner.class)
 public class TestAddressService {
 	
 	@Autowired

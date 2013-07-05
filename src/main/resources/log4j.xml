@@ -15,6 +15,10 @@
 		<level value="all" />
 	</logger>
 	
+	<logger name="com.sap.hana.cloud.samples.granny">
+		<level value="all" />
+	</logger>
+	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />

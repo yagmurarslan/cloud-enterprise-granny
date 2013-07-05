@@ -1,0 +1,124 @@
+package com.sap.hana.cloud.samples.granny.model;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+/**
+ * A contact person.
+ */
+@Entity
+@Table(name = "GRANNY_CONTACT")
+public class Contact extends BaseObject implements Serializable
+{
+	/**
+	 * The <code>serialVersionUID</code> of the class.
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Column(name="SAULTATION", length = 10, nullable=true)
+	@Enumerated(EnumType.STRING)
+	protected Salutation salutation = null;
+	
+	@Column(name="TITLE", length = 10, nullable=true)
+	@Enumerated(EnumType.STRING)
+	protected Title title = null;
+	
+	@Column(name="FIRSTNAME", length = 30, nullable=true)
+	protected String firstName = null;
+	
+	@Column(name="LASTNAME", length = 30, nullable=true)
+	protected String lastName = null;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="CONTACT_ID", referencedColumnName="ID")
+	protected List<Address> addresses = null;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="CONTACT_ID", referencedColumnName="ID")
+	protected List<PhoneNumber> phoneNumbers = null;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="CONTACT_ID", referencedColumnName="ID")
+	protected List<Email> emailAdresses = null;
+
+	public Salutation getSalutation()
+	{
+		return salutation;
+	}
+
+	public void setSalutation(Salutation salutation)
+	{
+		this.salutation = salutation;
+	}
+
+	public Title getTitle()
+	{
+		return title;
+	}
+
+	public void setTitle(Title title)
+	{
+		this.title = title;
+	}
+
+	public String getFirstName()
+	{
+		return firstName;
+	}
+
+	public void setFirstName(String firstName)
+	{
+		this.firstName = firstName;
+	}
+
+	public String getLastName()
+	{
+		return lastName;
+	}
+
+	public void setLastName(String lastName)
+	{
+		this.lastName = lastName;
+	}
+
+	public List<Address> getAddresses()
+	{
+		return addresses;
+	}
+
+	public void setAddresses(List<Address> addresses)
+	{
+		this.addresses = addresses;
+	}
+
+	public List<PhoneNumber> getPhoneNumbers()
+	{
+		return phoneNumbers;
+	}
+
+	public void setPhoneNumbers(List<PhoneNumber> phoneNumbers)
+	{
+		this.phoneNumbers = phoneNumbers;
+	}
+
+	public List<Email> getEmailAdresses()
+	{
+		return emailAdresses;
+	}
+
+	public void setEmailAdresses(List<Email> emailAdresses)
+	{
+		this.emailAdresses = emailAdresses;
+	}
+	
+}

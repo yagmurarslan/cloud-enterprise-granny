@@ -12,14 +12,12 @@
         http://www.springframework.org/schema/jee           http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
         http://www.springframework.org/schema/aop 			http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
 
-	<context:component-scan base-package="com.sap.hana.cloud.samples.granny.xcc, com.sap.hana.cloud.samples.granny.srv" />
+	<context:component-scan base-package="com.sap.hana.cloud.samples.granny.xcc, com.sap.hana.cloud.samples.granny.dao" />
 	
-	<jpa:repositories base-package="com.osintegrators.example" />
+	<jpa:repositories base-package="com.sap.hana.cloud.samples.granny.dao" />
 	
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
-
-	<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/DefaultDB" />
-
+	
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 		<property name="jpaDialect" ref="jpaDialect" />
@@ -46,6 +44,17 @@
 
 	<bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.EclipseLinkJpaDialect" />
 	
+	<beans profile="local, prod" >
+		<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/DefaultDB" />
+	</beans>
 	
+	<beans profile="test">
+		<bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource">
+	        <property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver"/>
+	        <property name="url" value="jdbc:derby://localhost:1527/DemoDB;create=true;"/>
+	        <property name="username" value="demo"/>
+	        <property name="password" value="demo"/>
+    	</bean>
+	</beans>
 	
 </beans>
