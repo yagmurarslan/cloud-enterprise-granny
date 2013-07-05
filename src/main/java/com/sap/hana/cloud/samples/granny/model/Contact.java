@@ -49,7 +49,7 @@ public class Contact extends BaseObject implements Serializable
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="CONTACT_ID", referencedColumnName="ID")
-	protected List<Email> emailAdresses = null;
+	protected List<EmailAddress> emailAdresses = null;
 
 	public Salutation getSalutation()
 	{
@@ -111,12 +111,12 @@ public class Contact extends BaseObject implements Serializable
 		this.phoneNumbers = phoneNumbers;
 	}
 
-	public List<Email> getEmailAdresses()
+	public List<EmailAddress> getEmailAdresses()
 	{
 		return emailAdresses;
 	}
 
-	public void setEmailAdresses(List<Email> emailAdresses)
+	public void setEmailAdresses(List<EmailAddress> emailAdresses)
 	{
 		this.emailAdresses = emailAdresses;
 	}

@@ -9,7 +9,7 @@
         <class>com.sap.hana.cloud.samples.granny.model.BaseObject</class>
         <class>com.sap.hana.cloud.samples.granny.model.Address</class>
         <class>com.sap.hana.cloud.samples.granny.model.Contact</class>
-        <class>com.sap.hana.cloud.samples.granny.model.Email</class>
+        <class>com.sap.hana.cloud.samples.granny.model.EmailAddress</class>
         <class>com.sap.hana.cloud.samples.granny.model.PhoneNumber</class>
   	  	
   	  	<exclude-unlisted-classes>true</exclude-unlisted-classes>

@@ -22,7 +22,7 @@ import com.sap.hana.cloud.samples.granny.model.Address;
 import com.sap.hana.cloud.samples.granny.model.AddressType;
 import com.sap.hana.cloud.samples.granny.model.CommunicationType;
 import com.sap.hana.cloud.samples.granny.model.Contact;
-import com.sap.hana.cloud.samples.granny.model.Email;
+import com.sap.hana.cloud.samples.granny.model.EmailAddress;
 import com.sap.hana.cloud.samples.granny.model.PhoneNumber;
 import com.sap.hana.cloud.samples.granny.model.Salutation;
 
@@ -118,7 +118,7 @@ public class TestContactDAO
 	{
 		Contact contact = new Contact();
 		Address address = new Address();
-		Email email = new Email();
+		EmailAddress email = new EmailAddress();
 		PhoneNumber homePhone = new PhoneNumber();
 		PhoneNumber cellPhone = new PhoneNumber();
 	
@@ -142,7 +142,7 @@ public class TestContactDAO
 		contact.setSalutation(Salutation.MR);
 		
 		List<Address> addressList = new ArrayList<Address>(1);
-		List<Email> emailList = new ArrayList<Email>(1);
+		List<EmailAddress> emailList = new ArrayList<EmailAddress>(1);
 		List<PhoneNumber> phoneNumberList = new ArrayList<PhoneNumber>(2);
 	
 		addressList.add(address);

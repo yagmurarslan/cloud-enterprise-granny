@@ -9,11 +9,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 /**
- * Email address of a {@link Contact}.
+ * EmailAddress address of a {@link Contact}.
  */
 @Entity
 @Table(name = "GRANNY_EMAIL")
-public class Email extends BaseObject implements Serializable
+public class EmailAddress extends BaseObject implements Serializable
 {
 	/**
 	 * The <code>serialVersionUID</code> of the class.

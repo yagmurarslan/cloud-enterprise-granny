@@ -33,7 +33,7 @@
 	</entity>
 
 	<entity>
-		<entity-name>com.sap.hana.cloud.samples.granny.model.Email</entity-name>
+		<entity-name>com.sap.hana.cloud.samples.granny.model.EmailAddress</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>90</entity-height>
 		<entity-X-Coordinate>442</entity-X-Coordinate>
