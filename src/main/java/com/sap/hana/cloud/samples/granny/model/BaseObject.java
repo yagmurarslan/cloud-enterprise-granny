@@ -12,6 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.eclipse.persistence.annotations.OptimisticLocking;
 import org.eclipse.persistence.annotations.OptimisticLockingType;
 
@@ -20,7 +21,7 @@ import org.eclipse.persistence.annotations.OptimisticLockingType;
  */
 @MappedSuperclass
 @OptimisticLocking(type=OptimisticLockingType.VERSION_COLUMN, cascade = true) 
-public abstract class BaseObject
+public abstract class BaseObject 
 {
 
 	/**
@@ -154,4 +155,12 @@ public abstract class BaseObject
 		this.version = version;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString()
+	{
+	    return new ToStringBuilder(this).append("id", this.id).append("createdAt", this.createdAt).append("createdBy", this.createdBy)
+	           .append("lastModifiedAt", this.lastModifiedAt).append("lastModifiedBy", this.lastModifiedBy).append("version", this.version).toString();
+	}
 }

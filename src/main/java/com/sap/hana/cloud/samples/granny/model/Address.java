@@ -8,9 +8,12 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * Address of a {@link Contact}.
  */
+
 @Entity
 @Table(name = "GRANNY_ADDRESS")
 public class Address extends BaseObject implements Serializable
@@ -111,5 +114,14 @@ public class Address extends BaseObject implements Serializable
 	{
 		this.country = country;
 	}
-	
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString()
+	{
+	    return new ToStringBuilder(this).appendSuper(super.toString()).append("type", this.type).append("street", this.street).append("street2", this.street2)
+	    	   .append("zipCode", this.zipCode).append("city", this.city).append("country", this.country)
+	           .append("state", this.state).toString();
+	}
 }

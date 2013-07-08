@@ -8,6 +8,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * The phone number of a {@link Contact}.
  */
@@ -44,5 +46,13 @@ public class PhoneNumber extends BaseObject implements Serializable
 	public void setNumber(String number)
 	{
 		this.number = number;
+	}
+	
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString()
+	{
+	    return new ToStringBuilder(this).appendSuper(super.toString()).append("type", this.type).append("number", this.number).toString();
 	}
 }

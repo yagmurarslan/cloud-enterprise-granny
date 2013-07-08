@@ -8,6 +8,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * EmailAddress address of a {@link Contact}.
  */
@@ -44,6 +46,14 @@ public class EmailAddress extends BaseObject implements Serializable
 	public void setEmail(String email)
 	{
 		this.email = email;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString()
+	{
+	    return new ToStringBuilder(this).appendSuper(super.toString()).append("type", this.type).append("email", this.email).toString();
 	}
 	
 }

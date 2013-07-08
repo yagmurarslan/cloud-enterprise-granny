@@ -12,10 +12,14 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * A contact person.
  */
+@XmlRootElement
 @Entity
 @Table(name = "GRANNY_CONTACT")
 public class Contact extends BaseObject implements Serializable
@@ -25,7 +29,7 @@ public class Contact extends BaseObject implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="SAULTATION", length = 10, nullable=true)
+	@Column(name="SALUTATION", length = 10, nullable=true)
 	@Enumerated(EnumType.STRING)
 	protected Salutation salutation = null;
 	
@@ -119,6 +123,16 @@ public class Contact extends BaseObject implements Serializable
 	public void setEmailAdresses(List<EmailAddress> emailAdresses)
 	{
 		this.emailAdresses = emailAdresses;
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString()
+	{
+	    return new ToStringBuilder(this).appendSuper(super.toString()).append("salutation", this.salutation).append("title", this.title)
+	            .append("firstName", this.firstName).append("lastName", this.lastName).append("addresses", this.addresses)
+	            .append("phoneNumbers", this.phoneNumbers).append("emailAdresses", this.emailAdresses).toString();
 	}
 	
 }
