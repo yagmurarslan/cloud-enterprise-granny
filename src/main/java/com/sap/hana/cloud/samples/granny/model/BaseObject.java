@@ -25,11 +25,11 @@ public abstract class BaseObject
 {
 
 	/**
-	 * The ID of the object.
+	 * The (globally unique) ID of the object.
 	 */
 	@Id
     @Column(name="ID", length = 36)
-    private String id = null;
+    private String id = UUID.randomUUID().toString();
 
 	/**
 	 * The {@link Date} the object was created at.
@@ -84,9 +84,7 @@ public abstract class BaseObject
      */
     @PrePersist
     protected void generateAuditInformation() 
-    {
-        id = UUID.randomUUID().toString();     
-        
+    {   
         final Date now = new Date();
         
         createdAt = now;
@@ -163,4 +161,44 @@ public abstract class BaseObject
 	    return new ToStringBuilder(this).append("id", this.id).append("createdAt", this.createdAt).append("createdBy", this.createdBy)
 	           .append("lastModifiedAt", this.lastModifiedAt).append("lastModifiedBy", this.lastModifiedBy).append("version", this.version).toString();
 	}
+	
+	/**
+	 * @see java.lang.Object#equals(Object)
+	 */
+	public final boolean equals(Object obj) 
+	{
+        if (this == obj) 
+        {
+        	return true;
+        }
+        
+        if (obj == null || !(obj instanceof BaseObject)) 
+        {
+            return false;
+        }
+
+        BaseObject other = (BaseObject) obj;
+
+        if (id == null) 
+        {
+        	return false;
+        }
+
+        return id.equals(other.getId());
+    }
+
+	/**
+	 * @see java.lang.Object#hashCode()
+	 */
+    public final int hashCode() 
+    {
+        if (id != null) 
+        {
+            return id.hashCode();
+        } 
+        else 
+        {
+            return super.hashCode();
+        }
+    }
 }
