@@ -23,7 +23,7 @@ public class EmailAddress extends BaseObject implements Serializable
 	@Enumerated(EnumType.STRING)
 	protected AddressType type = null;
 	
-	@Column(name="STREET", length = 50, nullable=true)
+	@Column(name="EMAIL", length = 70, nullable=true)
 	protected String email = null;
 
 	public AddressType getType()
