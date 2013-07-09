@@ -2,6 +2,7 @@ package com.sap.hana.cloud.samples.granny.dao;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.sap.hana.cloud.samples.granny.model.Address;
@@ -17,7 +18,8 @@ public interface ContactRepository extends CrudRepository<Contact, String>
 	 * 
 	 * @return A {@link List} of all {@link Contact} objects
 	 */
-	public List<Contact> findAll();
+	@Query("SELECT c from Contact c JOIN FETCH c.addresses JOIN FETCH c.phoneNumbers JOIN FETCH c.emailAdresses")
+	public List<Contact> queryAll();
 
 	/**
 	 * Returns a {@link List} of all {@link Contact} objects with an {@link Address}

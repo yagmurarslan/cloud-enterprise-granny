@@ -25,7 +25,7 @@ public class ContactDAOImpl implements ContactDAO
 	@Override
     public List<Contact> findAll()
     {
-	    return repository.findAll();
+	    return repository.queryAll();
     }
 
 	@Override
