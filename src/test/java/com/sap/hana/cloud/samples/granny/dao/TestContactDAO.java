@@ -85,8 +85,6 @@ public class TestContactDAO
 	
 	/** 
 	 * Tests concurrent modification of an object.
-	 * 
-	 * @throws JpaOptimisticLockingFailureException - In case of a concurrent modification
 	 */
 	public void testOptimisticLocking() 
 	{
@@ -129,6 +127,36 @@ public class TestContactDAO
 			// clean up the created contact
 			contactDAO.delete(contact);
 		}
+		
+	}
+	
+	/**
+	 * Tests the query for contacts based on a given country.
+	 */
+	@Test
+	@Transactional
+	public void testfindByAddressCountryQuery()
+	{
+		final String AUSTRALIA = "AU"; 
+		
+		Contact testPerson = createTestContact();
+		Address address = testPerson.getAddresses().get(0);
+		address.setCountry(AUSTRALIA);
+		
+		long noOfRecords = contactDAO.count();
+		
+		// create
+		Contact contact = contactDAO.save(testPerson);
+		assertNotNull("Contact should have been created!", contact);
+		assertTrue("Contact should have been created!", (noOfRecords == (contactDAO.count() - 1)));
+				
+		// spring data JPA query
+		List<Contact> aussies = contactDAO.findByAddressesCountry(AUSTRALIA);
+		assertTrue("There should be at least one contact", (aussies != null && aussies.size() > 0));
+	
+		// query all (optimized via fetch) 
+		aussies = contactDAO.findAll();
+		assertTrue("There should be at least one contact", (aussies != null && aussies.size() > 0));
 		
 	}
 	

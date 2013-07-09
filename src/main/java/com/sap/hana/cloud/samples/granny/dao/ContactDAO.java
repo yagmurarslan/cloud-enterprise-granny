@@ -35,4 +35,6 @@ public interface ContactDAO
 
 	
     public void deleteAll();
+    
+    public List<Contact> findByAddressesCountry(String country);
 }

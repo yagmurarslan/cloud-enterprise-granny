@@ -81,5 +81,11 @@ public class ContactDAOImpl implements ContactDAO
     {
 	    repository.deleteAll();
     }
+	
+	@Override
+	public List<Contact> findByAddressesCountry(String country)
+	{
+		return repository.findByAddressesCountry(country);
+	}
 
 }
