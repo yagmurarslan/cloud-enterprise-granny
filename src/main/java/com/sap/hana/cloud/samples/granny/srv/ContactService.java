@@ -35,14 +35,13 @@ public interface ContactService
 	List<Address> getAllAddresses() throws ServiceException;
 
 	/**
-	 * Returns the {@link Address} with the specified ID or <code>NULL</code> if no 
-	 * {@link Address} object with the specified ID exists.
+	 * Returns the {@link Address} with the specified ID or <code>NULL</code> if no {@link Address} object with the specified ID exists.
+	 * 
 	 * @param id The id of the  {@link Address} to retrieve
-	 * @return The {@link Address} with the specified ID or <code>NULL</code> if no 
-	 * {@link Address} object with the specified ID exists
+	 * @return The {@link Address} with the specified ID or <code>NULL</code> if no {@link Address} object with the specified ID exists
 	 * @throws ServiceException In case of an error
 	 */
-	Address getAddressById(Long id) throws ServiceException;
+	Address getAddressById(String id) throws ServiceException;
 
 	/**
 	 * Updates the specified {@link Address}.

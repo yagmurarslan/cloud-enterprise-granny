@@ -19,7 +19,7 @@ public class Address {
 	@Id
 	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long _id;
+	private String _id;
 
 	private String name;
 	private String address;
@@ -37,11 +37,11 @@ public class Address {
 	public Address() {
 	}
 
-	public Long get_id() {
+	public String get_id() {
 		return _id;
 	}
 
-	public void set_id(Long _id) {
+	public void set_id(String _id) {
 		this._id = _id;
 	}
 

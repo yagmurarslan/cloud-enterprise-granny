@@ -31,7 +31,7 @@ public class ContactController
 	 * The {@link ContactService} to be used.
 	 */
 	@Autowired
-	ContactService addressService;
+	ContactService contactService;
 
 	/**
 	 * Simply dispatches to the home view.
@@ -54,9 +54,9 @@ public class ContactController
 	 */
 	@RequestMapping(value = "/get/{_id}", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody Address get(@PathVariable Long _id)
+	public @ResponseBody Address get(@PathVariable String _id)
 	{
-		return addressService.getAddressById(_id);
+		return contactService.getAddressById(_id);
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class ContactController
 	@ResponseStatus(HttpStatus.CREATED)
 	public void create(@RequestBody Address address)
 	{
-		addressService.createAddress(address);
+		contactService.createAddress(address);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class ContactController
 	@ResponseStatus(HttpStatus.OK)
 	public void update(@RequestBody Address address)
 	{
-		addressService.updateAddress(address);
+		contactService.updateAddress(address);
 	}
 
 	/**
@@ -92,7 +92,7 @@ public class ContactController
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@RequestBody Address address)
 	{
-		addressService.deleteAddress(address);
+		contactService.deleteAddress(address);
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class ContactController
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody List<Address> list()
 	{
-		return addressService.getAllAddresses();
+		return contactService.getAllAddresses();
 	}
 	
 	/**
