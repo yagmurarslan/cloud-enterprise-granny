@@ -16,8 +16,8 @@
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<org.slf4j-version>1.7.2</org.slf4j-version>
 		<org.codehaus.jackson-version>1.9.9</org.codehaus.jackson-version>
+		<org.apache.cxf-version>2.7.5</org.apache.cxf-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
 	</properties>
 
 	<repositories>
@@ -97,6 +97,11 @@
 		<dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derbyclient</artifactId>
+			<version>10.9.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
 			<version>10.9.1.0</version>
 		</dependency>
 
@@ -243,6 +248,28 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-jaxrs</artifactId>
 			<version>${org.codehaus.jackson-version}</version>
+		</dependency>
+		
+		<!-- Apache CXF -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>${org.apache.cxf-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${org.apache.cxf-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-rs-extension-providers</artifactId>
+			<version>${org.apache.cxf-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-bundle-jaxrs</artifactId>
+			<version>${org.apache.cxf-version}</version>
 		</dependency>
 	</dependencies>
 

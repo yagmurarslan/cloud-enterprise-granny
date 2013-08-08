@@ -35,7 +35,7 @@ public class TestAddressService {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
+	//@Test
 	public void testCreateAddress() {
 		String expectedName = "John Doe";
 		String expectedAddress = "345 West Main St\nDurham, NC";
