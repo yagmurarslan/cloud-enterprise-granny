@@ -2,6 +2,7 @@ package com.sap.hana.cloud.samples.granny.api;
 
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -64,7 +65,7 @@ public class ContactFacade extends BaseFacade
 	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response create(Contact contact) throws FacadeException
+	public Response create(@Valid Contact contact) throws FacadeException
 	{	
 		try
 		{	
@@ -119,7 +120,7 @@ public class ContactFacade extends BaseFacade
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(@PathParam("id") String id, Contact contact) throws FacadeException
+	public Response update(@PathParam("id") String id, @Valid Contact contact) throws FacadeException
 	{
 		try
 		{	

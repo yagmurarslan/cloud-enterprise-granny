@@ -2,6 +2,8 @@ package com.sap.hana.cloud.samples.granny.dao;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,13 +31,13 @@ public class ContactDAOImpl implements ContactDAO
     }
 
 	@Override
-    public Contact save(Contact entity)
+    public Contact save(@Valid Contact entity)
     {
 	    return repository.save(entity);
     }
 
 	@Override
-    public Iterable<Contact> save(Iterable<? extends Contact> entities)
+    public Iterable<Contact> save(@Valid Iterable<? extends Contact> entities)
     {
 	    return repository.save(entities);
     }

@@ -7,7 +7,12 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import javax.validation.ConstraintViolation;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +41,28 @@ public class TestContactDAO
 {
 	@Autowired
 	ContactDAO contactDAO = null;
+	
+	@Before
+	public void setUp() throws Exception 
+	{
+		// nothing needs to be done here
+	}
+
+	@After
+	public void tearDown() throws Exception 
+	{
+		// nothing needs to be done here
+	}
+	
+	/**
+	 * Tests that we start fresh! ;)
+	 */
+	@Test
+	public void testInitialEnvironment()
+	{
+		long initialCount = contactDAO.count();
+		assertTrue("We should start fresh!", (initialCount == 0));
+	}
 	
 	/**
 	 * Tests the CRUD operations.
@@ -75,6 +102,7 @@ public class TestContactDAO
 	/** 
 	 * Tests concurrent modification of an object.
 	 */
+	@Test
 	public void testOptimisticLocking() 
 	{
 		boolean transactional = TransactionSynchronizationManager.isActualTransactionActive();
@@ -105,18 +133,12 @@ public class TestContactDAO
 		try
 		{
 			anotherContactRef = contactDAO.save(anotherContactRef);
-			fail("OtimisticLocking excpetion should have been thrown!");
+			fail("OptimisticLocking excpetion should have been thrown!");
 		}
 		catch (Exception ex)
 		{
 			assertTrue("Expected OptimisticException", ex instanceof JpaOptimisticLockingFailureException);
 		}
-		finally
-		{
-			// clean up the created contact
-			contactDAO.delete(contact);
-		}
-		
 	}
 	
 	/**
@@ -148,6 +170,34 @@ public class TestContactDAO
 		assertTrue("There should be at least one contact", (aussies != null && aussies.size() > 0));
 		
 	}
+	
+	/**
+	 * Tests the input validation when creating/updating objects.
+	 * 
+	 * TODO - remove data validation from DAO layer and implement it on service layer!
+	 */
+	@Test
+	@Transactional
+	public void testDataValidation()
+	{
+		Contact contact = createTestContact();
+		contact.setId(null);
+		
+		// try to create
+		try
+		{
+			contact = contactDAO.save(contact);
+			fail("Should not be possible to save entities withour a proper ID!");
+		}
+		catch (javax.validation.ConstraintViolationException ex)
+		{
+			Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
+			ConstraintViolation<?> violation = violations.iterator().next();
+			
+			assertTrue("Should not be possible to save entities withour a proper ID!", ("{model.object.id.not_null.error}".equals(violation.getMessageTemplate())));
+		}
+	}
+	
 	
 	/**
 	 * Creates a demo test {@link Contact}.

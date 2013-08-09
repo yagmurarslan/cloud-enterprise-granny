@@ -2,6 +2,8 @@ package com.sap.hana.cloud.samples.granny.srv;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,7 @@ public class ContactServiceImpl extends BaseService implements ContactService
 	/**
 	 * {@inheritDoc}
 	 */
-	public Contact createContact(Contact contact) throws ServiceException
+	public Contact createContact(@Valid Contact contact) throws ServiceException
 	{
 		Contact retVal = null;
 		
@@ -105,7 +107,7 @@ public class ContactServiceImpl extends BaseService implements ContactService
 	/**
 	 * {@inheritDoc}
 	 */
-	public Contact updateContact(Contact contact) throws ServiceException
+	public Contact updateContact(@Valid Contact contact) throws ServiceException
 	{
 		Contact retVal = null;
 		
