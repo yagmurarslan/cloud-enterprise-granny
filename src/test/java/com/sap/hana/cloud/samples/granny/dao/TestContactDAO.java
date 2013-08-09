@@ -180,7 +180,7 @@ public class TestContactDAO
 	@Transactional
 	public void testDataValidation()
 	{
-		Contact contact = createTestContact();
+		Contact contact = new Contact();
 		contact.setId(null);
 		
 		// try to create

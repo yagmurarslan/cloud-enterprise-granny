@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-public class LoggingAdvice
+public class LoggingAspect
 {
 	/**
 	 * {@link ConcurrentMap} of {@link Logger} instances used. "Cached" for better performance.
