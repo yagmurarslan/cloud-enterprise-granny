@@ -8,8 +8,6 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +26,9 @@ import com.sap.hana.cloud.samples.granny.model.EmailAddress;
 import com.sap.hana.cloud.samples.granny.model.PhoneNumber;
 import com.sap.hana.cloud.samples.granny.model.Salutation;
 
-
-
+/**
+ * Tests for the {@link ContactDAO} class.  
+ */
 @ContextConfiguration("classpath:/META-INF/spring/app-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles(profiles = "test")
@@ -38,16 +37,6 @@ public class TestContactDAO
 	@Autowired
 	ContactDAO contactDAO = null;
 	
-	@Before
-	public void setUp() throws Exception 
-	{
-	}
-
-	@After
-	public void tearDown() throws Exception 
-	{
-	}
-
 	/**
 	 * Tests the CRUD operations.
 	 */

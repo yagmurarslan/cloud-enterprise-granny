@@ -19,7 +19,7 @@ public class Address {
 	@Id
 	@Column(name="ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String _id;
+	private String _id; // TODO revert back to Long once the srv/ui layer are updated to use new model!
 
 	private String name;
 	private String address;

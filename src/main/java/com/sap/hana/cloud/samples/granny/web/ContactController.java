@@ -52,61 +52,66 @@ public class ContactController
 	 * @param _id The ID of the {@link Address} to return
 	 * @return The {@link Address} matching the specified ID
 	 */
+/*	
 	@RequestMapping(value = "/get/{_id}", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody Address get(@PathVariable String _id)
 	{
 		return contactService.getAddressById(_id);
 	}
-
+*/
 	/**
 	 * Creates the specified {@link Address}.
 	 * 
 	 * @param address The {@link Address} to create
 	 */
+/*
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public void create(@RequestBody Address address)
 	{
 		contactService.createAddress(address);
 	}
-
+*/
 	/**
 	 * Updates the specified {@link Address}.
 	 * 
 	 * @param address The {@link Address} to update
 	 */
+/*
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	public void update(@RequestBody Address address)
 	{
 		contactService.updateAddress(address);
 	}
-
+*/
 	/**
 	 * Deletes the specified {@link Address}.
 	 * 
 	 * @param address The {@link Address} to delete
 	 */
+/*	
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@RequestBody Address address)
 	{
 		contactService.deleteAddress(address);
 	}
-
+*/
 	/**
 	 * Returns a {@link List} of all {@link Address} objects.
 	 * 
 	 * @return {@link List} of all {@link Address} objects
 	 */
+/*
 	@RequestMapping(value = "/addresses", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody List<Address> list()
 	{
 		return contactService.getAllAddresses();
 	}
-	
+*/
 	/**
 	 * Handles a {@link ServiceException} and returns some *meaningful* error message.
 	 * 

@@ -2,53 +2,56 @@ package com.sap.hana.cloud.samples.granny.srv;
 
 import java.util.List;
 
-import com.osintegrators.example.Address;
+import com.sap.hana.cloud.samples.granny.model.Contact;
 
 /**
  * Provides CRUD (Create, Read, Update, Delete) operations as well as other
- * life-cycle related functions for {@link Address} objects.
+ * life-cycle related functions for {@link Contact} objects.
  */
 public interface ContactService
 {
 
 	/**
-	 * Creates the specified {@link Address}.
+	 * Creates the specified {@link Contact}.
 	 * 
-	 * @param address The {@link Address} to create
+	 * @param contact The {@link Contact} to create
+	 * @return The {@link Contact} 
 	 * @throws ServiceException In case of an error
 	 */
-	void createAddress(Address address) throws ServiceException;
+	Contact createContact(Contact contact) throws ServiceException;
 
 	/**
-	 * Deletes the specified {@link Address}.
+	 * Deletes the specified {@link Contact}.
 	 * 
-	 * @param address The {@link Address} to delete
+	 * @param contact The {@link Contact} to delete
 	 * @throws ServiceException In case of an error
 	 */
-	void deleteAddress(Address address) throws ServiceException;
+	void deleteContact(Contact contact) throws ServiceException;
 
 	/**
-	 * Returns a {@link List} of all {@link Address} objects.
-	 * @return {@link List} of all {@link Address} objects
+	 * Returns a {@link List} of all {@link Contact} objects.
+	 * 
+	 * @return {@link List} of all {@link Contact} objects
 	 * @throws ServiceException In case of an error
 	 */
-	List<Address> getAllAddresses() throws ServiceException;
+	List<Contact> getAllContactes() throws ServiceException;
 
 	/**
-	 * Returns the {@link Address} with the specified ID or <code>NULL</code> if no {@link Address} object with the specified ID exists.
+	 * Returns the {@link Contact} with the specified ID or <code>NULL</code> if no {@link Contact} object with the specified ID exists.
 	 * 
-	 * @param id The id of the  {@link Address} to retrieve
-	 * @return The {@link Address} with the specified ID or <code>NULL</code> if no {@link Address} object with the specified ID exists
+	 * @param id The id of the  {@link Contact} to retrieve
+	 * @return The {@link Contact} with the specified ID or <code>NULL</code> if no {@link Contact} object with the specified ID exists
 	 * @throws ServiceException In case of an error
 	 */
-	Address getAddressById(String id) throws ServiceException;
+	Contact getContactById(String id) throws ServiceException;
 
 	/**
-	 * Updates the specified {@link Address}.
+	 * Updates the specified {@link Contact}.
 	 * 
-	 * @param address The {@link Address} to delete
+	 * @param contact The {@link Contact} to update
+	 * @return The {@link Contact} 
 	 * @throws ServiceException In case of an error
 	 */
-	void updateAddress(Address address) throws ServiceException;
+	Contact updateContact(Contact contact) throws ServiceException;
 
 }
