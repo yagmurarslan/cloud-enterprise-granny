@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -28,21 +29,27 @@ public class Address extends BaseObject implements Serializable
 	protected AddressType type = null;
 	
 	@Column(name="STREET", length = 30, nullable=true)
+	@Size(max = 30, message = "{model.address.street.size.error}")
 	protected String street = null;
 	
 	@Column(name="STREET2", length = 30, nullable=true)
+	@Size(max = 30, message = "{model.address.street2.size.error}")
 	protected String street2 = null;
 	
 	@Column(name="CITY", length = 30, nullable=true)
+	@Size(max = 30, message = "{model.address.city.size.error}")
 	protected String city = null;
 	
 	@Column(name="ZIP", length = 8, nullable=true)
+	@Size(max = 8, message = "{model.address.zip_code.size.error}")
 	protected String zipCode = null;
 	
 	@Column(name="STATE", length = 20, nullable=true)
+	@Size(max = 20, message = "{model.address.state.size.error}")
 	protected String state = null;
 	
 	@Column(name="COUNTRY", length = 3, nullable=true)
+	@Size(max = 3, message = "{model.address.country.size.error}")
 	protected String country = null;
 
 	public AddressType getType()

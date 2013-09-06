@@ -36,10 +36,11 @@ public class ContactDAOImpl implements ContactDAO
 	    return repository.save(entity);
     }
 
-	@Override
+	@SuppressWarnings("unchecked")
+    @Override
     public Iterable<Contact> save(@Valid Iterable<? extends Contact> entities)
     {
-	    return repository.save(entities);
+	    return (Iterable<Contact>) repository.save(entities);
     }
 
 	@Override

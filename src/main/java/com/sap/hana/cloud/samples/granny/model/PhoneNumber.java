@@ -7,8 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.sap.hana.cloud.samples.granny.xcc.validations.ValidPhoneNumber;
 
 /**
  * The phone number of a {@link Contact}.
@@ -26,6 +29,8 @@ public class PhoneNumber extends BaseObject implements Serializable
 	protected CommunicationType type = null;
 	
 	@Column(name="NUMBER", length = 30, nullable=true)
+	@Size(max = 30, message = "{model.phone_number.number.size.error}")
+	//@ValidPhoneNumber(message = "{model.phone_numer.number.validity.error}")
 	protected String number = null;
 
 	public CommunicationType getType()

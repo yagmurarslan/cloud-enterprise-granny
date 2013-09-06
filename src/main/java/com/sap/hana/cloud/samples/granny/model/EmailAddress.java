@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -26,6 +28,8 @@ public class EmailAddress extends BaseObject implements Serializable
 	protected AddressType type = null;
 	
 	@Column(name="EMAIL", length = 70, nullable=true)
+	@Size(max = 70, message = "{model.email_address.email.size.error}")
+	@Pattern(regexp="^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "{model.email_address.email.pattern.error}" )
 	protected String email = null;
 
 	public AddressType getType()

@@ -210,13 +210,13 @@ public class TestContactDAO
 		Address address = new Address();
 		EmailAddress email = new EmailAddress();
 		PhoneNumber homePhone = new PhoneNumber();
-		PhoneNumber cellPhone = new PhoneNumber();
+		//PhoneNumber cellPhone = new PhoneNumber();
 	
 		homePhone.setType(CommunicationType.HOME);
 		homePhone.setNumber("+1 610 661 1000");
 		
-		cellPhone.setType(CommunicationType.CELL);
-		cellPhone.setNumber("+1 555 123 4567");
+		//cellPhone.setType(CommunicationType.CELL);
+		//cellPhone.setNumber("+1 555 123 4567");
 		
 		email.setType(AddressType.WORK);
 		email.setEmail("thomas.anderson@sap.com");
@@ -238,7 +238,7 @@ public class TestContactDAO
 		addressList.add(address);
 		emailList.add(email);
 		phoneNumberList.add(homePhone);
-		phoneNumberList.add(cellPhone);
+		//phoneNumberList.add(cellPhone);
 		
 		contact.setAddresses(addressList);
 		contact.setEmailAdresses(emailList);

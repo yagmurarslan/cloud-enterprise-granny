@@ -37,23 +37,23 @@ public class ContactFacade extends BaseFacade
 	 * Returns a {@link List} of all {@link Contact} objects.
 	 * 
 	 * @return {@link Response} representation of the {@link List} of all {@link Contact} objects
-	 * @throws FacadeException In case of an error
 	 */
 	@GET
-	public Response findAll() throws FacadeException
+	public Response findAll() 
 	{
-		List<Contact> contacts = null;
+		Response retVal = null;
 		
 		try
 		{
-			contacts = contactSrv.getAllContactes();
+			List<Contact> contacts = contactSrv.getAllContactes();
+			retVal = Response.ok(contacts).build();
 		}
 		catch (Exception ex)
 		{
-			this.handleException(ex);
+			retVal = this.handleException(ex);
 		}
 		
-		return Response.ok(contacts).build();
+		return retVal;
 	}
 	
 	/**
@@ -61,22 +61,24 @@ public class ContactFacade extends BaseFacade
 	 * 
 	 * @param contact The {@link Contact} to be created
 	 * @return {@link Response} representation of the created {@link Contact}
-	 * @throws FacadeException In case of an error
 	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response create(@Valid Contact contact) throws FacadeException
+	public Response create(@Valid Contact contact) 
 	{	
+		Response retVal = null;
+		
 		try
 		{	
 			contact = contactSrv.createContact(contact);
+			retVal = Response.ok(contact).status(Status.CREATED).build();
 		}
 		catch (Exception ex)
 		{
-			this.handleException(ex);
+			retVal = this.handleException(ex);
 		}
 		
-		return Response.ok(contact).status(Status.CREATED).build();
+		return retVal;
 	}
 	
 	/**
@@ -84,29 +86,32 @@ public class ContactFacade extends BaseFacade
 	 * 
 	 * @param id The id of the  {@link Contact} to retrieve
 	 * @return {@link Response} representation of the {@link Contact} or a {@link Status.NOT_FOUND} (404) error code
-	 * @throws FacadeException In case of an error
 	 */
 	@GET
 	@Path("/{id}")
-	public Response findOne(@PathParam("id") String id) throws FacadeException
+	public Response findOne(@PathParam("id") String id) 
 	{
-		Contact contact = null;
+		Response retVal = null;
 		
 		try
 		{
-			contact = contactSrv.getContactById(id);
+			Contact contact = contactSrv.getContactById(id);
 			
 			if (contact == null)
 			{
-				return Response.status(Status.NOT_FOUND).build();
+				retVal = Response.status(Status.NOT_FOUND).build();
+			}
+			else
+			{
+				retVal = Response.ok(contact).build();
 			}
 		}
 		catch (Exception ex)
 		{
-			this.handleException(ex);
+			retVal = this.handleException(ex);
 		}
 		
-		return Response.ok(contact).build();
+		return retVal;
 	}
 	
 	/**
@@ -115,23 +120,25 @@ public class ContactFacade extends BaseFacade
 	 * @param id The ID of the {@link Contact} to return
 	 * @param contact The {@link Contact} object with the new property values to be used 
 	 * @return {@link Response} representation of the updated {@link Contact}
-	 * @throws FacadeException In case of an error
 	 */
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(@PathParam("id") String id, @Valid Contact contact) throws FacadeException
+	public Response update(@PathParam("id") String id, @Valid Contact contact) 
 	{
+		Response retVal = null;
+		
 		try
 		{	
 			contact = contactSrv.updateContact(contact);
+			retVal = Response.ok(contact).build();
 		}
 		catch (Exception ex)
 		{
-			this.handleException(ex);
+			retVal = this.handleException(ex);
 		}
 		
-		return Response.ok(contact).build();
+		return retVal;
 	}
 
 	/**
@@ -139,23 +146,26 @@ public class ContactFacade extends BaseFacade
 	 * 
 	 * @param id The ID of the {@link Contact} to delete
 	 * @response {@link Status.NOT_FOUND} (200) status code
-	 * @throws FacadeException In case of an error
 	 */
 	@DELETE
 	@Path("/{id}")
-	public Response delete(@PathParam("id") String id) throws FacadeException
+	public Response delete(@PathParam("id") String id) 
 	{
+		Response retVal = null;
+		
 		try
 		{	
 			Contact contact = contactSrv.getContactById(id);
 			contactSrv.deleteContact(contact);
+			
+			retVal = Response.status(Status.OK).build();
 		}
 		catch (Exception ex)
 		{
-			this.handleException(ex);
+			retVal = this.handleException(ex);
 		}
 		
-		return Response.status(Status.OK).build();
+		return retVal;
 	}
 	
 	/**
@@ -163,25 +173,23 @@ public class ContactFacade extends BaseFacade
 	 * 
 	 * @param id The ID of the {@link Contact}
 	 * @return {@link Response} representation of the {@link List} of all {@link Address} objects for the {@link Contact} with the specified ID.
-	 * @throws FacadeException In case of an error
 	 */
 	@GET
 	@Path("/{id}/addresses")
-	public Response getAllAddressesByContactID(@PathParam("id") String id) throws FacadeException
+	public Response getAllAddressesByContactID(@PathParam("id") String id) 
 	{
-		List<Address> addresses = null;
+		Response retVal = null;
 		
 		try
 		{	
-			addresses = contactSrv.getContactById(id).getAddresses();
+			List<Address> addresses = contactSrv.getContactById(id).getAddresses();
+			retVal = Response.ok(addresses).build();
 		}
 		catch (Exception ex)
 		{
-			this.handleException(ex);
+			retVal = this.handleException(ex);
 		}
 		
-		return Response.ok(addresses).build();
+		return retVal;
 	}
-
-	
 }
