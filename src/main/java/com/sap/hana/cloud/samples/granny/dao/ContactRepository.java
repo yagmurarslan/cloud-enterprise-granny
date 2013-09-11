@@ -18,7 +18,7 @@ public interface ContactRepository extends CrudRepository<Contact, String>
 	 * 
 	 * @return A {@link List} of all {@link Contact} objects
 	 */
-	@Query("SELECT c from Contact c JOIN FETCH c.addresses JOIN FETCH c.phoneNumbers JOIN FETCH c.emailAdresses")
+	@Query("SELECT DISTINCT c from Contact c JOIN FETCH c.addresses JOIN FETCH c.phoneNumbers JOIN FETCH c.emailAddresses ORDER BY  c.lastName, c.firstName ASC")
 	public List<Contact> queryAll();
 
 	/**
