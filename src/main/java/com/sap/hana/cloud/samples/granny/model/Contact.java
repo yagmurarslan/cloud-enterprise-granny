@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -38,22 +40,27 @@ public class Contact extends BaseObject implements Serializable
 	protected Title title = null;
 	
 	@Column(name="FIRSTNAME", length = 30, nullable=true)
+	@Size(max = 30, message = "{model.contact.first_name.error}")
 	protected String firstName = null;
 	
 	@Column(name="LASTNAME", length = 30, nullable=true)
+	@Size(max = 30, message = "{model.contact.lastname_name.error}")
 	protected String lastName = null;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="CONTACT_ID", referencedColumnName="ID")
+	@Valid
 	protected List<Address> addresses = null;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="CONTACT_ID", referencedColumnName="ID")
+	@Valid
 	protected List<PhoneNumber> phoneNumbers = null;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="CONTACT_ID", referencedColumnName="ID")
-	protected List<EmailAddress> emailAdresses = null;
+	@Valid
+	protected List<EmailAddress> emailAddresses = null;
 
 	public Salutation getSalutation()
 	{
@@ -115,14 +122,14 @@ public class Contact extends BaseObject implements Serializable
 		this.phoneNumbers = phoneNumbers;
 	}
 
-	public List<EmailAddress> getEmailAdresses()
+	public List<EmailAddress> getEmailAddresses()
 	{
-		return emailAdresses;
+		return emailAddresses;
 	}
 
-	public void setEmailAdresses(List<EmailAddress> emailAdresses)
+	public void setEmailAddresses(List<EmailAddress> emailAdresses)
 	{
-		this.emailAdresses = emailAdresses;
+		this.emailAddresses = emailAdresses;
 	}
 
 	/**
@@ -132,7 +139,7 @@ public class Contact extends BaseObject implements Serializable
 	{
 	    return new ToStringBuilder(this).appendSuper(super.toString()).append("salutation", this.salutation).append("title", this.title)
 	            .append("firstName", this.firstName).append("lastName", this.lastName).append("addresses", this.addresses)
-	            .append("phoneNumbers", this.phoneNumbers).append("emailAdresses", this.emailAdresses).toString();
+	            .append("phoneNumbers", this.phoneNumbers).append("emailAddresses", this.emailAddresses).toString();
 	}
 	
 }

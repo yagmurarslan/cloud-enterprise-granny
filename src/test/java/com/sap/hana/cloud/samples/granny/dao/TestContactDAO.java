@@ -241,7 +241,7 @@ public class TestContactDAO
 		//phoneNumberList.add(cellPhone);
 		
 		contact.setAddresses(addressList);
-		contact.setEmailAdresses(emailList);
+		contact.setEmailAddresses(emailList);
 		contact.setPhoneNumbers(phoneNumberList);
 		
 		return contact;

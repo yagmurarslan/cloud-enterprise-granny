@@ -37,6 +37,14 @@ public class ContactServiceImpl extends BaseService implements ContactService
 	 */
 	public Contact createContact(@Valid Contact contact) throws ServiceException
 	{
+		return this.saveContact(contact);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public Contact saveContact(@Valid Contact contact) throws ServiceException
+	{
 		Contact retVal = null;
 		
 		try
@@ -109,17 +117,6 @@ public class ContactServiceImpl extends BaseService implements ContactService
 	 */
 	public Contact updateContact(@Valid Contact contact) throws ServiceException
 	{
-		Contact retVal = null;
-		
-		try
-		{
-			retVal = contactDAO.save(contact);
-		}
-		catch (Exception ex)
-		{
-			this.handleException(ex);
-		}
-		
-		return retVal;
+		return this.saveContact(contact);
 	}
 }

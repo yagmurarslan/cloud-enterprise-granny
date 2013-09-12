@@ -21,6 +21,16 @@ public interface ContactService
 	Contact createContact(Contact contact) throws ServiceException;
 
 	/**
+	 * Saves the specified {@link Contact}.
+	 * 
+	 * @param contact The {@link Contact} to save
+	 * @return The {@link Contact} 
+	 * @throws ServiceException In case of an error
+	 */
+	Contact saveContact(Contact contact) throws ServiceException;
+
+	
+	/**
 	 * Deletes the specified {@link Contact}.
 	 * 
 	 * @param contact The {@link Contact} to delete

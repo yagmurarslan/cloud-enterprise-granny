@@ -5,23 +5,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title><tiles:getAsString name="title" ignore="true" /></title>
+	<title><tiles:getAsString name="title" /></title>
 	
-	<tiles:insertAttribute name="meta" ignore="true"/>
-	<tiles:insertAttribute name="stylesheets" ignore="true"/>
+	<tiles:insertAttribute name="meta" />
+	<tiles:insertAttribute name="stylesheets" />
 </head>
 
 <body>
-	<div id="outer">
-	<div id="inner">
+<tiles:insertAttribute name="navbar"/>
 
-	<tiles:insertAttribute name="content" ignore="true"/>
+<div class="container-fluid">
 
-	</div><!-- end inner -->
-	</div><!-- end outer -->
-	
-<tiles:insertAttribute name="footer" ignore="true"/>
-<tiles:insertAttribute name="js" ignore="true"/>
+	<tiles:insertAttribute name="content" />
+	<hr>
+    <tiles:insertAttribute name="footer" />
+
+</div><!--/.fluid-container-->
+
+<tiles:insertAttribute name="js" />
 
 </body>
 </html>

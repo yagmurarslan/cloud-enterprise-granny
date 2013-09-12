@@ -12,9 +12,14 @@
 		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" />
 	</definition>
 
-	<definition name="home" extends="default.definition">
+	<definition name="contact" extends="default.definition">
 		<put-attribute name="title" value="Granny's Addressbook" type="string" cascade="true"/>
-		<put-attribute name="content" value="/WEB-INF/views/home.jsp" />
+		<put-attribute name="content" value="/WEB-INF/views/contact.jsp" />
+	</definition>
+	
+	<definition name="about" extends="default.definition">
+		<put-attribute name="title" value="Granny's Addressbook" type="string" cascade="true"/>
+		<put-attribute name="content" value="/WEB-INF/views/about.jsp" />
 	</definition>
 	
 </tiles-definitions>
