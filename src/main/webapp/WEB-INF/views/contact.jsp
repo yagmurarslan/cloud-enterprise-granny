@@ -64,13 +64,13 @@
 								<div class="form-group">
 									<label for="firstName" class="col-xs-3 col-sm-3 col-md-3 col-lg-2 control-label">Firstname</label>
 									<div class="col-xs-8 col-sm-7 col-md-7 col-lg-5">
-										<input type="text" class="form-control" id="firstName" placeholder="Firstname" value="<c:out value="${contact.firstName}" />" />
+										<input type="text" class="form-control" id="firstName" name="firstName" placeholder="Firstname" value="<c:out value="${contact.firstName}" />" />
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="lastName" class="col-xs-3 col-sm-3 col-md-3 col-lg-2 control-label">Lastname</label>
 									<div class="col-xs-8 col-sm-7 col-md-7 col-lg-5">
-										<input type="text" class="form-control" id="lastName" placeholder="Lastname" value="<c:out value="${contact.lastName}" />" />
+										<input type="text" class="form-control" id="lastName" name="lastName" placeholder="Lastname" value="<c:out value="${contact.lastName}" />" />
 									</div>
 								</div>
 							</div>
