@@ -1,28 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	
-<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>">
-<style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
 
-      @media (max-width: 980px) {
-        /* Enable use of floated navbar text */
-        .navbar-text.pull-right {
-          float: none;
-          padding-left: 5px;
-          padding-right: 5px;
-        }
-      }
-    </style>
-<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-responsive.css"/>">
-
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!-- Optional theme -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css" />
+ 
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-  <script src="<c:url value="/resources/js/html5shiv.js"/>"></script>
+	<script src="<c:url value="/resources/js/html5shiv.js" />"></script>
+	<script src="<c:url value="/resources/js/respond.min.js" />"></script>
 <![endif]-->
+ 
+<!-- Granny --> 
+<link rel="stylesheet" href="<c:url value="/resources/css/granny.css" />" />

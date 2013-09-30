@@ -1,5 +1,6 @@
 package com.sap.hana.cloud.samples.granny.web;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +92,12 @@ public class ContactController
 	    return retVal;
 	}
 	
+	@RequestMapping(value = "/contact", method = RequestMethod.GET)
+	public void PJAX(HttpServletResponse response) throws IOException
+	{
+		response.getWriter().println("PJAX enabled!");
+	}
+	
 	
 	
 	@RequestMapping(value="/contact", method = RequestMethod.POST, params="save")
@@ -111,6 +119,13 @@ public class ContactController
 		
 		return retVal;
 	}
+	
+	@RequestMapping(value="/contact", method = RequestMethod.POST)
+	public ModelAndView submit(@ModelAttribute("contact") @Valid Contact contact, BindingResult bindingResult, Model model) 
+	{
+		return this.save(contact, bindingResult, model);
+	}
+	
 	
 	@RequestMapping(value="/contact", method = RequestMethod.POST, params="addAddress")
 	public ModelAndView addAddress(@ModelAttribute("contact") Contact contact, BindingResult bindingResult, Model model)
@@ -139,7 +154,7 @@ public class ContactController
 	}
 	
 	@RequestMapping(value="/contact", method = RequestMethod.POST, params="deletePhoneNumber")
-	public ModelAndView deletePhoneNumber(@ModelAttribute("contact") Contact contact, BindingResult bindingResult, Model model, @RequestParam("deletePhoneNumber") int index)
+	public ModelAndView deletePhoneNumber(@ModelAttribute("contact") Contact contact, BindingResult bindingResult, Model model, @RequestParam("deletePhoneNumber") Integer index)
 	{
 		ModelAndView retVal = new ModelAndView("contact");
 		
@@ -170,7 +185,7 @@ public class ContactController
 	}
 	
 	@RequestMapping(value="/contact", method = RequestMethod.POST, params="deleteEmail")
-	public ModelAndView deleteEmail(@ModelAttribute("contact") Contact contact, BindingResult bindingResult, Model model, @RequestParam("deleteEmail") int index)
+	public ModelAndView deleteEmail(@ModelAttribute("contact") Contact contact, BindingResult bindingResult, Model model, @RequestParam("deleteEmail") Integer index)
 	{
 		ModelAndView retVal = new ModelAndView("contact");
 		
@@ -185,7 +200,7 @@ public class ContactController
 	}
 	
 	@RequestMapping(value="/contact", method = RequestMethod.POST, params="delete")
-	public ModelAndView delete(@ModelAttribute("contact") @Valid Contact contact, BindingResult bindingResult, Model model)
+	public ModelAndView delete(@ModelAttribute("contact") @Valid Contact contact, BindingResult bindingResult, Model model, @RequestParam("delete") String value)
 	{
 		ModelAndView retVal = new ModelAndView("contact");
 		

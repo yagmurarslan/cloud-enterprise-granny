@@ -9,20 +9,18 @@
 	
 	<tiles:insertAttribute name="meta" />
 	<tiles:insertAttribute name="stylesheets" />
+	<tiles:insertAttribute name="js" />
+	
 </head>
 
 <body>
-<tiles:insertAttribute name="navbar"/>
-
-<div class="container-fluid">
-
-	<tiles:insertAttribute name="content" />
-	<hr>
+<div class="container">
+	<tiles:insertAttribute name="navbar"/>
+	<div class="content" id="pjax-container">
+		<tiles:insertAttribute name="content" />
+	</div>
     <tiles:insertAttribute name="footer" />
 
-</div><!--/.fluid-container-->
-
-<tiles:insertAttribute name="js" />
-
+</div><!--/container-->
 </body>
 </html>
