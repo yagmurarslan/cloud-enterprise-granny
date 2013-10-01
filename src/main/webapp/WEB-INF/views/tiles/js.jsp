@@ -12,7 +12,9 @@
 <script src="<c:url value="/resources/js/jquery.pjax.js" />"></script>
 
 <script>
+/*
 	$(document).on('submit', 'form[data-pjax]', function(event) {$.pjax.submit(event, '#pjax-container')});
     
     $(document).pjax('a', '#pjax-container');
+   */
 </script>

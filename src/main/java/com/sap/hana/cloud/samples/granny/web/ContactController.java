@@ -2,13 +2,8 @@ package com.sap.hana.cloud.samples.granny.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -35,6 +30,7 @@ import com.sap.hana.cloud.samples.granny.model.EmailAddress;
 import com.sap.hana.cloud.samples.granny.model.PhoneNumber;
 import com.sap.hana.cloud.samples.granny.srv.ContactService;
 import com.sap.hana.cloud.samples.granny.srv.ServiceException;
+import com.sap.hana.cloud.samples.granny.util.LocaleUtils;
 
 /**
  * Handles requests for the application home page.
@@ -61,7 +57,7 @@ public class ContactController
 		model.addAttribute("contactList", contactList);
 		
 		// initialize country list
-		model.addAttribute("countryList", getCountryList(locale));
+		model.addAttribute("countryList", LocaleUtils.getCountryList(locale));
 	}
 	
 	/**
@@ -160,7 +156,7 @@ public class ContactController
 		
 		if (contact.getPhoneNumbers() != null)
 		{
-			contact.getPhoneNumbers().remove(index);
+			contact.getPhoneNumbers().remove(index.intValue());
 		}
 		
 		retVal.addObject(contact);
@@ -191,7 +187,7 @@ public class ContactController
 		
 		if (contact.getEmailAddresses() != null)
 		{
-			contact.getEmailAddresses().remove(index);
+			contact.getEmailAddresses().remove(index.intValue());
 		}
 		
 		retVal.addObject(contact);
@@ -283,49 +279,4 @@ public class ContactController
 		
 		return contact;
 	}
-	
-	
-	/**
-	 * Returns a {@link SortedMap} containing the ISO 3166 code of all countries as the key and the localized name 
-	 * of the country as the value.
-	 * 
-	 * @param locale The {@link Locale} used to obtain the localized names of the countries
-	 * @return {@link SortedMap} containing the ISO 3166 code of all countries as the key and the localized name 
-	 * of the country as the value.
-	 */
-	public static SortedMap<String, String> getCountryList(Locale locale)
-	{
-		Map<String, String> map = new HashMap<String, String>(Locale.getISOCountries().length);
-		
-		for (String str : Locale.getISOCountries())
-		{
-			map.put(str, new Locale("", str).getDisplayCountry(locale));
-		}
-		
-		return sortByValues(map);
-	}
-	
-	/**
-	 * Sorts the specified {@link Map} according to the natural ordering of its values.
-	 * 
-	 * @param map The {@link Map} to sort
-	 * @return The {@link SortedMap} 
-	 */
-	public static <K, V extends Comparable<V>> SortedMap<K, V> sortByValues(final Map<K, V> map) 
-	{
-		Comparator<K> valueComparator =  new Comparator<K>() 
-		{
-		    public int compare(K k1, K k2) 
-		    {
-		        int compare = map.get(k1).compareTo(map.get(k2));
-		        if (compare == 0) return 1;
-		        else return compare;
-		    }
-		};
-		
-		SortedMap<K, V> sortedByValues = new TreeMap<K, V>(valueComparator);
-		sortedByValues.putAll(map);
-		return sortedByValues;
-	}
-
 }
