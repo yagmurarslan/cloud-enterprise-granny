@@ -1,12 +1,10 @@
 package com.sap.hana.cloud.samples.granny.web;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.SortedMap;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +38,8 @@ import com.sap.hana.cloud.samples.granny.util.LocaleUtils;
 @Primary
 public class ContactController
 {
+	private static final String STANDARD_VIEWNAME = "contacts";
+	
 	/**
 	 * The {@link ContactService} to be used.
 	 */
@@ -59,85 +59,68 @@ public class ContactController
 		return LocaleUtils.getCountryList(locale);
 	}
 	
-	/**
-	 * Populates the first screen. 
-	 * 
-	 * @param locale The {@link Locale} associated with this request
-	 * @return <code>home</code>
-	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home(Locale locale)
+	public String home(Locale locale)
 	{
-		ModelAndView retVal = new ModelAndView("contact");
-		
-	    return retVal;
+		return "redirect:/" + STANDARD_VIEWNAME + "/";
 	}
 	
-	/**
-	 * Simply dispatches to the "about" page. 
-	 * 
-	 * @param model The {@link Model} associated with this request
-	 * @return <code>about</code>
-	 */
+	@RequestMapping(value = "/contacts/", method = RequestMethod.GET)
+	public String contactPage(Locale locale, Model model)
+	{
+		model.addAttribute(getContactList());
+		
+		return STANDARD_VIEWNAME;
+	}
+	
 	@RequestMapping(value = "/about", method = RequestMethod.GET)
-	public ModelAndView about()
+	public String about()
 	{
-		ModelAndView retVal = new ModelAndView("about");
-		
-	    return retVal;
-	}
-	
-	@RequestMapping(value = "/contact", method = RequestMethod.GET)
-	public void PJAX(HttpServletResponse response) throws IOException
-	{
-		response.getWriter().println("PJAX enabled!");
+		return "about";
 	}
 	
 	
-	
-	@RequestMapping(value="/contact", method = RequestMethod.POST, params="save")
+	@RequestMapping(value="/contacts/*", method = RequestMethod.POST, params="save")
 	public ModelAndView save(@ModelAttribute("contact") @Valid Contact contact, BindingResult bindingResult, Model model)
 	{
-		ModelAndView retVal = null;
+		ModelAndView retVal = new ModelAndView(STANDARD_VIEWNAME);
 		
-		if (bindingResult.hasErrors())
-		{
-			retVal = new ModelAndView("contact");
-		}
-		else
+		if (! bindingResult.hasErrors())
 		{
 			contact = contactService.saveContact(contact);
-			retVal = new ModelAndView("contact");
+			retVal.addObject(contact);
+			retVal.addObject(getContactList());
+			
+			retVal = new ModelAndView("redirect:/contacts/{id}");
+			retVal.addObject("id", contact.getId());
 		}
 		
 		retVal.addObject(bindingResult);
-		retVal.addObject(getContactList());
-		retVal.addObject(contact);
 		
 		return retVal;
 	}
 	
-	@RequestMapping(value="/contact", method = RequestMethod.POST)
+	@RequestMapping(value="/contacts/*", method = RequestMethod.POST)
 	public ModelAndView submit(@ModelAttribute("contact") @Valid Contact contact, BindingResult bindingResult, Model model) 
 	{
 		return this.save(contact, bindingResult, model);
 	}
 	
 	
-	@RequestMapping(value="/contact", method = RequestMethod.POST, params="addAddress")
+	@RequestMapping(value="/contacts/*", method = RequestMethod.POST, params="addAddress")
 	public ModelAndView addAddress(@ModelAttribute("contact") Contact contact, BindingResult bindingResult, Model model)
 	{
-		ModelAndView retVal = new ModelAndView("contact");
+		ModelAndView retVal = new ModelAndView(STANDARD_VIEWNAME);
 		
-		
+		// TODO
 		
 		return retVal;
 	}
 	
-	@RequestMapping(value="/contact", method = RequestMethod.POST, params="addPhoneNumber")
+	@RequestMapping(value="/contacts/*", method = RequestMethod.POST, params="addPhoneNumber")
 	public ModelAndView addPhoneNumber(@ModelAttribute("contact") Contact contact, BindingResult bindingResult, Model model)
 	{
-		ModelAndView retVal = new ModelAndView("contact");
+		ModelAndView retVal = new ModelAndView(STANDARD_VIEWNAME);
 		
 		if (contact.getPhoneNumbers() == null)
 		{
@@ -150,10 +133,10 @@ public class ContactController
 		return retVal;
 	}
 	
-	@RequestMapping(value="/contact", method = RequestMethod.POST, params="deletePhoneNumber")
+	@RequestMapping(value="/contacts/*", method = RequestMethod.POST, params="deletePhoneNumber")
 	public ModelAndView deletePhoneNumber(@ModelAttribute("contact") Contact contact, BindingResult bindingResult, Model model, @RequestParam("deletePhoneNumber") Integer index)
 	{
-		ModelAndView retVal = new ModelAndView("contact");
+		ModelAndView retVal = new ModelAndView(STANDARD_VIEWNAME);
 		
 		if (contact.getPhoneNumbers() != null)
 		{
@@ -165,10 +148,10 @@ public class ContactController
 		return retVal;
 	}
 	
-	@RequestMapping(value="/contact", method = RequestMethod.POST, params="addEmail")
+	@RequestMapping(value="/contacts/*", method = RequestMethod.POST, params="addEmail")
 	public ModelAndView addEmail(@ModelAttribute("contact") Contact contact, BindingResult bindingResult, Model model)
 	{
-		ModelAndView retVal = new ModelAndView("contact");
+		ModelAndView retVal = new ModelAndView(STANDARD_VIEWNAME);
 		
 		if (contact.getEmailAddresses() == null)
 		{
@@ -181,10 +164,10 @@ public class ContactController
 		return retVal;
 	}
 	
-	@RequestMapping(value="/contact", method = RequestMethod.POST, params="deleteEmail")
+	@RequestMapping(value="/contacts/*", method = RequestMethod.POST, params="deleteEmail")
 	public ModelAndView deleteEmail(@ModelAttribute("contact") Contact contact, BindingResult bindingResult, Model model, @RequestParam("deleteEmail") Integer index)
 	{
-		ModelAndView retVal = new ModelAndView("contact");
+		ModelAndView retVal = new ModelAndView(STANDARD_VIEWNAME);
 		
 		if (contact.getEmailAddresses() != null)
 		{
@@ -196,10 +179,10 @@ public class ContactController
 		return retVal;
 	}
 	
-	@RequestMapping(value="/contact", method = RequestMethod.POST, params="delete")
+	@RequestMapping(value="/contacts/*", method = RequestMethod.POST, params="delete")
 	public ModelAndView delete(@ModelAttribute("contact") @Valid Contact contact, BindingResult bindingResult, Model model, @RequestParam("delete") String value)
 	{
-		ModelAndView retVal = new ModelAndView("contact");
+		ModelAndView retVal = new ModelAndView("redirect:/" + STANDARD_VIEWNAME + "/");
 		
 		contactService.deleteContact(contact);
 		
@@ -213,11 +196,11 @@ public class ContactController
 	}
             
 
-	@RequestMapping(value = "/contact/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/contacts/{id}", method = RequestMethod.GET)
 	// public ModelAndView getById(@RequestParam("id") String id, Model model)
 	public ModelAndView getById(@PathVariable String id, Model model)
 	{
-		ModelAndView retVal = new ModelAndView("contact");
+		ModelAndView retVal = new ModelAndView(STANDARD_VIEWNAME);
 		
 		Contact contact = contactService.getContactById(id);
 		model.addAttribute(contact);

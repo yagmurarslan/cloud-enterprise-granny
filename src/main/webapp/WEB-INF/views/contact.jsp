@@ -18,7 +18,7 @@
           <div class="panel-body">
             <ol class="list-group">
                 <c:forEach items="${contactList}" var="contact" varStatus="contactStatus">
-                    <li class="list-group-item"><a href="<c:url value="/contact/${contact.id}#basic_data"/>" data-pjax>${contact.firstName} ${contact.lastName}</a></li>
+                    <li class="list-group-item"><a href="<c:url value="/contacts/${contact.id}#basic_data"/>" data-pjax>${contact.firstName} ${contact.lastName}</a></li>
                 </c:forEach>
             </ol>
           </div>
@@ -30,7 +30,7 @@
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<form:form id="contact" name="contact" servletRelativeAction="/contact" method="POST" enctype="application/x-www-form-urlencoded" autocomplete="on" modelAttribute="contact" class="form-horizontal" role="form" data-pjax="data-pjax">
+				<form:form id="contact" name="contact" servletRelativeAction="/contacts/${contact.version eq 0 ? '' : contact.id}" method="POST" enctype="application/x-www-form-urlencoded" autocomplete="on" modelAttribute="contact" class="form-horizontal" role="form" data-pjax="data-pjax">
 					<fieldset>
 						<a id="basic_data"></a><section>
                         <form:hidden path="id" />
