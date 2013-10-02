@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.SortedMap;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -44,20 +45,18 @@ public class ContactController
 	 */
 	@Autowired
 	ContactService contactService;
-
-	@ModelAttribute
-	public void populateModel(Locale locale, Model model) 
+	
+	@ModelAttribute("contactList")
+	public List<Contact> getContactList()
 	{
-		// create an empty contact object
-		Contact contact = prepopulateContact(new Contact());
-		model.addAttribute(contact);
-		
 		// get all contacts
-		List<Contact> contactList = contactService.getAllContactes();
-		model.addAttribute("contactList", contactList);
-		
-		// initialize country list
-		model.addAttribute("countryList", LocaleUtils.getCountryList(locale));
+		return contactService.getAllContactes();
+	}
+	
+	@ModelAttribute("countryList")
+	public SortedMap<String, String> getCountryList(Locale locale)
+	{
+		return LocaleUtils.getCountryList(locale);
 	}
 	
 	/**
@@ -112,6 +111,8 @@ public class ContactController
 		}
 		
 		retVal.addObject(bindingResult);
+		retVal.addObject(getContactList());
+		retVal.addObject(contact);
 		
 		return retVal;
 	}
@@ -203,12 +204,10 @@ public class ContactController
 		contactService.deleteContact(contact);
 		
 		// create an empty contact object
-		contact = prepopulateContact(new Contact());
+		contact = populateContact(new Contact());
 		model.addAttribute(contact);
 		
-		// get all contacts
-		List<Contact> contactList = contactService.getAllContactes();
-		model.addAttribute("contactList", contactList);
+		retVal.addObject(getContactList());
 		
 		return retVal;
 	}
@@ -240,13 +239,14 @@ public class ContactController
 	}
 	
 	/**
-	 * Pre-populates the specified {@link Contact} with initial (empty) address, email address and phone number
+	 * Populates the specified {@link Contact} with initial (empty) address, email address and phone number
 	 * information as required by the web view component. 
 	 * 
-	 * @param contact The {@link Contact} to pre-populate
-	 * @return The pre-populated {@link Contact}
+	 * @param contact The {@link Contact} to populate
+	 * @return The populated {@link Contact}
 	 */
-	public static Contact prepopulateContact(Contact contact)
+	@ModelAttribute("contact")
+	public static Contact populateContact(Contact contact)
 	{
 		if (contact == null)
 		{
