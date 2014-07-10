@@ -1,7 +1,7 @@
 SAP HANA Cloud Platform Samples - enterprise granny
 ========
 
-<img src="https://github.com/SAP/cloud-enterprise-granny/raw/master/src/main/webapp/resources/img/icon_9727.png" width="25%" style="display: block; margin-left: auto; margin-right: auto">
+<img src="/src/main/webapp/resources/img/icon_9727.png" width="25%" style="display: block; margin-left: auto; margin-right: auto">
 
 This sample is a fork of the original [Granny's Addressbook] (https://github.com/osintegrators/JavaSpringGranny) provided by Open Software Integrators. 
 
