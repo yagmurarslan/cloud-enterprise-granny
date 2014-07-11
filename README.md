@@ -2,7 +2,7 @@ SAP HANA Cloud Platform Samples - enterprise granny
 ========
 
 <p align="center">
-  <img src="/src/main/webapp/resources/img/icon_9727.png" width="25%">
+  <img src="/doc/ensw_granny_logo_web.png" width="25%">
 </p>
 
 Enterprise Granny is a sample application used to demonstrate how-to develop great cloud applications with the SAP HANA Cloud Platform. Step by step we will enhance this simple demo app and make it _enterprise-ready_ by using open source software and by leveraging some of the capabilities of the platform.
