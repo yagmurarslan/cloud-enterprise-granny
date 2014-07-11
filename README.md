@@ -3,9 +3,24 @@ SAP HANA Cloud Platform Samples - enterprise granny
 
 <img src="/src/main/webapp/resources/img/icon_9727.png" width="25%" style="display: block; margin-left: auto; margin-right: auto">
 
-This sample is a fork of the original [Granny's Addressbook] (https://github.com/osintegrators/JavaSpringGranny) provided by Open Software Integrators. 
+Enterprise Granny is a sample application used to demonstrate how-to develop great cloud applications with the SAP HANA Cloud Platform. Step by step we will enhance this simple demo app and make it _enterprise-ready_ by using open source software and by leveraging some of the capabilities of the platform.
 
-It's currently a work in progress - stay tuned!
+[Introduction video](https://www.youtube.com/watch?v=t1rZDX-0PQI)
+
+**Note:** The initial source code is a fork of the original [Granny's Addressbook]  (https://github.com/osintegrators/JavaSpringGranny) application provided by Open Software Integrators. 
+
+Table of Content
+-----------
+
++ [Chapter 01 - There's no spoon - but a fork! ](/doc/01.md)
++ [Chapter 02 - Making it run](/doc/02.md)
++ [Chapter 03 - The Good, the Bad and the Ugly](/doc/03.md)
++ [Chapter 04 - Get in control](/doc/04.md)
++ [Chapter 05 - Granny's Next Topmodel](/doc/05.md)
++ [Chapter 06 - Back to the basics](/doc/06.md)
++ [Chapter 07 - Put Granny to the test](/doc/07.md)
++ [Chapter 08 - Inner beauty](/doc/08.md)
+
 
 Quick start
 -----------
