@@ -9,7 +9,7 @@
        <span class="icon-bar"></span>
        <span class="icon-bar"></span>
      </button>
-     <a class="navbar-brand" href="<c:url value="/"/>" data-pjax><img src="<c:url value="/resources/img/icon_9727.png"/>" style="width: 40px; height: 40px; margin-top: -10px;">&nbsp;&nbsp;<tiles:getAsString name="title" ignore="true" /></a>
+     <a class="navbar-brand" href="<c:url value="/"/>" data-pjax><img src="<c:url value="/resources/img/icon_9727.png"/>" style="width: 40px; height: 40px; margin-top: -10px; margin-right: 10px;" class="hidden-xs hidden-sm"> <tiles:getAsString name="title" ignore="true" /></a>
    </div>
    <div class="navbar-collapse collapse">
      <ul class="nav navbar-nav">
