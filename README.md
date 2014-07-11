@@ -1,11 +1,15 @@
 SAP HANA Cloud Platform Samples - enterprise granny
 ========
 
-<img src="/src/main/webapp/resources/img/icon_9727.png" width="25%" style="display: block; margin-left: auto; margin-right: auto">
+<p align="center">
+  <img src="/src/main/webapp/resources/img/icon_9727.png" width="25%">
+</p>
 
 Enterprise Granny is a sample application used to demonstrate how-to develop great cloud applications with the SAP HANA Cloud Platform. Step by step we will enhance this simple demo app and make it _enterprise-ready_ by using open source software and by leveraging some of the capabilities of the platform.
 
+<p align="center">
 [![Introduction video](http://img.youtube.com/vi/t1rZDX-0PQI/0.jpg)](https://www.youtube.com/watch?v=t1rZDX-0PQI)
+<p align="center">
 
 **Note:** The initial source code is a fork of the original [Granny's Addressbook]  (https://github.com/osintegrators/JavaSpringGranny) application provided by Open Software Integrators. 
 
