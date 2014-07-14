@@ -14,7 +14,9 @@ public abstract class BaseFacade
 	 * 
 	 * @param ex The {@link Exception} to handle
 	 * @return The corresponding {@link Response} for the caught {@link Exception}
+	 * @deprecated In favor of {@link com.sap.hana.cloud.samples.granny.web.util.ServiceExceptionMapper}
 	 */
+	@Deprecated 
 	protected Response handleException(Exception ex) 
 	{
 		return Response.serverError().build();

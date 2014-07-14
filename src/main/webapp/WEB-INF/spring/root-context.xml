@@ -29,9 +29,9 @@
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
             <ref bean="jacksonProvider" />
-		    <!-- 
-		    <ref bean="restClientExceptionMapper" />
-		     -->
+            <ref bean="parserExceptionMapper" />
+            <ref bean="jsonMappingExceptionMapper" />
+            <ref bean="serviceExceptionMapper" />
         </jaxrs:providers>
 	</jaxrs:server>
 	
@@ -40,5 +40,11 @@
 	<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider">
 		<property name="mapper" ref="objectMapper"/>
 	</bean>
+	
+		<!-- Exception Mappers -->
+	<bean id="parserExceptionMapper" class="com.sap.hana.cloud.samples.granny.web.util.ParserExceptionMapper" />
+	<bean id="jsonMappingExceptionMapper" class="com.sap.hana.cloud.samples.granny.web.util.JsonMappingExceptionMapper" />
+	<bean id="serviceExceptionMapper" class="com.sap.hana.cloud.samples.granny.web.util.ServiceExceptionMapper" />
+	
 	
 </beans>

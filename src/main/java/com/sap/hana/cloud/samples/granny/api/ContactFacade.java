@@ -2,7 +2,6 @@ package com.sap.hana.cloud.samples.granny.api;
 
 import java.util.List;
 
-import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -41,19 +40,8 @@ public class ContactFacade extends BaseFacade
 	@GET
 	public Response findAll() 
 	{
-		Response retVal = null;
-		
-		try
-		{
-			List<Contact> contacts = contactSrv.getAllContactes();
-			retVal = Response.ok(contacts).build();
-		}
-		catch (Exception ex)
-		{
-			retVal = this.handleException(ex);
-		}
-		
-		return retVal;
+		List<Contact> contacts = contactSrv.getAllContactes();
+		return Response.ok(contacts).build();
 	}
 	
 	/**
@@ -64,21 +52,10 @@ public class ContactFacade extends BaseFacade
 	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response create(@Valid Contact contact) 
+	public Response create(Contact contact) 
 	{	
-		Response retVal = null;
-		
-		try
-		{	
-			contact = contactSrv.createContact(contact);
-			retVal = Response.ok(contact).status(Status.CREATED).build();
-		}
-		catch (Exception ex)
-		{
-			retVal = this.handleException(ex);
-		}
-		
-		return retVal;
+		contact = contactSrv.createContact(contact);
+		return Response.ok(contact).status(Status.CREATED).build();
 	}
 	
 	/**
@@ -93,22 +70,15 @@ public class ContactFacade extends BaseFacade
 	{
 		Response retVal = null;
 		
-		try
+		Contact contact = contactSrv.getContactById(id);
+		
+		if (contact == null)
 		{
-			Contact contact = contactSrv.getContactById(id);
-			
-			if (contact == null)
-			{
-				retVal = Response.status(Status.NOT_FOUND).build();
-			}
-			else
-			{
-				retVal = Response.ok(contact).build();
-			}
+			retVal = Response.status(Status.NOT_FOUND).build();
 		}
-		catch (Exception ex)
+		else
 		{
-			retVal = this.handleException(ex);
+			retVal = Response.ok(contact).build();
 		}
 		
 		return retVal;
@@ -124,21 +94,10 @@ public class ContactFacade extends BaseFacade
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response update(@PathParam("id") String id, @Valid Contact contact) 
+	public Response update(@PathParam("id") String id, Contact contact) 
 	{
-		Response retVal = null;
-		
-		try
-		{	
-			contact = contactSrv.updateContact(contact);
-			retVal = Response.ok(contact).build();
-		}
-		catch (Exception ex)
-		{
-			retVal = this.handleException(ex);
-		}
-		
-		return retVal;
+		contact = contactSrv.updateContact(contact);
+		return Response.ok(contact).build();
 	}
 
 	/**
@@ -153,17 +112,10 @@ public class ContactFacade extends BaseFacade
 	{
 		Response retVal = null;
 		
-		try
-		{	
-			Contact contact = contactSrv.getContactById(id);
-			contactSrv.deleteContact(contact);
-			
-			retVal = Response.status(Status.OK).build();
-		}
-		catch (Exception ex)
-		{
-			retVal = this.handleException(ex);
-		}
+		Contact contact = contactSrv.getContactById(id);
+		contactSrv.deleteContact(contact);
+		
+		retVal = Response.status(Status.OK).build();
 		
 		return retVal;
 	}
@@ -178,18 +130,8 @@ public class ContactFacade extends BaseFacade
 	@Path("/{id}/addresses")
 	public Response getAllAddressesByContactID(@PathParam("id") String id) 
 	{
-		Response retVal = null;
+		List<Address> addresses = contactSrv.getContactById(id).getAddresses();
+		return  Response.ok(addresses).build();
 		
-		try
-		{	
-			List<Address> addresses = contactSrv.getContactById(id).getAddresses();
-			retVal = Response.ok(addresses).build();
-		}
-		catch (Exception ex)
-		{
-			retVal = this.handleException(ex);
-		}
-		
-		return retVal;
 	}
 }

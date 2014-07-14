@@ -16,7 +16,7 @@
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<org.slf4j-version>1.7.2</org.slf4j-version>
 		<org.codehaus.jackson-version>1.9.9</org.codehaus.jackson-version>
-		<org.apache.cxf-version>2.7.6</org.apache.cxf-version>
+		<org.apache.cxf-version>2.7.11</org.apache.cxf-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -351,7 +351,7 @@
     <developers>
         <developer>
             <name>SAP HANA Cloud Platform</name>
-            <url>http://hana.ondemand.com</url>
+            <url>http://hcp.sap.com</url>
             <organization>SAP AG</organization>
             <organizationUrl>http://www.sap.com/</organizationUrl>
         </developer>

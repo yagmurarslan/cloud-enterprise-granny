@@ -64,7 +64,17 @@ h6,
 
 .navbar-brand
 {
+  font-family: 'Pacifico', cursive;
+  font-weight: 200;
+  font-size: 200%;
+}
+
+@media(max-width:767px)
+{
+.navbar-brand
+{
 	font-family: 'Pacifico', cursive;
 	font-weight: 200;
-  font-size: 200%;
+  font-size: 150%;
+}
 }
