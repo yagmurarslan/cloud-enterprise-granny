@@ -39,10 +39,17 @@ public class JsonMappingExceptionMapper implements ExceptionMapper<JsonMappingEx
 	@Override
 	public Response toResponse(JsonMappingException exception)
 	{	
+		final String PACKAGE_NAME = "com.sap.hana.cloud.samples.granny.model.";
+		
+		final String PATTERN = "\\n at \\[Source: org.apache.cxf.transport.http.AbstractHTTPDestination\\$.{1,12};\\s";
+		final String REPLACE = " at location: [";
+		
+		String msgStr = exception.getMessage().replaceAll(PACKAGE_NAME, ""); // remove full-qualified package names
+		msgStr = msgStr.replaceAll(PATTERN,REPLACE);
+	
 		StatusMessage message = new StatusMessage();
-
 		message.setCode(HttpStatus.BAD_REQUEST.value());
-		message.setDescription(exception.getMessage());
+		message.setDescription(msgStr);
 		message.setError("Mapping error");
 
 		return Response.status(message.getCode()).entity(message).type(MediaType.APPLICATION_JSON).build();
