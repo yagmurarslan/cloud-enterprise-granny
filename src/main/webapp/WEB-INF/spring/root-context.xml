@@ -57,7 +57,24 @@
 	<bean id="validationExceptionMapper" class="com.sap.hana.cloud.samples.granny.web.util.ValidationExceptionMapper" />
 	
 	<!-- Validation -->	
-	<bean id="validationProvider" class="org.apache.cxf.validation.BeanValidationProvider" />
+	<bean id="validationProvider" class="org.apache.cxf.validation.BeanValidationProvider">
+  		<constructor-arg><ref bean="validationConfiguration"/></constructor-arg>
+	</bean>
+	
+	<bean id="validationConfiguration" class="org.apache.cxf.validation.ValidationConfiguration">
+		 <property name="messageInterpolator" ref="resourceBundleMessageInterpolator"/>
+		 <property name="parameterNameProvider" ref="jaxRSParameterNameProvider" />
+	</bean>
+		
+	<bean id="resourceBundleMessageInterpolator" class="org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator">
+    <constructor-arg index="0">
+        <bean class="org.springframework.validation.beanvalidation.MessageSourceResourceBundleLocator">
+            <constructor-arg index="0" ref="messageSource"/>
+        </bean>
+    </constructor-arg>
+	</bean>
+	
+	<bean id="jaxRSParameterNameProvider" class="org.apache.cxf.jaxrs.validation.JAXRSParameterNameProvider" />
  
 	<bean id="validationInInterceptor" class="org.apache.cxf.jaxrs.validation.JAXRSBeanValidationInInterceptor">
 	    <property name="provider" ref="validationProvider" />

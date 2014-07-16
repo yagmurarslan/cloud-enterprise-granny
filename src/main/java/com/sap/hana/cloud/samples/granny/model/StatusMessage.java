@@ -1,6 +1,8 @@
 package com.sap.hana.cloud.samples.granny.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -33,6 +35,46 @@ public class StatusMessage implements Serializable
 	String description = null;
 	
 	String message = null;
+	
+	List<ValidationError> errors = null;
+
+	public StatusMessage(){}
+	
+	public StatusMessage(int code, String error, String description, String message, ValidationError...errors)
+	{
+		this.setCode(code);
+		this.setError(error);
+		this.setDescription(description);
+		this.setMessage(message);
+		
+		if (errors != null)
+		{
+			this.setErrors(Arrays.asList(errors));
+		}
+	}
+	
+	public StatusMessage(String error, String description, String message, ValidationError...errors)
+	{
+		this.setError(error);
+		this.setDescription(description);
+		this.setMessage(message);
+		
+		if (errors != null)
+		{
+			this.setErrors(Arrays.asList(errors));
+		}
+	}
+	
+	
+	public List<ValidationError> getErrors()
+	{
+		return errors;
+	}
+
+	public void setErrors(List<ValidationError> errors)
+	{
+		this.errors = errors;
+	}
 
 	public int getCode()
 	{
