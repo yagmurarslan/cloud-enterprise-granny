@@ -29,7 +29,7 @@ public class PhoneNumber extends BaseObject implements Serializable
 	protected CommunicationType type = null;
 	
 	@Column(name="NUMBER", length = 30, nullable=true)
-	@Size(max = 30, message = "{model.phone_number.number.size.error}")
+	@Size(max = 30, message = "{api.data_validation.max_length.error}")
 	//@ValidPhoneNumber(message = "{model.phone_numer.number.validity.error}")
 	protected String number = null;
 

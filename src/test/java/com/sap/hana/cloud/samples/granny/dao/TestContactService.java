@@ -3,10 +3,7 @@ package com.sap.hana.cloud.samples.granny.dao;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -19,8 +16,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sap.hana.cloud.samples.granny.model.Contact;
+import com.sap.hana.cloud.samples.granny.model.StatusMessage;
+import com.sap.hana.cloud.samples.granny.model.ValidationError;
 import com.sap.hana.cloud.samples.granny.srv.ContactService;
-import com.sap.hana.cloud.samples.granny.srv.ServiceException;
+import com.sap.hana.cloud.samples.granny.srv.DataValidationException;
 
 /**
  * Tests for the {@link ContactService} class.  
@@ -64,16 +63,23 @@ public class TestContactService
 			contact = contactSrv.createContact(contact);
 			fail("Should not be possible to save entities withour a proper ID!");
 		}
-		catch (ServiceException ex)
+		catch (DataValidationException ex)
 		{
-			assertTrue("RootCause should be ConstraintViolationException!", (ex.getCause() instanceof ConstraintViolationException));
-			ConstraintViolationException rootCause = (ConstraintViolationException) ex.getCause();
+			StatusMessage msg = ex.getStatusMessage();
 			
-			Set<ConstraintViolation<?>> violations = rootCause.getConstraintViolations();
-			ConstraintViolation<?> violation = violations.iterator().next();
+			List<ValidationError> errors = msg.getErrors();
 			
-			assertTrue("Should not be possible to save entities withour a proper ID!", ("{model.object.id.not_null.error}".equals(violation.getMessageTemplate())));
+			if (errors != null && errors.size() > 0)
+			{
+				ValidationError error = errors.get(0);
+				assertTrue("Should not be possible to save entities withour a proper ID!", ("model.object.id.not_null.error".equals(error.getMessageKey())));
+			}	
 		}
+		catch (Exception ex)
+		{
+			assertTrue("RootCause should be DataValidationException!", (ex instanceof DataValidationException));
+		}
+		
 		catch (NoSuchMethodError er)
 		{
 			// TDOD issues with javax-el not present during Maven build or jUnit tests

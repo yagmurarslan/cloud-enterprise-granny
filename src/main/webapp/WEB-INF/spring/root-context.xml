@@ -54,7 +54,11 @@
 	<bean id="jsonMappingExceptionMapper" class="com.sap.hana.cloud.samples.granny.web.util.JsonMappingExceptionMapper" />
 	<bean id="serviceExceptionMapper" class="com.sap.hana.cloud.samples.granny.web.util.ServiceExceptionMapper" />
 	
-	<bean id="validationExceptionMapper" class="com.sap.hana.cloud.samples.granny.web.util.ValidationExceptionMapper" />
+	<bean id="constraintViolationMapper" class="com.sap.hana.cloud.samples.granny.util.ConstraintViolationMapper">
+		<property name="resourceBundleName" value="${messageResourceBundleName}"/>
+	</bean>
+	
+	<bean id="validationExceptionMapper" class="com.sap.hana.cloud.samples.granny.web.util.ValidationExceptionMapper" parent="constraintViolationMapper" />
 	
 	<!-- Validation -->	
 	<bean id="validationProvider" class="org.apache.cxf.validation.BeanValidationProvider">
@@ -74,9 +78,9 @@
     </constructor-arg>
 	</bean>
 	
-	<bean id="jaxRSParameterNameProvider" class="org.apache.cxf.jaxrs.validation.JAXRSParameterNameProvider" />
+	<bean id="jaxRSParameterNameProvider" class="com.sap.hana.cloud.samples.granny.web.util.CustomJAXRSParameterNameProvider" />
  
-	<bean id="validationInInterceptor" class="org.apache.cxf.jaxrs.validation.JAXRSBeanValidationInInterceptor">
+	<bean id="validationInInterceptor" class="com.sap.hana.cloud.samples.granny.web.util.CustomJAXRSBeanValidationInInterceptor">
 	    <property name="provider" ref="validationProvider" />
 	</bean>
 	 

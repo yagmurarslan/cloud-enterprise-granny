@@ -40,11 +40,11 @@ public class Contact extends BaseObject implements Serializable
 	protected Title title = null;
 	
 	@Column(name="FIRSTNAME", length = 30, nullable=true)
-	@Size(max = 30, message = "{model.contact.first_name.size.error}")
+	@Size(max = 30, message = "{api.data_validation.max_length.error}")
 	protected String firstName = null;
 	
 	@Column(name="LASTNAME", length = 30, nullable=true)
-	@Size(max = 30, message = "{model.contact.lastname_name.size.error}")
+	@Size(max = 30, message = "{api.data_validation.max_length.error}")
 	protected String lastName = null;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

@@ -49,11 +49,21 @@
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 		<property name="validationMessageSource" ref="messageSource" />
 	</bean>
+	
+	<context:property-placeholder properties-ref="messageBundles"/>
+
+	<bean id="messageBundles" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	  <property name="properties">
+	    <props>
+	      <prop key="messageResourceBundleName">i18n/messages</prop>
+	    </props>
+	  </property>
+	</bean>
 
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">  
         <property name="basenames">
 	        <util:list>
-	    		<value>i18n/messages</value>
+	    		<value>${messageResourceBundleName}</value>
 	    	</util:list>
     	</property>
     </bean>  

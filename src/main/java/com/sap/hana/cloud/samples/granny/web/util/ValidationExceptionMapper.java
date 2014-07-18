@@ -1,7 +1,7 @@
 package com.sap.hana.cloud.samples.granny.web.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Locale;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -13,15 +13,35 @@ import javax.ws.rs.ext.Provider;
 import org.apache.cxf.validation.ResponseConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 import com.sap.hana.cloud.samples.granny.model.StatusMessage;
 import com.sap.hana.cloud.samples.granny.model.ValidationError;
+import com.sap.hana.cloud.samples.granny.util.ConstraintViolationMapper;
 
+/**
+ * Deals with {@link ConstraintViolationException}s intercepted in the inbound RESTful service communication
+ * and maps the contained {@link ConstraintViolation} to respective {@link ValidationError}s stored within 
+ * a {@link StatusMessage}.
+ * 
+ * @see org.apache.cxf.jaxrs.validation.JAXRSBeanValidationInInterceptor
+ * @see StatusMessage
+ */
 @Provider
-public class ValidationExceptionMapper implements ExceptionMapper<ValidationException>
+public class ValidationExceptionMapper extends ConstraintViolationMapper implements ExceptionMapper<ValidationException>
 {
 	Logger log = LoggerFactory.getLogger(ValidationExceptionMapper.class);
 
+
+	/**
+	 * Catches a {@link ValidationException} and in case its an instance of 
+	 * {@link ConstraintViolationException} it maps the contained {@link ConstraintViolation}
+	 * to respective {@link ValidationError}s stored within a {@link StatusMessage}.
+	 * 
+	 * @param exception The caught {@link ValidationException}
+	 * @return The {@link Response} containing a respective {@link StatusMessage} 
+	 * @see StatusMessage
+	 */
 	@Override
 	public Response toResponse(ValidationException exception)
 	{
@@ -31,26 +51,23 @@ public class ValidationExceptionMapper implements ExceptionMapper<ValidationExce
 			final ConstraintViolationException constraint = (ConstraintViolationException) exception;
 			final boolean isResponseException = constraint instanceof ResponseConstraintViolationException;
 
-			List<ValidationError> validationErrors = new ArrayList<ValidationError>(constraint.getConstraintViolations().size());
+			// get locale
+			final Locale locale = LocaleContextHolder.getLocale();
 			
-			for (final ConstraintViolation<?> violation : constraint.getConstraintViolations())
-			{
-				// log.debug(violation.getRootBeanClass().getSimpleName() + "." + violation.getPropertyPath() + ": " + violation.getMessage());
-				ValidationError error = new ValidationError(violation.getMessage(), violation.getMessageTemplate(), violation.getPropertyPath().toString(), String.valueOf(violation.getInvalidValue()), null);
-				validationErrors.add(error);
-			}
+			// convert constraint violation
+			ValidationError[] errors = convertConstraintViolationExceptionToValidationErrors(constraint, locale, getResourceBundleName());
 
 			if (isResponseException)
 			{
 				return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 			}
-
-			ValidationError[] errors = new ValidationError[validationErrors.size()];
-			
-			StatusMessage msg = new StatusMessage("api.data_validation.error", null, "Data validation failed!", validationErrors.toArray(errors));
-			
-			
-			return Response.status(Response.Status.BAD_REQUEST).entity(msg).build();
+			else
+			{
+				StatusMessage msg = getDefaultStatusMessage();
+				msg.setErrors(Arrays.asList(errors));
+				
+				return Response.status(Response.Status.BAD_REQUEST).entity(msg).build();
+			}
 		}
 		else
 		{

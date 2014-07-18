@@ -28,7 +28,7 @@ public class EmailAddress extends BaseObject implements Serializable
 	protected AddressType type = null;
 	
 	@Column(name="EMAIL", length = 70, nullable=true)
-	@Size(max = 70, message = "{model.email_address.email.size.error}")
+	@Size(max = 70, message = "{api.data_validation.max_length.error}")
 	//@Pattern(regexp="^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "{model.email_address.email.pattern.error}" )
 	protected String email = null;
 

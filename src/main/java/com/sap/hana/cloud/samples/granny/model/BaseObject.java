@@ -32,7 +32,7 @@ public abstract class BaseObject
 	@Id
     @Column(name="ID", length = 36)
 	@NotNull(message = "{model.object.id.not_null.error}")
-	@Size(max = 36, message = "{model.object.id.size.error}")
+	@Size(max = 36, message = "{api.data_validation.max_length.error}")
     private String id = UUID.randomUUID().toString();
 
 	/**
@@ -53,14 +53,14 @@ public abstract class BaseObject
      * ID of the user who created the object.
      */
     @Column(name="CREATED_BY", updatable = false, length = 20)
-    @Size(max = 20, message = "{model.object.createdBy.size.error}")
+    @Size(max = 20, message = "{api.data_validation.max_length.error}")
     private String createdBy = null;
     
     /**
      * ID of the user who was the last to modify the object.
      */
     @Column(name="MODIFIED_BY", length = 20)
-    @Size(max = 20, message = "{model.object.lastModifiedBy.size.error}")
+    @Size(max = 20, message = "{api.data_validation.max_length.error}")
     private String lastModifiedBy = null;
     
     /**

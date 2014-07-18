@@ -20,7 +20,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 @XmlRootElement(name = "status")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class StatusMessage implements Serializable
+public class StatusMessage implements Serializable, Cloneable
 {
 	/**
 	 * The <code>serialVersionUID</code> of the class.
@@ -156,5 +156,23 @@ public class StatusMessage implements Serializable
 	            .append(this.error, rhs.error).append(this.description, rhs.description).append(this.code, rhs.code)
 	            .isEquals();
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#clone()
+	 */
+	public StatusMessage clone()
+	{
+		StatusMessage retVal = new StatusMessage();
+		
+		retVal.setCode(this.getCode());
+		
+		retVal.description = (this.getDescription() == null) ? null : new String(this.getDescription());
+		retVal.error = (this.getError() == null) ? null : new String(this.getError());
+		retVal.message = (this.getMessage() == null) ? null : new String(this.getMessage());
+		
+		return retVal;
+	}
+	
 }
 	

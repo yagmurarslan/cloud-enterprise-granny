@@ -3,6 +3,7 @@ package com.sap.hana.cloud.samples.granny.model;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,6 +22,8 @@ public class ValidationError implements Serializable
 	 */
     private static final long serialVersionUID = 1L;
 
+    String messageKey = null;
+    
     String message = null;
     
     String messageTemplate = null;
@@ -29,30 +32,28 @@ public class ValidationError implements Serializable
     
     String invalidValue = null;
     
-    List<String> messageParameter = null;
+    Map<String, String> messageParameter = null;
     
     public ValidationError() {}
     
-    public ValidationError(String message, String messageTemplate, String path, String invalidValue, String... parameter)
+    public ValidationError(String messageKey, String message, String messageTemplate, String path, String invalidValue, Map<String, String> parameter)
     {
+    	this.setMessageKey(messageKey);
     	this.setMessage(message);
     	this.setMessageTemplate(messageTemplate);
     	this.setPath(path);
     	this.setInvalidValue(invalidValue);
-    	
-    	if (parameter != null)
-    	{
-    		this.setMessageParameter(Arrays.asList(parameter));
-    	}
+    	this.setMessageParameter(parameter);
+ 
     }
     
 
-	public List<String> getMessageParameter()
+	public Map<String, String> getMessageParameter()
 	{
 		return messageParameter;
 	}
 
-	public void setMessageParameter(List<String> messageParameter)
+	public void setMessageParameter(Map<String, String> messageParameter)
 	{
 		this.messageParameter = messageParameter;
 	}
@@ -95,5 +96,15 @@ public class ValidationError implements Serializable
 	public void setInvalidValue(String invalidValue)
 	{
 		this.invalidValue = invalidValue;
+	}
+
+	public String getMessageKey()
+	{
+		return messageKey;
+	}
+
+	public void setMessageKey(String messageKey)
+	{
+		this.messageKey = messageKey;
 	}
 }
