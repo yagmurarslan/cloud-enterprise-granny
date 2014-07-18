@@ -14,6 +14,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -35,8 +36,8 @@ public class DataValidationAspect
 	@Inject
 	LocalValidatorFactoryBean validator = null;
 	
-	//@Inject 
-	String messageResourceBundleName = "i18n/messages";
+	@Value("${messageResourceBundleName}")
+	String messageResourceBundleName = null; 
 
 	/**
 	 * Validates the data of any method parameter annotated with {@link Valid}.
