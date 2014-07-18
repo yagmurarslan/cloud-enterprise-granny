@@ -24,7 +24,7 @@ Table of Content
 + [Chapter 06 - Back to the basics](/doc/06.md)
 + [Chapter 07 - Put Granny to the test](/doc/07.md)
 + [Chapter 08 - Inner beauty](/doc/08.md)
-
++ [Chapter 09 - The Road to API-ness](/doc/09.md)
 
 Quick start
 -----------
