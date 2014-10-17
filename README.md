@@ -25,6 +25,7 @@ Table of Content
 + [Chapter 07 - Put Granny to the test](/doc/07.md)
 + [Chapter 08 - Inner beauty](/doc/08.md)
 + [Chapter 09 - The Road to API-ness](/doc/09.md)
++ [Chapter 10 - Everybody's favorite : documentation](/doc/10.md)
 
 Quick start
 -----------
