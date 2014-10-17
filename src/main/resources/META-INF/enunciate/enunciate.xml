@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<enunciate label="Enterprise Granny" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://enunciate.codehaus.org/schemas/enunciate-1.28.xsd">
+		
+	<namespaces>
+		<namespace id="Addressbook" uri="http://api.enterprise-granny.samples.cloud.sap.com/model" />
+	</namespaces>
+	
+	<services>
+		<rest defaultRestSubcontext="/api/v1" />
+	</services>
+	
+	<webapp disabled="true" doCompile="false" doLibCopy="false" doPackage="false" />
+	
+	<modules>
+		<!-- Disable all the client generation tools -->
+		<basic-app disabled="true" />
+		<c disabled="true" />
+		<csharp disabled="true" />
+		<java-client disabled="true" />
+		<jaxws-client disabled="true" />
+		<jaxws-ri disabled="true" />
+		<jaxws-support disabled="true" />
+		<jersey disabled="true" />
+		<obj-c disabled="true" />
+		<xml disabled="true" />
+		<docs splashPackage="com.sap.hana.cloud.samples.granny.api" title="Granny's Addressbook"
+			copyright="SAP SE" includeDefaultDownloads="false" includeExampleXml="false"
+			includeExampleJson="true" groupRestResources="grouping" applyWsdlFilter="false"
+			docsDir="docs" freemarkerXMLProcessingTemplate="docs.fmt" base="docs-base.zip">		
+		</docs>
+	</modules>
+
+</enunciate>

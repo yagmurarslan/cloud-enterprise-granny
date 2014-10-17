@@ -14,6 +14,7 @@
    <div class="navbar-collapse collapse">
      <ul class="nav navbar-nav">
        <li><a href="<c:url value="/about"/>" data-pjax>About</a></li>
+       <li><a href="<c:url value="/docs"/>">API</a></li>
      </ul>
      <ul class="nav navbar-nav navbar-right">
         <c:if test="${not empty pageContext.request.remoteUser}">

@@ -28,6 +28,8 @@ import com.sap.hana.cloud.samples.granny.srv.ContactService;
 @Service()
 @Path("/contacts")
 @Produces({ "application/json" })
+@org.codehaus.enunciate.Facet(name = "grouping", value= "Addressbook API", 
+documentation = "Provides REST endpoints to manage address data.")
 public class ContactFacade extends BaseFacade
 {
 	@Autowired
@@ -37,8 +39,11 @@ public class ContactFacade extends BaseFacade
 	 * Returns a {@link List} of all {@link Contact} objects.
 	 * 
 	 * @return {@link Response} representation of the {@link List} of all {@link Contact} objects
+	 * 
+	 * @name Find Contact 
 	 */
 	@GET
+	@org.codehaus.enunciate.jaxrs.TypeHint(Contact.class)
 	public Response findAll() 
 	{
 		List<Contact> contacts = contactSrv.getAllContactes();
@@ -50,9 +55,12 @@ public class ContactFacade extends BaseFacade
 	 * 
 	 * @param contact The {@link Contact} to be created
 	 * @return {@link Response} representation of the created {@link Contact}
+	 * 
+	 * @name Create Contact
 	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
+	@org.codehaus.enunciate.jaxrs.TypeHint(Contact.class)
 	public Response create(@Valid Contact contact) 
 	{	
 		contact = contactSrv.createContact(contact);
@@ -64,9 +72,12 @@ public class ContactFacade extends BaseFacade
 	 * 
 	 * @param id The id of the  {@link Contact} to retrieve
 	 * @return {@link Response} representation of the {@link Contact} or a {@link Status.NOT_FOUND} (404) error code
+	 * 
+	 * @name Find Contact
 	 */
 	@GET
 	@Path("/{id}")
+	@org.codehaus.enunciate.jaxrs.TypeHint(Contact.class)
 	public Response findOne(@PathParam("id") String id) 
 	{
 		Response retVal = null;
@@ -91,10 +102,13 @@ public class ContactFacade extends BaseFacade
 	 * @param id The ID of the {@link Contact} to return
 	 * @param contact The {@link Contact} object with the new property values to be used 
 	 * @return {@link Response} representation of the updated {@link Contact}
+	 * 
+	 * @name Update Contact
 	 */
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
+	@org.codehaus.enunciate.jaxrs.TypeHint(Contact.class)
 	public Response update(@PathParam("id") String id, @Valid Contact contact) 
 	{
 		contact = contactSrv.updateContact(contact);
@@ -105,10 +119,13 @@ public class ContactFacade extends BaseFacade
 	 * Deletes the {@link Contact} object with the specified ID.
 	 * 
 	 * @param id The ID of the {@link Contact} to delete
-	 * @response {@link Status.NOT_FOUND} (200) status code
+	 * @response {@link Status.OK} (200) status code
+	 * 
+	 * @name Delete Contact
 	 */
 	@DELETE
 	@Path("/{id}")
+	@org.codehaus.enunciate.jaxrs.StatusCodes(value = {@org.codehaus.enunciate.jaxrs.ResponseCode(code = 200, condition = "In case of success")})
 	public Response delete(@PathParam("id") String id) 
 	{
 		Response retVal = null;
@@ -126,9 +143,13 @@ public class ContactFacade extends BaseFacade
 	 * 
 	 * @param id The ID of the {@link Contact}
 	 * @return {@link Response} representation of the {@link List} of all {@link Address} objects for the {@link Contact} with the specified ID.
+	 * 
+	 *  Find Addresses For Contact
 	 */
 	@GET
 	@Path("/{id}/addresses")
+	@org.codehaus.enunciate.jaxrs.TypeHint(Address.class)
+	@org.codehaus.enunciate.Facet(name = "org.codehaus.enunciate.doc.ExcludeFromDocumentation")
 	public Response getAllAddressesByContactID(@PathParam("id") String id) 
 	{
 		List<Address> addresses = contactSrv.getContactById(id).getAddresses();

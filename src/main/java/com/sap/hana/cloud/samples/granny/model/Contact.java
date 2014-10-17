@@ -62,6 +62,9 @@ public class Contact extends BaseObject implements Serializable
 	@Valid
 	protected List<EmailAddress> emailAddresses = null;
 
+	/**
+	 * The salutation
+	 */
 	public Salutation getSalutation()
 	{
 		return salutation;
@@ -72,6 +75,9 @@ public class Contact extends BaseObject implements Serializable
 		this.salutation = salutation;
 	}
 
+	/**
+	 * The title
+	 */
 	public Title getTitle()
 	{
 		return title;
@@ -82,6 +88,9 @@ public class Contact extends BaseObject implements Serializable
 		this.title = title;
 	}
 
+	/**
+	 * The first name 
+	 */
 	public String getFirstName()
 	{
 		return firstName;
@@ -92,6 +101,9 @@ public class Contact extends BaseObject implements Serializable
 		this.firstName = firstName;
 	}
 
+	/*
+	 * The last name
+	 */
 	public String getLastName()
 	{
 		return lastName;
