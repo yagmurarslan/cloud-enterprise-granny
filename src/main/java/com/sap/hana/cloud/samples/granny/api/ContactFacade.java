@@ -40,7 +40,7 @@ public class ContactFacade extends BaseFacade
 	 * 
 	 * @return {@link Response} representation of the {@link List} of all {@link Contact} objects
 	 * 
-	 * @name Find Contact 
+	 * @name Get All Contacts 
 	 */
 	@GET
 	@org.codehaus.enunciate.jaxrs.TypeHint(Contact.class)
@@ -68,16 +68,19 @@ public class ContactFacade extends BaseFacade
 	}
 	
 	/**
-	 * Returns the {@link Contact} with the specified ID or <code>NULL</code> if no {@link Contact} object with the specified ID exists.
+	 * Returns the {@link Contact} with the specified ID or a {@link Status.NOT_FOUND} (404) error code if no {@link Contact} object with the specified ID exists.
 	 * 
 	 * @param id The id of the  {@link Contact} to retrieve
 	 * @return {@link Response} representation of the {@link Contact} or a {@link Status.NOT_FOUND} (404) error code
 	 * 
-	 * @name Find Contact
+	 * @name Get Contact 
 	 */
 	@GET
 	@Path("/{id}")
 	@org.codehaus.enunciate.jaxrs.TypeHint(Contact.class)
+	@org.codehaus.enunciate.jaxrs.StatusCodes(value = {@org.codehaus.enunciate.jaxrs.ResponseCode(code = 200, condition = "In case of success"),
+													   @org.codehaus.enunciate.jaxrs.ResponseCode(code = 404, condition = "In case no Contact object with the specified ID exists")})
+
 	public Response findOne(@PathParam("id") String id) 
 	{
 		Response retVal = null;
@@ -126,6 +129,7 @@ public class ContactFacade extends BaseFacade
 	@DELETE
 	@Path("/{id}")
 	@org.codehaus.enunciate.jaxrs.StatusCodes(value = {@org.codehaus.enunciate.jaxrs.ResponseCode(code = 200, condition = "In case of success")})
+	@org.codehaus.enunciate.jaxrs.TypeHint(org.codehaus.enunciate.jaxrs.TypeHint.NO_CONTENT.class)
 	public Response delete(@PathParam("id") String id) 
 	{
 		Response retVal = null;

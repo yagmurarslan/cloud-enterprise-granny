@@ -3,18 +3,9 @@
 	
 <!-- jQuery -->
 <script src="<c:url value="/resources/js/jquery-1.11.1.min.js" />"></script>
-<script src="<c:url value="/resources/js/jquery-migrate-1.2.1.min.js" />"></script>
 
 <!-- bootstrap -->
 <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 
 <!-- pjax -->
 <script src="<c:url value="/resources/js/jquery.pjax.js" />"></script>
-
-<script>
-/*
-	$(document).on('submit', 'form[data-pjax]', function(event) {$.pjax.submit(event, '#pjax-container')});
-    
-    $(document).pjax('a', '#pjax-container');
-   */
-</script>
