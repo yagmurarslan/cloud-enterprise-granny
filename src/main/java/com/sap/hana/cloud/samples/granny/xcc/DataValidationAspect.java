@@ -91,7 +91,11 @@ public class DataValidationAspect
 			
 			ValidationError[] errors = ConstraintViolationMapper.convertConstraintViolationsToValidationErrors(constraints, locale, this.messageResourceBundleName);
 			
-			throw new DataValidationException(errors);
+			// only throw data validation exception in case we found errors ;)
+			if (errors != null && errors.length > 0)
+			{
+				throw new DataValidationException(errors);
+			}
 		}
 		catch (ConstraintViolationException ex)
 		{
