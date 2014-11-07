@@ -1,0 +1,12 @@
+---
+applications:
+- name: enterprise-granny
+  memory: 512M
+  instances: 1
+  host: enterprise-granny
+  path: target/enterprise-granny.war
+  services:
+    - hana_shared
+  env:
+    SPRING_PROFILES_DEFAULT: cloud
+  

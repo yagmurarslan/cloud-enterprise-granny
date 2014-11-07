@@ -20,6 +20,9 @@
 		<org.codehaus.jackson-version>1.9.9</org.codehaus.jackson-version>
 		<org.apache.cxf-version>3.0.0</org.apache.cxf-version>
 		<org.codehaus.enunciate-version>1.28</org.codehaus.enunciate-version>
+		<org.apache.olingo-version>2.0.1-SNAPSHOT</org.apache.olingo-version>
+		<org.springframework.cloud-version>1.1.0.RELEASE</org.springframework.cloud-version>
+		<com.sap.hana.cloud-version>0.1.0-SNAPSHOT</com.sap.hana.cloud-version>
 	</properties>
 
 	<repositories>
@@ -45,6 +48,17 @@
 			<name>EclipseLink Maven Repository</name>
 			<url>http://download.eclipse.org/rt/eclipselink/maven.repo/</url>
 		</repository>
+		
+		<!-- 
+			Needed for Olingo snapshots
+			see: https://git-wip-us.apache.org/repos/asf?p=olingo-odata2.git;a=commit;h=44604c78
+		 -->
+		<repository>
+			<id>apache</id>
+			<name>Apache Maven Snapshots Repository</name>
+			<url>http://repository.apache.org/content/repositories/snapshots/</url>
+		</repository>
+		
 	</repositories>
 
 	<dependencies>
@@ -152,6 +166,13 @@
 			<artifactId>derby</artifactId>
 			<version>10.9.1.0</version>
 		</dependency>
+		
+		<!-- H2 database -->
+		<dependency>
+		    <groupId>com.h2database</groupId>
+		    <artifactId>h2</artifactId>
+		    <version>1.4.182</version>
+		</dependency>
 
 		<!-- EclipseLink (and JPA) -->
 		<dependency>
@@ -163,7 +184,7 @@
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>javax.persistence</artifactId>
-			<version>2.0.3</version>
+			<version>2.1.0</version>
 		</dependency>
 
 		<!-- AspectJ -->
@@ -215,7 +236,6 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j-version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -374,6 +394,67 @@
 			<version>${org.codehaus.enunciate-version}</version>
 		</dependency>
 		
+		<!-- Apache Olingo (OData handling) -->
+		<dependency>
+		  <groupId>org.apache.olingo</groupId>
+		  <artifactId>olingo-odata2-api</artifactId>
+		  <version>${org.apache.olingo-version}</version>
+		  <scope>compile</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.olingo</groupId>
+		  <artifactId>olingo-odata2-core</artifactId>
+		  <version>${org.apache.olingo-version}</version>
+		  <scope>runtime</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.olingo</groupId>
+		  <artifactId>olingo-odata2-jpa-processor-api</artifactId>
+		  <version>${org.apache.olingo-version}</version>
+		  <scope>compile</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.olingo</groupId>
+		  <artifactId>olingo-odata2-api-annotation</artifactId>
+		  <version>${org.apache.olingo-version}</version>
+		  <scope>runtime</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.olingo</groupId>
+		  <artifactId>olingo-odata2-jpa-processor-core</artifactId>
+		  <version>${org.apache.olingo-version}</version>
+		  <scope>runtime</scope>
+		</dependency>
+		
+		<!-- CloudFoundry/Heroku -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-cloudfoundry-connector</artifactId>
+			<version>${org.springframework.cloud-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-heroku-connector</artifactId>
+			<version>${org.springframework.cloud-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-spring-service-connector</artifactId>
+			<version>${org.springframework.cloud-version}</version>
+		</dependency>
+
+		<!-- SAP HANA Cloud Platform -->
+		<dependency> 
+	       <groupId>com.sap.hana.cloud</groupId> 
+	       <artifactId>spring-cloud-saphcp-connector</artifactId> 
+		   <version>${com.sap.hana.cloud-version}</version> 
+		</dependency> 
+		<dependency> 
+	       <groupId>com.sap.hana.cloud</groupId> 
+	       <artifactId>spring-cloud-cloudfoundry-hana-service-connector</artifactId> 
+		   <version>${com.sap.hana.cloud-version}</version> 
+		</dependency> 
+		
 	</dependencies>
 
 	<build>
@@ -496,6 +577,25 @@
 										</pluginExecutionFilter>
 										<action>
 											<execute></execute>
+										</action>
+									</pluginExecution>
+									<pluginExecution>
+										<pluginExecutionFilter>
+											<groupId>
+												org.codehaus.enunciate
+											</groupId>
+											<artifactId>
+												maven-enunciate-plugin
+											</artifactId>
+											<versionRange>
+												[1.28,)
+											</versionRange>
+											<goals>
+												<goal>docs</goal>
+											</goals>
+										</pluginExecutionFilter>
+										<action>
+											<ignore></ignore>
 										</action>
 									</pluginExecution>
 								</pluginExecutions>
