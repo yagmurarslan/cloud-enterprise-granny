@@ -6,7 +6,7 @@
 	<artifactId>enterprise-granny</artifactId>
 	<name>enterprise-granny</name>
 	<packaging>war</packaging>
-	<version>1.0.0-BUILD-SNAPSHOT</version>
+	<version>1.11.0-BUILD-SNAPSHOT</version>
 	<description>A sample address book application demonstrating the interplay of popular open-source libraries. [WIP]</description>
 	
 	<properties>
@@ -22,7 +22,7 @@
 		<org.codehaus.enunciate-version>1.28</org.codehaus.enunciate-version>
 		<org.apache.olingo-version>2.0.1-SNAPSHOT</org.apache.olingo-version>
 		<org.springframework.cloud-version>1.1.0.RELEASE</org.springframework.cloud-version>
-		<com.sap.hana.cloud-version>0.1.0-SNAPSHOT</com.sap.hana.cloud-version>
+		<com.sap.hana.cloud-version>1.0.0.RELEASE</com.sap.hana.cloud-version>
 	</properties>
 
 	<repositories>
@@ -446,7 +446,7 @@
 		<!-- SAP HANA Cloud Platform -->
 		<dependency> 
 	       <groupId>com.sap.hana.cloud</groupId> 
-	       <artifactId>spring-cloud-saphcp-connector</artifactId> 
+	       <artifactId>spring-cloud-sap-connector</artifactId> 
 		   <version>${com.sap.hana.cloud-version}</version> 
 		</dependency> 
 		<dependency> 
@@ -458,152 +458,152 @@
 	</dependencies>
 
 	<build>
-			<plugins>
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.5.1</version>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>${java-version}</source>
+					<target>${java-version}</target>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<warName>enterprise-granny</warName>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+					<id>compile</id>
+					<phase>compile</phase>
 					<configuration>
-						<source>${java-version}</source>
-						<target>${java-version}</target>
-						<showDeprecation>true</showDeprecation>
-						<showWarnings>true</showWarnings>
+						<target>
+							<property name="compile_classpath" refid="maven.compile.classpath" />
+							<property name="runtime_classpath" refid="maven.runtime.classpath" />
+							<property name="test_classpath" refid="maven.test.classpath" />
+							<property name="plugin_classpath" refid="maven.plugin.classpath" />
+							 
+							<echo message="compile classpath: ${compile_classpath}" />
+							<echo message="runtime classpath: ${runtime_classpath}" />
+							<echo message="test classpath: ${test_classpath}" />
+							<echo message="plugin classpath: ${plugin_classpath}" />
+						</target>
 					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-war-plugin</artifactId>
-					<version>2.2</version>
-					<configuration>
-						<warName>enterprise-granny</warName>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.5</version>
-					<configuration>
-						<encoding>UTF-8</encoding>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-antrun-plugin</artifactId>
-					<version>1.7</version>
-					<executions>
-						<execution>
-						<id>compile</id>
-						<phase>compile</phase>
-						<configuration>
-							<target>
-								<property name="compile_classpath" refid="maven.compile.classpath" />
-								<property name="runtime_classpath" refid="maven.runtime.classpath" />
-								<property name="test_classpath" refid="maven.test.classpath" />
-								<property name="plugin_classpath" refid="maven.plugin.classpath" />
-								 
-								<echo message="compile classpath: ${compile_classpath}" />
-								<echo message="runtime classpath: ${runtime_classpath}" />
-								<echo message="test classpath: ${test_classpath}" />
-								<echo message="plugin classpath: ${plugin_classpath}" />
-							</target>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						</execution>
-					</executions>
-				</plugin>
-					
-				<!-- enunciate - REST documentation tool -->
-				<plugin>
-					<groupId>org.codehaus.enunciate</groupId>
-					<artifactId>maven-enunciate-plugin</artifactId>
-					<version>${org.codehaus.enunciate-version}</version>
-					<executions>
-						<execution>
-							<goals>
-								<goal>docs</goal>
-							</goals>
-							<configuration>
-								<docsDir>${project.basedir}/src/main/webapp/docs</docsDir>
-								<configFile>${project.basedir}/src/main/resources/META-INF/enunciate/enunciate.xml</configFile>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>	
+					<goals>
+						<goal>run</goal>
+					</goals>
+					</execution>
+				</executions>
+			</plugin>
 				
-				<!-- delete old API documentation as part of clean -->
-				<plugin>
-		            <groupId>org.apache.maven.plugins</groupId>
-		            <artifactId>maven-clean-plugin</artifactId>
-		            <version>2.4.1</version>
-		            <configuration>
-		                <filesets>
-		                    <fileset>
-		                        <directory>${project.basedir}/src/main/webapp/docs</directory>
-		                        <includes>
-		                            <include>**/*</include>
-		                        </includes>
-		                        <followSymlinks>false</followSymlinks>
-		                    </fileset>
-		                </filesets>
-		            </configuration>
-		        </plugin>
-			</plugins>
-
-			<pluginManagement>
-				<plugins>
-					<!-- Eclipse m2e settings only - influence on the Maven build itself -->
-					<plugin>
-						<groupId>org.eclipse.m2e</groupId>
-						<artifactId>lifecycle-mapping</artifactId>
-						<version>1.0.0</version>
+			<!-- enunciate - REST documentation tool -->
+			<plugin>
+				<groupId>org.codehaus.enunciate</groupId>
+				<artifactId>maven-enunciate-plugin</artifactId>
+				<version>${org.codehaus.enunciate-version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>docs</goal>
+						</goals>
 						<configuration>
-							<lifecycleMappingMetadata>
-								<pluginExecutions>
-									<pluginExecution>
-										<pluginExecutionFilter>
-											<groupId>
-												org.apache.maven.plugins
-											</groupId>
-											<artifactId>
-												maven-antrun-plugin
-											</artifactId>
-											<versionRange>
-												[1.7,)
-											</versionRange>
-											<goals>
-												<goal>run</goal>
-											</goals>
-										</pluginExecutionFilter>
-										<action>
-											<execute></execute>
-										</action>
-									</pluginExecution>
-									<pluginExecution>
-										<pluginExecutionFilter>
-											<groupId>
-												org.codehaus.enunciate
-											</groupId>
-											<artifactId>
-												maven-enunciate-plugin
-											</artifactId>
-											<versionRange>
-												[1.28,)
-											</versionRange>
-											<goals>
-												<goal>docs</goal>
-											</goals>
-										</pluginExecutionFilter>
-										<action>
-											<ignore></ignore>
-										</action>
-									</pluginExecution>
-								</pluginExecutions>
-							</lifecycleMappingMetadata>
+							<docsDir>${project.basedir}/src/main/webapp/docs</docsDir>
+							<configFile>${project.basedir}/src/main/resources/META-INF/enunciate/enunciate.xml</configFile>
 						</configuration>
-					</plugin>
-				</plugins>
-			</pluginManagement>
+					</execution>
+				</executions>
+			</plugin>	
+			
+			<!-- delete old API documentation as part of clean -->
+			<plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-clean-plugin</artifactId>
+	            <version>2.4.1</version>
+	            <configuration>
+	                <filesets>
+	                    <fileset>
+	                        <directory>${project.basedir}/src/main/webapp/docs</directory>
+	                        <includes>
+	                            <include>**/*</include>
+	                        </includes>
+	                        <followSymlinks>false</followSymlinks>
+	                    </fileset>
+	                </filesets>
+	            </configuration>
+	        </plugin>
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<!-- Eclipse m2e settings only - influence on the Maven build itself -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-antrun-plugin
+										</artifactId>
+										<versionRange>
+											[1.7,)
+										</versionRange>
+										<goals>
+											<goal>run</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute></execute>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.enunciate
+										</groupId>
+										<artifactId>
+											maven-enunciate-plugin
+										</artifactId>
+										<versionRange>
+											[1.28,)
+										</versionRange>
+										<goals>
+											<goal>docs</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 	
 	 <organization>
