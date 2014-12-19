@@ -6,7 +6,7 @@
 	<artifactId>enterprise-granny</artifactId>
 	<name>enterprise-granny</name>
 	<packaging>war</packaging>
-	<version>1.11.0-BUILD-SNAPSHOT</version>
+	<version>1.11.1-BUILD-SNAPSHOT</version>
 	<description>A sample address book application demonstrating the interplay of popular open-source libraries. [WIP]</description>
 	
 	<properties>

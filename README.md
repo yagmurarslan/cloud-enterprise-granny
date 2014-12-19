@@ -26,6 +26,7 @@ Table of Content
 + [Chapter 08 - Inner beauty](/doc/08.md)
 + [Chapter 09 - The Road to API-ness](/doc/09.md)
 + [Chapter 10 - Everybody's favorite : documentation](/doc/10.md)
++ [Chapter 11 - One for all](/doc/11.md)
 
 Quick start
 -----------
@@ -65,7 +66,7 @@ Authors
 Copyright and license
 ---------------------
 
-Copyright (c) 2013 SAP SE
+Copyright (c) 2013. 2014 SAP SE
 
 Except as provided below, this software is licensed under the Apache License, Version 2.0 (the "License"); you may not use this software except in compliance with the License.You may obtain a copy of the License at:
 
