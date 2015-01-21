@@ -20,9 +20,12 @@
 		<org.codehaus.jackson-version>1.9.9</org.codehaus.jackson-version>
 		<org.apache.cxf-version>3.0.0</org.apache.cxf-version>
 		<org.codehaus.enunciate-version>1.28</org.codehaus.enunciate-version>
-		<org.apache.olingo-version>2.0.1-SNAPSHOT</org.apache.olingo-version>
 		<org.springframework.cloud-version>1.1.0.RELEASE</org.springframework.cloud-version>
 		<com.sap.hana.cloud-version>1.0.0.RELEASE</com.sap.hana.cloud-version>
+		<org.liquibase.liquibase-core.version>3.2.0</org.liquibase.liquibase-core.version>
+		
+		<com.sap.cloud.neo.api-version>1.64.15</com.sap.cloud.neo.api-version>
+		
 	</properties>
 
 	<repositories>
@@ -47,16 +50,6 @@
 			<id>eclipselink</id>
 			<name>EclipseLink Maven Repository</name>
 			<url>http://download.eclipse.org/rt/eclipselink/maven.repo/</url>
-		</repository>
-		
-		<!-- 
-			Needed for Olingo snapshots
-			see: https://git-wip-us.apache.org/repos/asf?p=olingo-odata2.git;a=commit;h=44604c78
-		 -->
-		<repository>
-			<id>apache</id>
-			<name>Apache Maven Snapshots Repository</name>
-			<url>http://repository.apache.org/content/repositories/snapshots/</url>
 		</repository>
 		
 	</repositories>
@@ -393,39 +386,7 @@
 			<artifactId>enunciate-docs</artifactId>
 			<version>${org.codehaus.enunciate-version}</version>
 		</dependency>
-		
-		<!-- Apache Olingo (OData handling) -->
-		<dependency>
-		  <groupId>org.apache.olingo</groupId>
-		  <artifactId>olingo-odata2-api</artifactId>
-		  <version>${org.apache.olingo-version}</version>
-		  <scope>compile</scope>
-		</dependency>
-		<dependency>
-		  <groupId>org.apache.olingo</groupId>
-		  <artifactId>olingo-odata2-core</artifactId>
-		  <version>${org.apache.olingo-version}</version>
-		  <scope>runtime</scope>
-		</dependency>
-		<dependency>
-		  <groupId>org.apache.olingo</groupId>
-		  <artifactId>olingo-odata2-jpa-processor-api</artifactId>
-		  <version>${org.apache.olingo-version}</version>
-		  <scope>compile</scope>
-		</dependency>
-		<dependency>
-		  <groupId>org.apache.olingo</groupId>
-		  <artifactId>olingo-odata2-api-annotation</artifactId>
-		  <version>${org.apache.olingo-version}</version>
-		  <scope>runtime</scope>
-		</dependency>
-		<dependency>
-		  <groupId>org.apache.olingo</groupId>
-		  <artifactId>olingo-odata2-jpa-processor-core</artifactId>
-		  <version>${org.apache.olingo-version}</version>
-		  <scope>runtime</scope>
-		</dependency>
-		
+			
 		<!-- CloudFoundry/Heroku -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -454,6 +415,20 @@
 	       <artifactId>spring-cloud-cloudfoundry-hana-service-connector</artifactId> 
 		   <version>${com.sap.hana.cloud-version}</version> 
 		</dependency> 
+		
+		<dependency>
+		    <groupId>com.sap.cloud</groupId>
+		    <artifactId>neo-java-web-api</artifactId>
+		    <version>${com.sap.cloud.neo.api-version}</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<!-- Liquibase (DB Schema Transformations -->
+		<dependency>
+		    <groupId>org.liquibase</groupId>
+		    <artifactId>liquibase-core</artifactId>
+		    <version>${org.liquibase.liquibase-core.version}</version>
+		</dependency>
 		
 	</dependencies>
 
