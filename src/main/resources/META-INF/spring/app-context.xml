@@ -71,13 +71,11 @@
     	</property>
     </bean>  
 	
-<!-- 	
-	<beans profile="dev, prod" >
+	<beans profile="local" >
 		<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/DefaultDB" />
 	</beans>
--->	
 
-	<beans profile="dev, prod, cloud">
+	<beans profile="cloud">
 		<cloud:data-source id="dataSource"/>
 	</beans>
 
@@ -89,7 +87,4 @@
 	        <property name="password" value="demo"/>
     	</bean>
 	</beans>
-	
-
-		
 </beans>

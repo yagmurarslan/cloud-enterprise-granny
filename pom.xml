@@ -21,7 +21,7 @@
 		<org.apache.cxf-version>3.0.0</org.apache.cxf-version>
 		<org.codehaus.enunciate-version>1.28</org.codehaus.enunciate-version>
 		<org.springframework.cloud-version>1.1.0.RELEASE</org.springframework.cloud-version>
-		<com.sap.hana.cloud-version>1.0.0.RELEASE</com.sap.hana.cloud-version>
+		<com.sap.hana.cloud-version>1.0.1.RELEASE</com.sap.hana.cloud-version>
 		<org.liquibase.liquibase-core.version>3.2.0</org.liquibase.liquibase-core.version>
 		
 		<com.sap.cloud.neo.api-version>1.64.15</com.sap.cloud.neo.api-version>
