@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <enunciate label="Enterprise Granny" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://enunciate.codehaus.org/schemas/enunciate-1.28.xsd">
+	xsi:noNamespaceSchemaLocation="http://enunciate.codehaus.org/schemas/enunciate-1.31.xsd">
 		
 	<namespaces>
 		<namespace id="Addressbook" uri="http://api.enterprise-granny.samples.cloud.sap.com/model" />
