@@ -7,7 +7,6 @@ import javax.ws.rs.ext.ExceptionMapper;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.http.HttpStatus;
 
 import com.sap.hana.cloud.samples.granny.model.StatusMessage;
 import com.sap.hana.cloud.samples.granny.util.CustomObjectMapper;
@@ -44,7 +43,7 @@ public class ParserExceptionMapper implements ExceptionMapper<JsonParseException
 		
 		StatusMessage message = new StatusMessage();
 
-		message.setCode(HttpStatus.BAD_REQUEST.value());
+		message.setCode(400);
 		message.setDescription(exception.getMessage().replaceAll(PATTERN, REPLACE));
 		message.setError("Parsing error");
 

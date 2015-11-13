@@ -125,7 +125,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <link rel="shortcut icon" href="/enterprise-granny/resources/img/favicon.ico">
+  <link rel="shortcut icon" href="../resources/img/favicon.ico">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../resources/img/ensw_granny_logo_144.png">
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../resources/img/ensw_granny_logo_114.png">
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../resources/img/ensw_granny_logo_72.png">
@@ -139,12 +139,12 @@
 	 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
-	  <script src="/enterprise-granny/resources/js/html5shiv.js"></script>
-	  <script src="/enterprise-granny/resources/js/respond.min.js"></script>
+	  <script src="../resources/js/html5shiv.js"></script>
+	  <script src="../resources/js/respond.min.js"></script>
   <![endif]-->
  
   <!-- Granny --> 
-  <link rel="stylesheet" href="../resources/css/granny.css" />
+  <link rel="stylesheet" href="../resources/css/contact-srv.css" />
 
   <!-- fonts -->
   <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
@@ -167,11 +167,10 @@
 	       <span class="icon-bar"></span>
 	       <span class="icon-bar"></span>
 	     </button>
-	     <a class="navbar-brand" href="../" data-pjax><img src="../resources/img/icon_9727.png" style="width: 40px; height: 40px; margin-top: -10px; margin-right: 10px;" class="hidden-xs hidden-sm"> Granny's Addressbook</a>
+	     <a class="navbar-brand" href="../" data-pjax><img src="../resources/img/icon_9727.png" style="width: 40px; height: 40px; margin-top: -10px; margin-right: 10px;" class="hidden-xs hidden-sm"> Addressbook Service</a>
 	   </div>
 	   <div class="navbar-collapse collapse">
 	     <ul class="nav navbar-nav">
-	       <li><a href="/about" data-pjax>About</a></li>
 	       <li><a href="/docs">API</a></li>
 	     </ul>
 	   </div><!--/.nav-collapse -->
@@ -593,7 +592,7 @@
       		<h2>${nameTags[0]}</h2>
     	</div>
       <p>
-      	<a href="/enterprise-granny/api/v1${resource.@name}"><pre>[${operation.@name}] /api/v1${resource.@name}</pre></a>
+      	<a href="/api/v1${resource.@name}"><pre>[${operation.@name}] /api/v1${resource.@name}</pre></a>
       </p>
     [#list operation.alias as alias]
       <p class="note">Alias: ${alias}</p>

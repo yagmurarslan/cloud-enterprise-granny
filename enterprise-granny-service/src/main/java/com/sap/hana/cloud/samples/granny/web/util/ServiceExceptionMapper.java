@@ -1,13 +1,11 @@
 package com.sap.hana.cloud.samples.granny.web.util;
 
 import javax.inject.Inject;
-import javax.validation.ConstraintViolationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.http.HttpStatus;
 
 import com.sap.hana.cloud.samples.granny.model.StatusMessage;
 import com.sap.hana.cloud.samples.granny.srv.ServiceException;

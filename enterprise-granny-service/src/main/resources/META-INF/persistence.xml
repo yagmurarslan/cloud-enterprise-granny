@@ -5,7 +5,8 @@
 			 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 
     <persistence-unit name="application" transaction-type="RESOURCE_LOCAL">
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        
         <class>com.sap.hana.cloud.samples.granny.model.BaseObject</class>
         <class>com.sap.hana.cloud.samples.granny.model.Address</class>
         <class>com.sap.hana.cloud.samples.granny.model.Contact</class>

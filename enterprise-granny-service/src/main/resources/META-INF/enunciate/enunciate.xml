@@ -3,7 +3,7 @@
 	xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/stoicflame/enunciate/master/top/src/main/resources/META-INF/enunciate-1.31.xsd">
 		
 	<namespaces>
-		<namespace id="Addressbook" uri="http://api.enterprise-granny.samples.cloud.sap.com/model" />
+		<namespace id="Addressbook" uri="http://api.granny.samples.cloud.sap.com/model" />
 	</namespaces>
 	
 	<services>
@@ -24,7 +24,7 @@
 		<jersey disabled="true" />
 		<obj-c disabled="true" />
 		<xml disabled="true" />
-		<docs splashPackage="com.sap.hana.cloud.samples.granny.api" title="Granny's Addressbook"
+		<docs splashPackage="com.sap.hana.cloud.samples.granny.api.impl" title="Granny's Addressbook Service"
 			copyright="SAP SE" includeDefaultDownloads="false" includeExampleXml="false"
 			includeExampleJson="true" groupRestResources="grouping" applyWsdlFilter="false"
 			docsDir="docs" freemarkerXMLProcessingTemplate="docs.fmt" base="docs-base.zip">		
