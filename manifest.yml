@@ -1,6 +1,6 @@
 ---
 applications:
-- name: enterprise-granny
+- name: enterprise-granny-${random-word}
   memory: 512M
   instances: 1
   host: enterprise-granny
