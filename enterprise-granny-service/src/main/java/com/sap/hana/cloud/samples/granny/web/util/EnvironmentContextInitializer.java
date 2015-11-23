@@ -37,15 +37,18 @@ public class EnvironmentContextInitializer implements ApplicationContextInitiali
 	{
 		RuntimeEnvironment retVal = RuntimeEnvironment.CLOUD;
 		
-		String landscape = System.getenv("HC_LANDSCAPE"); // NEO
-		String vcap = System.getenv("VCAP_APPLICATION");  // Cloud Foundry
+		final String landscape = System.getenv("HC_LANDSCAPE"); // NEO
+		final String vcap = System.getenv("VCAP_APPLICATION");  // Cloud Foundry
 		
 		if (landscape == null && vcap == null)
 		{
 			retVal = RuntimeEnvironment.LOCAL;
 		}
 		
-		logger.info("Application running in '{}' environment", retVal.name().toLowerCase());
+		if (logger.isInfoEnabled())
+		{
+			logger.info("Application running in '{}' environment", retVal.name().toLowerCase());			
+		}
 		
 		return retVal;
 	}

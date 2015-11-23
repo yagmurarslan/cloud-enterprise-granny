@@ -1,0 +1,12 @@
+---
+applications:
+- name: enterprise-granny-client-${random-word}
+  memory: 512M
+  instances: 1
+  host: enterprise-granny-client
+  path: target/client.war
+  services:
+    - hana
+  env:
+    SPRING_PROFILES_DEFAULT: cloud
+  

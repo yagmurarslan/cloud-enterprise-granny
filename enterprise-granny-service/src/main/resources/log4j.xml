@@ -35,6 +35,22 @@
 	<logger name="org.springframework.web">
 		<level value="info" />
 	</logger>
+	
+		<logger name="org.springframework.cloud">
+		<level value="debug" />
+	</logger>
+	
+	<logger name="org.springframework.cloud.service.relational">
+		<level value="debug" />
+	</logger>
+	
+	<logger name="com.sap.hana.cloud.hcp">
+		<level value="debug" />
+	</logger>
+	
+	<logger name="com.sap.hana.cloud.hcp.cf">
+		<level value="debug" />
+	</logger>
 
 	<!-- Root Logger -->
 	<root>

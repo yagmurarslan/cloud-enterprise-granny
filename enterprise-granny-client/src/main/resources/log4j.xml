@@ -30,6 +30,10 @@
 	<logger name="org.springframework.web">
 		<level value="info" />
 	</logger>
+	
+	<logger name="com.sap.hana.cloud.samples.granny.client">
+		<level value="info" />
+	</logger>
 
 	<!-- Root Logger -->
 	<root>

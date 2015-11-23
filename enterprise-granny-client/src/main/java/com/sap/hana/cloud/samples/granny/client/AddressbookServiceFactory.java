@@ -1,7 +1,6 @@
 package com.sap.hana.cloud.samples.granny.client;
 
 import java.net.URISyntaxException;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +11,16 @@ import javax.naming.NamingException;
 import org.apache.cxf.jaxrs.client.JAXRSClientFactory;
 import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.sap.core.connectivity.api.http.HttpDestination;
 import com.sap.hana.cloud.samples.granny.api.ContactFacade;
 
 public class AddressbookServiceFactory
 {
+	private static final Logger logger = LoggerFactory.getLogger(AddressbookServiceFactory.class);
+
 	/**
 	 * Name of the logical destination of the Addressbook service to be used.
 	 * Should match the resource name specified in the <code>web.xml</code>.
@@ -36,36 +39,41 @@ public class AddressbookServiceFactory
 	 */
 	static String getEndPoint()
 	{
-		String retVal = getAddressbookServiceDestination();
+		String retVal = null;
 		
-		// TODO add logic for Cloud Foundry runtime
+		String destinationName = DESTINATION_NAME; 
+		
+		final String landscape = System.getenv("HC_LANDSCAPE"); // NEO
+		final String vcap = System.getenv("VCAP_APPLICATION");  // Cloud Foundry
+		
+		if (landscape == null && vcap == null)
+		{
+			// no landscape indicator found, assume we are running locally
+			retVal = "http://localhost:8080/api/v1";
+		}
+		else 
+		{
+			if (landscape != null) // NEO
+			{
+				retVal = getAddressbookServiceDestination(destinationName);
+			}
+			
+			if (vcap != null) // Cloud Foundry
+			{
+				destinationName = DESTINATION_NAME.toUpperCase().replace('-', '_');
+				retVal = System.getenv(destinationName);
+			}
+		}
 		
 		if (retVal == null)
 		{
-			/*
-			 *  apply defensive programming and try to make an educated guess
-			 */
-			
-			// check if we are running locally
-			final String landscape = System.getenv("HC_APPLICATION");
-			
-			if (landscape == null)
+			logger.error("No API destination with name '{}‘ found!", destinationName);			
+		}
+		else
+		{
+			if (logger.isInfoEnabled())
 			{
-				// no landscape maintained, let's try with defaults
-				retVal = "http://localhost:8080";
-			}
-			else 
-			{
-				// URL pattern
-				final String urlPattern = "{0}://{1}-{2}.{3}";
-				
-				// the host landscape
-				final String host = System.getenv("HC_HOST");
-				
-				// tenant/account name
-				final String account = System.getenv("HC_ACCOUNT");			
-				
-				retVal = new MessageFormat(urlPattern).format(new Object[]{ "https", "srvdemo", account, host });
+				logger.info("API destination: " + retVal);			
 			}
 		}
 
@@ -77,13 +85,14 @@ public class AddressbookServiceFactory
 	 * destination of the Connectivity service or <code>NULL</code> if no valid
 	 * destination was found. 
 	 * 
+	 * @param destinationName The name of the {@link HttpDestination} to be used
 	 * @return URI of the Addressbook service to be used via the corresponding 
 	 * destination of the Connectivity service or <code>NULL</code> if no valid
 	 * destination was found
 	 * 
 	 * @see https://help.hana.ondemand.com/help/frameset.htm?e5c9867dbb571014957ef9d7a8846b1c.html
 	 */
-	static String getAddressbookServiceDestination()
+	static String getAddressbookServiceDestination(String destinationName)
 	{
 		String retVal = null;
 		
@@ -93,7 +102,7 @@ public class AddressbookServiceFactory
 
 			HttpDestination destination = null;
 
-			destination = (HttpDestination) ctx.lookup("java:comp/env/" + DESTINATION_NAME);
+			destination = (HttpDestination) ctx.lookup("java:comp/env/" + destinationName);
 			
 			if (destination != null && destination.getURI() != null)
 			{
@@ -102,12 +111,11 @@ public class AddressbookServiceFactory
 		}
 		catch (NamingException ex)
 		{
-			// no destination maintained, we'll continue by trying to make an educated guess 
+			logger.error("No API destination with name '{}‘ found!", destinationName);			
 		}
         catch (URISyntaxException ex)
         {
-	        ex.printStackTrace();
-        }
+        	logger.error("Invalid URI defined for API destination with name '{}‘!", destinationName);        }
 		
 		return retVal;
 
@@ -127,9 +135,13 @@ public class AddressbookServiceFactory
 		JacksonJaxbJsonProvider jsonProvider = new JacksonJaxbJsonProvider();
 		providers.add(jsonProvider);
 		
-		// initialize proxy
-		retVal  = JAXRSClientFactory.create(endPoint, ContactFacade.class, providers);
-
+		if (endPoint != null)
+		{
+			
+			// initialize proxy
+			retVal  = JAXRSClientFactory.create(endPoint, ContactFacade.class, providers);
+		}
+		
 		return retVal;
 	}
 }
