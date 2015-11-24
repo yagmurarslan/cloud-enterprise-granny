@@ -9,7 +9,7 @@ Enterprise Granny is a sample application used to demonstrate how-to develop gre
 
 <p align="center">
 [![Introduction video](http://img.youtube.com/vi/t1rZDX-0PQI/0.jpg)](https://www.youtube.com/watch?v=t1rZDX-0PQI)
-<p align="center">
+</p>
 
 **Note:** The initial source code is a fork of the original [Granny's Addressbook]  (https://github.com/osintegrators/JavaSpringGranny) application provided by Open Software Integrators. 
 
@@ -28,13 +28,12 @@ Table of Content
 + [Chapter 10 - Everybody's favorite : documentation](/doc/10.md)
 + [Chapter 11 - One for all](/doc/11.md)
 
++ [Chapter 20 - Granny 2.0: A new Beginning](/doc/20a.md)
+
 Quick start
 -----------
 
 Clone the repo, `git clone https://github.com/SAP/cloud-enterprise-granny.git`, or [download the latest release](https://github.com/SAP/cloud-enterprise-granny/archive/master.zip).
-
-This sample code comes with a series of blog posts: check out [Enterprise Granny](http://scn.sap.com/docs/DOC-42001) on the SAP Community Network (no registration required!)
-
 
 Versioning
 ----------
