@@ -9,9 +9,9 @@ Enterprise Granny is a sample application used to demonstrate how-to develop gre
 
 <p align="center">
 [![Introduction video](http://img.youtube.com/vi/t1rZDX-0PQI/0.jpg)](https://www.youtube.com/watch?v=t1rZDX-0PQI)
-</p>
+<p align="center">
 
-**Note:** The initial source code is a fork of the original [Granny's Addressbook]  (https://github.com/osintegrators/JavaSpringGranny) application provided by Open Software Integrators. 
+**Note:** The initial source code is a fork of the original [Granny's Addressbook](https://github.com/osintegrators/JavaSpringGranny) application provided by Open Software Integrators. 
 
 Table of Content
 -----------
