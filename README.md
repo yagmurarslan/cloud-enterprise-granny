@@ -13,6 +13,30 @@ Enterprise Granny is a sample application used to demonstrate how-to develop gre
 
 **Note:** The initial source code is a fork of the original [Granny's Addressbook](https://github.com/osintegrators/JavaSpringGranny) application provided by Open Software Integrators. 
 
+Quick start
+-----------
+
+Clone the repo, `git clone https://github.com/SAP/cloud-enterprise-granny.git`, or [download the latest release](https://github.com/SAP/cloud-enterprise-granny/archive/master.zip).
+
+With the introduction of the 2.x branch (which is now the new master branch) the application has been refactored into three modules:
+
++ a shared `enterprise-granny-core` module, which contains the domain model and the API,
++ a (micro-) service (provider) called `enterprise-granny-service` and
++ an exemplary client application called `enterprise-granny-client` 
+
+The later two are both web applications (packaged as WAR files by default) and hence, need to be deployed separately. As the client uses the REST API of the service (provider) one needs to specify the endpoint URL pointing to the API. This is done as described below:
+
++ _SAP HANA Cloud Platform (NEO):_ Define an HTTP destination with the name `Addressbook-Service`. The client app comes with an example, which can be found here: [destination.properties](enterprise-granny-client/src/main/resources/destinations/destination.properties)
++ _Cloud Foundry:_ Define a user-defined environment variable with the name `ADDRESSBOOK_SERVICE` and the value of the URI, as shown below: 
+
+```
+ADDRESSBOOK_SERVICE=https://enterprise-granny-service.cfapps.neo.ondemand.com/api/v1
+```
+
+Please also remember to adjust the declared services within the [`manifest.yml`](enterprise-granny-client/manifest.yml) file as required for your runtime environment! 
+
+> **NOTE:** If you intend to deploy this application to a Cloud Foundry landscape provided by SAP or its partners in order to leverage the capabilities of the SAP HANA database platform you need to manually provide the HANA JDBC driver (`ngdbc.jar`) within the [`WEB-INF/lib`](enterprise-granny-service/src/main/webapp/WEB-INF/lib) folder. 
+
 Table of Content
 -----------
 
@@ -30,10 +54,6 @@ Table of Content
 
 + [Chapter 20 - Granny 2.0: A new Beginning](/doc/20a.md)
 
-Quick start
------------
-
-Clone the repo, `git clone https://github.com/SAP/cloud-enterprise-granny.git`, or [download the latest release](https://github.com/SAP/cloud-enterprise-granny/archive/master.zip).
 
 Versioning
 ----------
