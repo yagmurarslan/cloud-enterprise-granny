@@ -53,7 +53,7 @@ Table of Content
 + [Chapter 11 - One for all](/doc/11.md)
 
 + [Chapter 20 - Granny 2.0: A new Beginning](/doc/20a.md)
-+ [Chapter 20 - Granny 2.0: A new Beginning - Part II](/doc/20.md)
++ [Chapter 20 - Granny 2.0: A new Beginning - Part II](/doc/20b.md)
 
 Versioning
 ----------
