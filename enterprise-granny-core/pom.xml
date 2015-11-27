@@ -5,11 +5,11 @@
     <artifactId>enterprise-granny</artifactId>
     <version>2.1.0-BUILD-SNAPSHOT</version>
   </parent>
-  
+
   <artifactId>enterprise-granny-core</artifactId>
   <name>enterprise-granny-core</name>
   <description>Contains the domain model and API interfaces</description>
-  
+
   <dependencies>
   		<dependency>
 		    <groupId>org.apache.commons</groupId>
@@ -74,5 +74,5 @@
 			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
-  
+
 </project>
