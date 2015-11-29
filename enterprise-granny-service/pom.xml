@@ -274,8 +274,8 @@
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.3.2-b02</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -343,7 +343,7 @@
 		<dependency>
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.el</artifactId>
-			<version>3.0.1-b05</version>
+			<version>3.0.1-b08</version>
 		</dependency>
 
 		<!-- Google Phone Lib -->

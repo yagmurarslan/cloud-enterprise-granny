@@ -35,10 +35,9 @@ import com.sap.hana.cloud.samples.granny.model.Salutation;
 /**
  * Tests for the {@link ContactDAO} class.  
  */
-@ContextConfiguration("classpath:/META-INF/spring/app-context.xml")
+@ContextConfiguration("classpath:/META-INF/spring/spring-persistence-config.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles(profiles = "test")
-@Ignore("does not work due to missing spring app-context.")
 public class TestContactDAO
 {
 	@Autowired

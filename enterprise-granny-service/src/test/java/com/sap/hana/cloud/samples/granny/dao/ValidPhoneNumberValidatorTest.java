@@ -10,7 +10,6 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +26,9 @@ import com.sap.hana.cloud.samples.granny.xcc.validations.ValidPhoneNumberValidat
 /**
  * Tests for the {@link ValidPhoneNumberValidator} class.  
  */
-@ContextConfiguration("classpath:/META-INF/spring/app-context.xml")
+@ContextConfiguration("classpath:/META-INF/spring/spring-persistence-config.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles(profiles = "test")
-@Ignore("does not work due to missing spring app-context.")
 public class ValidPhoneNumberValidatorTest
 {
 	

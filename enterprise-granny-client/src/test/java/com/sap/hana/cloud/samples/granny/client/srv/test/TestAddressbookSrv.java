@@ -13,6 +13,11 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.sap.hana.cloud.samples.granny.api.ContactFacade;
 import com.sap.hana.cloud.samples.granny.model.Address;
@@ -28,6 +33,9 @@ import com.sap.hana.cloud.samples.granny.util.ConstraintViolationMapper;
 /**
  * Tests for the {@link ContactFacade} class.  
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ActiveProfiles(profiles = "test")
+@Ignore("As it assumes the Addressbook Service to run on a hardcoded port on localhost!")
 public class TestAddressbookSrv
 {
 	static String endPoint = null;
@@ -72,7 +80,7 @@ public class TestAddressbookSrv
 	/**
 	 * Tests getting all contacts
 	 */
-	//@Test
+	@Test
 	public void testGetContacts() 
 	{
 		
@@ -85,7 +93,7 @@ public class TestAddressbookSrv
 	/**
 	 * Tests creating a contact.
 	 */
-	//@Test
+	@Test
 	public void testCRUD() 
 	{	
 		// create test data
@@ -123,7 +131,7 @@ public class TestAddressbookSrv
 	 * 
 	 * @see http://www.historyrundown.com/top-5-people-with-the-longest-names/
 	 */
-	//@Test
+	@Test
 	public void testDataValidation() 
 	{
 		
