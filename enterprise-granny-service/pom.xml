@@ -45,7 +45,7 @@
 			<artifactId>enterprise-granny-core</artifactId>
 			<version>${version}</version>
 		</dependency>
-		
+
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -288,7 +288,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.10</version>
 			<scope>test</scope>
 		</dependency>
 
