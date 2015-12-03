@@ -37,6 +37,8 @@ Please also remember to adjust the declared services within the [`manifest.yml`]
 
 > **NOTE:** If you intend to deploy this application to a Cloud Foundry landscape provided by SAP or its partners in order to leverage the capabilities of the SAP HANA database platform you need to manually provide the HANA JDBC driver (`ngdbc.jar`) within the [`WEB-INF/lib`](enterprise-granny-service/src/main/webapp/WEB-INF/lib) folder. 
 
+> **NOTE:** Please note that the application does not run on the Java EE 6 Web profile (2.x) runtime on SAP HANA Cloud Platform due to class loading conflicts with the out-dated javax.validation version used by this runtime! 
+
 Table of Content
 -----------
 
