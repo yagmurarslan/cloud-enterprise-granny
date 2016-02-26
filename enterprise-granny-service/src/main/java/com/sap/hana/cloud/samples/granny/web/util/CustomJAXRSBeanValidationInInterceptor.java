@@ -34,7 +34,10 @@ public class CustomJAXRSBeanValidationInInterceptor extends JAXRSBeanValidationI
             
             for (Object obj : arguments)
             {
-            	provider.validateBean(obj);
+            	if (obj != null)
+            	{
+            		provider.validateBean(obj);
+            	}	
             }
             
             message.getExchange().put(BeanValidationProvider.class, provider);

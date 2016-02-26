@@ -58,6 +58,11 @@ public class DataValidationAspect
 
 		// get the message parameter themselves
 		final Object[] param = joinPoint.getArgs();
+		
+		if (param == null || param.length < 1)
+		{
+			return; // nothing to validate
+		}
 
 		// check whether or not they have been annotated with @Valid
 		for (int i = 0; i < param.length; i++)
