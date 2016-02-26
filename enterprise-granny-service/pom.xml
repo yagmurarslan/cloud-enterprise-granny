@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.sap.hana.cloud.samples</groupId>
 		<artifactId>enterprise-granny</artifactId>
-		<version>2.2.0-BUILD-SNAPSHOT</version>
+		<version>2.2.1-BUILD-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>enterprise-granny-service</artifactId>
@@ -39,21 +39,23 @@
 	</repositories>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>com.sap.hana.cloud.samples</groupId>
 			<artifactId>enterprise-granny-core</artifactId>
-			<version>${version}</version>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.1</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -64,72 +66,38 @@
 					<groupId>commons-logging</groupId>
 					<artifactId>commons-logging</artifactId>
 				</exclusion>
-				<exclusion>
-					<artifactId>spring-core</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-beans</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
 			</exclusions>
 		</dependency>
-
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+        <dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>${org.springframework-version}</version>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-commons</artifactId>
+			<version>${org.springframework.data-version}</version>
 		</dependency>
-
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework-version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>spring-core</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-beans</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>${org.springframework.data-jpa-version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework-version}</version>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<artifactId>spring-core</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>${org.springframework.data-version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>spring-core</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-beans</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<!-- Apache Jakarta Commons -->
@@ -137,6 +105,7 @@
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
+			<scope>runtime</scope>
 		</dependency>
 
 		<!-- Derby -->
@@ -144,11 +113,13 @@
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derbyclient</artifactId>
 			<version>10.9.1.0</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derby</artifactId>
 			<version>10.9.1.0</version>
+			<scope>runtime</scope>
 		</dependency>
 
 		<!-- EclipseLink (and JPA) -->
@@ -163,23 +134,7 @@
 			<artifactId>javax.persistence</artifactId>
 			<version>2.1.0</version>
 		</dependency>
-		
-		<!-- Liquibase (DB refactoring) -->
-		<!-- 
-		<dependency>
-		    <groupId>org.liquibase</groupId>
-		    <artifactId>liquibase-core</artifactId>
-		    <version>${org.liquibase.liquibase-core.version}</version>
-		</dependency>
-		-->
-		<!-- 
-		<dependency>
-		    <groupId>org.liquibase.ext</groupId>
-		    <artifactId>liquibase-hanadb</artifactId>
-		    <version>1.0</version>
-		</dependency>
-		 -->
-		
+				
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -197,16 +152,6 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
 			<version>${org.springframework-version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>spring-core</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-beans</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -229,23 +174,26 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j-version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
+		  	<artifactId>slf4j-log4j12</artifactId>
+		  	<version>${org.slf4j-version}</version>
+		  	<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.15</version>
+			<scope>test</scope>
 			<exclusions>
 				<exclusion>
 					<groupId>javax.mail</groupId>
@@ -264,9 +212,8 @@
 					<artifactId>jmxri</artifactId>
 				</exclusion>
 			</exclusions>
-			<scope>runtime</scope>
 		</dependency>
-
+		
 		<!-- @Inject -->
 		<dependency>
 			<groupId>javax.inject</groupId>
@@ -281,18 +228,7 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>javax.servlet.jsp-api</artifactId>
-			<version>2.3.2-b02</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
-
+		 
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -307,20 +243,34 @@
 			<artifactId>jackson-core-asl</artifactId>
 			<version>${org.codehaus.jackson-version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${org.codehaus.jackson-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-xc</artifactId>
 			<version>${org.codehaus.jackson-version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-jaxrs</artifactId>
 			<version>${org.codehaus.jackson-version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>jsr311-api</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
 		<!-- Apache CXF -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-core</artifactId>
+			<version>${org.apache.cxf-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
@@ -331,7 +281,7 @@
 			<artifactId>cxf-rt-rs-client</artifactId>
 			<version>${org.apache.cxf-version}</version>
 		</dependency>
-
+		
 		<!-- Validation -->
 		<dependency>
 			<groupId>javax.validation</groupId>
@@ -355,30 +305,12 @@
 			<version>3.0.1-b08</version>
 			<scope>test</scope>
 		</dependency>
-
+		
 		<!-- Google Phone Lib -->
 		<dependency>
 			<groupId>com.googlecode.libphonenumber</groupId>
 			<artifactId>libphonenumber</artifactId>
 			<version>5.7</version>
-		</dependency>
-
-		<!-- Tiles -->
-		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-jsp</artifactId>
-			<version>2.2.2</version>
-			<exclusions>
-				<!-- Exclude Commons Logging in favor of SLF4j -->
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging-api</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>jcl-over-slf4j</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<!-- enunciate (REST API documentation tool) -->
@@ -387,22 +319,30 @@
 			<artifactId>enunciate-docs</artifactId>
 			<version>${org.codehaus.enunciate-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.codehaus.enunciate</groupId>
+			<artifactId>enunciate-core-annotations</artifactId>
+			<version>${org.codehaus.enunciate-version}</version>
+		</dependency>
 
 		<!-- CloudFoundry/Heroku -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-cloudfoundry-connector</artifactId>
 			<version>${org.springframework.cloud-version}</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-heroku-connector</artifactId>
 			<version>${org.springframework.cloud-version}</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-spring-service-connector</artifactId>
 			<version>${org.springframework.cloud-version}</version>
+			<scope>runtime</scope>
 		</dependency>
 
 		<!-- SAP HANA Cloud Platform -->
@@ -410,11 +350,13 @@
 			<groupId>com.sap.hana.cloud</groupId>
 			<artifactId>spring-cloud-sap-connector</artifactId>
 			<version>${com.sap.hana.cloud-version}</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.sap.hana.cloud</groupId>
 			<artifactId>spring-cloud-cloudfoundry-hana-service-connector</artifactId>
 			<version>${com.sap.hana.cloud-version}</version>
+			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
@@ -554,7 +496,7 @@
 											org.codehaus.enunciate
 										</groupId>
 										<artifactId>
-											maven-enunciate-plugin
+											enunciate-maven-plugin
 										</artifactId>
 										<versionRange>
 											[1.28,)
@@ -570,6 +512,36 @@
 							</pluginExecutions>
 						</lifecycleMappingMetadata>
 					</configuration>
+				</plugin>
+				
+				<!-- leading by example -->
+				<plugin>
+			        <groupId>org.apache.maven.plugins</groupId>
+			        <artifactId>maven-dependency-plugin</artifactId>
+			        <version>2.10</version>
+			        <executions>
+			          <execution>
+			            <id>analyze</id>
+			            <goals>
+			              <goal>analyze</goal>
+			            </goals>
+			          </execution>
+			        </executions>
+			        <configuration>
+			          <failOnWarning>false</failOnWarning>
+			          <ignoreNonCompile>true</ignoreNonCompile>
+				      <ignoredUnusedDeclaredDependencies>
+				        <ignoredUnusedDeclaredDependency>org.springframework:spring-aspects</ignoredUnusedDeclaredDependency>
+				        <ignoredUnusedDeclaredDependency>org.springframework:spring-aop</ignoredUnusedDeclaredDependency>			        	
+				        <ignoredUnusedDeclaredDependency>org.aspectj:aspectjweaver</ignoredUnusedDeclaredDependency>
+				        <ignoredUnusedDeclaredDependency>cglib:cglib-nodep</ignoredUnusedDeclaredDependency>
+				        <ignoredUnusedDeclaredDependency>asm:asm</ignoredUnusedDeclaredDependency>
+				        <ignoredUnusedDeclaredDependency>org.apache.cxf:cxf-rt-rs-client</ignoredUnusedDeclaredDependency>
+				        <ignoredUnusedDeclaredDependency>org.codehaus.enunciate:enunciate-docs</ignoredUnusedDeclaredDependency>
+				        <ignoredUnusedDeclaredDependency>org.hibernate:hibernate-validator</ignoredUnusedDeclaredDependency>
+				      	<ignoredUnusedDeclaredDependency>org.codehaus.jackson:jackson-jaxrs</ignoredUnusedDeclaredDependency>
+				      </ignoredUnusedDeclaredDependencies>
+			        </configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
