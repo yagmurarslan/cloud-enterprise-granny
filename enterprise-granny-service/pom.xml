@@ -325,7 +325,15 @@
 			<artifactId>libphonenumber</artifactId>
 			<version>5.7</version>
 		</dependency>
-
+		
+		  
+		<!-- enunciate (REST API documentation tool) -->
+		<dependency>
+	      	<groupId>com.webcohesion.enunciate</groupId>
+	      	<artifactId>enunciate-core</artifactId>
+	      	<version>${com.webcohesion.enunciate-version}</version>
+	    </dependency>
+		  
 		<!-- CloudFoundry/Heroku -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -424,6 +432,40 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+			  <groupId>com.webcohesion.enunciate</groupId>
+			  <artifactId>enunciate-maven-plugin</artifactId>
+			  <version>2.5.0</version>
+			  <executions>
+			    <execution>
+			      <goals>
+			        <goal>docs</goal>
+			      </goals>
+			      <configuration>
+						<docsDir>${project.basedir}/src/main/webapp/docs</docsDir>
+						<configFile>${project.basedir}/src/main/resources/META-INF/enunciate/enunciate.xml</configFile>
+				  </configuration>
+			    </execution>
+			  </executions>
+			</plugin>
+			
+			<!-- delete old API documentation as part of clean -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${project.basedir}/src/main/webapp/docs</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
 		</plugins>
 
 		<pluginManagement>
@@ -455,7 +497,25 @@
 										<execute></execute>
 									</action>
 								</pluginExecution>
-								
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.enunciate
+										</groupId>
+										<artifactId>
+											enunciate-maven-plugin
+										</artifactId>
+										<versionRange>
+											[2.5,)
+										</versionRange>
+										<goals>
+											<goal>docs</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
 							</pluginExecutions>
 						</lifecycleMappingMetadata>
 					</configuration>
@@ -487,6 +547,7 @@
 				        <ignoredUnusedDeclaredDependency>org.apache.cxf:cxf-rt-rs-service-description</ignoredUnusedDeclaredDependency>
 				        <ignoredUnusedDeclaredDependency>org.hibernate:hibernate-validator</ignoredUnusedDeclaredDependency>
 				      	<ignoredUnusedDeclaredDependency>org.codehaus.jackson:jackson-jaxrs</ignoredUnusedDeclaredDependency>
+				      	<ignoredUnusedDeclaredDependency>om.webcohesion.enunciate:enunciate-core</ignoredUnusedDeclaredDependency>
 				      	<ignoredUnusedDeclaredDependency>io.swagger:swagger-jaxrs</ignoredUnusedDeclaredDependency>
 				      </ignoredUnusedDeclaredDependencies>
 			        </configuration>

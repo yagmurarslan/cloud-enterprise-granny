@@ -1,8 +1,5 @@
 package com.sap.hana.cloud.samples.granny.api.impl;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-
 import java.util.List;
 
 import javax.validation.Valid;
@@ -31,8 +28,7 @@ import com.sap.hana.cloud.samples.granny.srv.ContactService;
 @Service("contactFacade")
 @Path("/contacts")
 @Produces({ "application/json" })
-@Api( value = "/contacts", description = "Provides REST endpoints to manage address data" )
-
+@com.webcohesion.enunciate.metadata.Facet(value= "Addressbook API", documentation = "Provides REST endpoints to manage address data.")
 public class ContactFacadeImpl extends BaseFacade 
 {
 	@Autowired
@@ -46,12 +42,7 @@ public class ContactFacadeImpl extends BaseFacade
 	 * @name Get All Contacts 
 	 */
 	@GET
-	@ApiOperation( 
-		    value = "Get All Contacts", 
-		    notes = "Provides a list of contacts", 
-		    response = Contact.class, 
-		    responseContainer = "List")
-		   
+	@com.webcohesion.enunciate.metadata.rs.TypeHint(Contact.class)
 	public Response findAll() 
 	{
 		List<Contact> contacts = contactSrv.getAllContactes();
@@ -68,6 +59,7 @@ public class ContactFacadeImpl extends BaseFacade
 	 */
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
+	@com.webcohesion.enunciate.metadata.rs.TypeHint(Contact.class)
 	public Response create(@Valid Contact contact) 
 	{	
 		contact = contactSrv.createContact(contact);
@@ -84,6 +76,10 @@ public class ContactFacadeImpl extends BaseFacade
 	 */
 	@GET
 	@Path("/{id}")
+	@com.webcohesion.enunciate.metadata.rs.TypeHint(Contact.class)
+	@com.webcohesion.enunciate.metadata.rs.StatusCodes(value = {@com.webcohesion.enunciate.metadata.rs.ResponseCode(code = 200, condition = "In case of success"),
+													   @com.webcohesion.enunciate.metadata.rs.ResponseCode(code = 404, condition = "In case no Contact object with the specified ID exists")})
+
 	public Response findOne(@PathParam("id") String id) 
 	{
 		Response retVal = null;
@@ -114,6 +110,7 @@ public class ContactFacadeImpl extends BaseFacade
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
+	@com.webcohesion.enunciate.metadata.rs.TypeHint(Contact.class)
 	public Response update(@PathParam("id") String id, @Valid Contact contact) 
 	{
 		contact = contactSrv.updateContact(contact);
@@ -132,6 +129,8 @@ public class ContactFacadeImpl extends BaseFacade
 	@Path("/{id}")
 	@Consumes({MediaType.WILDCARD})
 	@Produces({MediaType.WILDCARD})
+	@com.webcohesion.enunciate.metadata.rs.StatusCodes(value = {@com.webcohesion.enunciate.metadata.rs.ResponseCode(code = 200, condition = "In case of success")})
+	@com.webcohesion.enunciate.metadata.rs.TypeHint(com.webcohesion.enunciate.metadata.rs.TypeHint.NO_CONTENT.class)
 	public Response delete(@PathParam("id") String id) 
 	{
 		Response retVal = null;
@@ -154,6 +153,7 @@ public class ContactFacadeImpl extends BaseFacade
 	 */
 	@GET
 	@Path("/{id}/addresses")
+	@com.webcohesion.enunciate.metadata.rs.TypeHint(Address.class)
 	public Response getAllAddressesByContactID(@PathParam("id") String id) 
 	{
 		List<Address> addresses = contactSrv.getContactById(id).getAddresses();

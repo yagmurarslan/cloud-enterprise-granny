@@ -1,34 +1,47 @@
-<?xml version="1.0"?>
-<enunciate label="Enterprise Granny" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/stoicflame/enunciate/master/top/src/main/resources/META-INF/enunciate-1.31.xsd">
-		
-	<namespaces>
-		<namespace id="Addressbook" uri="http://api.granny.samples.cloud.sap.com/model" />
-	</namespaces>
-	
-	<services>
-		<rest defaultRestSubcontext="/api/v1" />
-	</services>
-	
-	<webapp disabled="true" doCompile="false" doLibCopy="false" doPackage="false" />
-	
-	<modules>
-		<!-- Disable all the client generation tools -->
-		<basic-app disabled="true" />
-		<c disabled="true" />
-		<csharp disabled="true" />
-		<java-client disabled="true" />
-		<jaxws-client disabled="true" />
-		<jaxws-ri disabled="true" />
-		<jaxws-support disabled="true" />
-		<jersey disabled="true" />
-		<obj-c disabled="true" />
-		<xml disabled="true" />
-		<docs splashPackage="com.sap.hana.cloud.samples.granny.api.impl" title="Granny's Addressbook Service"
+<enunciate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://enunciate.webcohesion.com/schemas/enunciate-2.0.0.xsd">
+
+	<api-classes>
+    	<include pattern="com.sap.hana.cloud.samples.granny.model.*"/>
+    	 
+    	<exclude pattern="com.sap.hana.cloud.samples.granny.api.*"/>  
+    	
+    	<exclude pattern="io.swagger.jaxrs.listing.**" />
+    	<exclude pattern="org.eclipse.persistence.jpa.rs.**" /> 	
+  	</api-classes>
+
+
+  <modules>
+    <jaxrs datatype-detection="aggressive"/>
+    <jackson />
+    <docs docsDir="../../../webapp/docs" docsSubdir="/"/>
+    
+    <swagger disabled="true"/>
+    
+    <gwt-json-overlay disabled="true" />
+    <idl disabled="true" />
+
+    <jackson1 disabled="true"/>
+    <jaxb disabled="true"/>
+    <jaxws disabled="true"/>
+    <spring-web disabled="true"/>
+    
+    <c-xml-client disabled="true" />
+    <csharp-xml-client disabled="true" />
+    <java-json-client disabled="true" />
+    <java-xml-client disabled="true"/>
+    <javascript-client disabled="true"/>
+    <obj-c-xml-client disabled="true"/>
+    <php-json-client disabled="true"/>
+    <php-xml-client disabled="true" />
+    <ruby-json-client disabled="true"/>
+  </modules>
+  
+</enunciate>
+
+<!-- 
+	splashPackage="com.sap.hana.cloud.samples.granny.api.impl" title="Granny's Addressbook Service"
 			copyright="SAP SE" includeDefaultDownloads="false" includeExampleXml="false"
 			includeExampleJson="true" groupRestResources="grouping" applyWsdlFilter="false"
-			docsDir="docs" freemarkerXMLProcessingTemplate="docs.fmt" base="docs-base.zip">		
-		</docs>
-	</modules>
-
-</enunciate>
+			docsDir="docs" freemarkerXMLProcessingTemplate="docs.fmt" base="docs-base.zip"
+ -->
+ 

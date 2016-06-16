@@ -20,7 +20,7 @@
 		<org.apache.cxf-version>3.1.5</org.apache.cxf-version>
 		<org.codehaus.jackson-version>1.9.13</org.codehaus.jackson-version>
 		<javax.ws.rs.jsr311-api-version>1.1.1</javax.ws.rs.jsr311-api-version>
-		<org.codehaus.enunciate-version>1.31</org.codehaus.enunciate-version>
+		<com.webcohesion.enunciate-version>2.5.0</com.webcohesion.enunciate-version>
 		<org.aspectj-version>1.8.7</org.aspectj-version>
 		<cglib-version>2.2</cglib-version>
 		<org.apache.tiles-version>2.2.2</org.apache.tiles-version>
@@ -28,7 +28,7 @@
 		<org.slf4j-version>1.7.13</org.slf4j-version>
 		<log4j-version>1.2.16</log4j-version>
 		
-		<org.springframework.cloud-version>1.2.0.RELEASE</org.springframework.cloud-version>
+		<org.springframework.cloud-version>1.2.2.RELEASE</org.springframework.cloud-version>
 		<com.sap.hana.cloud-version>1.0.4.RELEASE</com.sap.hana.cloud-version>
 		
 		<com.sap.cloud.neo.api-version>1.92.21.3</com.sap.cloud.neo.api-version>
