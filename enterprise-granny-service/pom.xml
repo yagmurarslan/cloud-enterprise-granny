@@ -174,26 +174,22 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j-version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>${org.slf4j-version}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 		  	<artifactId>slf4j-log4j12</artifactId>
 		  	<version>${org.slf4j-version}</version>
-		  	<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.15</version>
-			<scope>test</scope>
 			<exclusions>
 				<exclusion>
 					<groupId>javax.mail</groupId>
@@ -281,6 +277,23 @@
 			<artifactId>cxf-rt-rs-client</artifactId>
 			<version>${org.apache.cxf-version}</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.cxf</groupId>
+		    <artifactId>cxf-rt-rs-service-description</artifactId>
+		    <version>${org.apache.cxf-version}</version>
+		</dependency>
+        
+        <!-- Swagger v2 -->
+        <dependency>
+		    <groupId>io.swagger</groupId>
+		    <artifactId>swagger-jaxrs</artifactId>
+		    <version>1.5.7</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.swagger</groupId>
+		    <artifactId>swagger-annotations</artifactId>
+		    <version>1.5.7</version>
+		</dependency>
 		
 		<!-- Validation -->
 		<dependency>
@@ -311,18 +324,6 @@
 			<groupId>com.googlecode.libphonenumber</groupId>
 			<artifactId>libphonenumber</artifactId>
 			<version>5.7</version>
-		</dependency>
-
-		<!-- enunciate (REST API documentation tool) -->
-		<dependency>
-			<groupId>org.codehaus.enunciate</groupId>
-			<artifactId>enunciate-docs</artifactId>
-			<version>${org.codehaus.enunciate-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.enunciate</groupId>
-			<artifactId>enunciate-core-annotations</artifactId>
-			<version>${org.codehaus.enunciate-version}</version>
 		</dependency>
 
 		<!-- CloudFoundry/Heroku -->
@@ -423,42 +424,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
-			<!-- enunciate - REST documentation tool -->
-			<plugin>
-				<groupId>org.codehaus.enunciate</groupId>
-				<artifactId>maven-enunciate-plugin</artifactId>
-				<version>${org.codehaus.enunciate-version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>docs</goal>
-						</goals>
-						<configuration>
-							<docsDir>${project.basedir}/src/main/webapp/docs</docsDir>
-							<configFile>${project.basedir}/src/main/resources/META-INF/enunciate/enunciate.xml</configFile>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<!-- delete old API documentation as part of clean -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>2.4.1</version>
-				<configuration>
-					<filesets>
-						<fileset>
-							<directory>${project.basedir}/src/main/webapp/docs</directory>
-							<includes>
-								<include>**/*</include>
-							</includes>
-							<followSymlinks>false</followSymlinks>
-						</fileset>
-					</filesets>
-				</configuration>
-			</plugin>
 		</plugins>
 
 		<pluginManagement>
@@ -490,25 +455,7 @@
 										<execute></execute>
 									</action>
 								</pluginExecution>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.codehaus.enunciate
-										</groupId>
-										<artifactId>
-											enunciate-maven-plugin
-										</artifactId>
-										<versionRange>
-											[1.28,)
-										</versionRange>
-										<goals>
-											<goal>docs</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
+								
 							</pluginExecutions>
 						</lifecycleMappingMetadata>
 					</configuration>
@@ -537,9 +484,10 @@
 				        <ignoredUnusedDeclaredDependency>cglib:cglib-nodep</ignoredUnusedDeclaredDependency>
 				        <ignoredUnusedDeclaredDependency>asm:asm</ignoredUnusedDeclaredDependency>
 				        <ignoredUnusedDeclaredDependency>org.apache.cxf:cxf-rt-rs-client</ignoredUnusedDeclaredDependency>
-				        <ignoredUnusedDeclaredDependency>org.codehaus.enunciate:enunciate-docs</ignoredUnusedDeclaredDependency>
+				        <ignoredUnusedDeclaredDependency>org.apache.cxf:cxf-rt-rs-service-description</ignoredUnusedDeclaredDependency>
 				        <ignoredUnusedDeclaredDependency>org.hibernate:hibernate-validator</ignoredUnusedDeclaredDependency>
 				      	<ignoredUnusedDeclaredDependency>org.codehaus.jackson:jackson-jaxrs</ignoredUnusedDeclaredDependency>
+				      	<ignoredUnusedDeclaredDependency>io.swagger:swagger-jaxrs</ignoredUnusedDeclaredDependency>
 				      </ignoredUnusedDeclaredDependencies>
 			        </configuration>
 				</plugin>

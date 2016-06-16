@@ -20,7 +20,7 @@
 
 	<context:component-scan base-package="com.sap.hana.cloud.samples.granny.api.impl" />
 
-	<jaxrs:server id="api" address="/v1">
+	<jaxrs:server id="api" address="/v1"> 
 		<jaxrs:inInterceptors>
         	<ref bean="validationInInterceptor" />
 	    </jaxrs:inInterceptors>
@@ -32,6 +32,7 @@
         </jaxrs:properties>
 		<jaxrs:serviceBeans>
 			<ref bean="contactFacade" />
+			<ref bean="swagger" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
             <ref bean="jacksonProvider" />
@@ -41,6 +42,7 @@
             <ref bean="validationExceptionMapper" />
         </jaxrs:providers>
 	</jaxrs:server>
+
 
 	<bean id="objectMapper" class="com.sap.hana.cloud.samples.granny.util.CustomObjectMapper" />
 
@@ -86,5 +88,20 @@
 	<bean id="validationOutInterceptor" class="org.apache.cxf.jaxrs.validation.JAXRSBeanValidationOutInterceptor">
 	    <property name="provider" ref="validationProvider" />
 	</bean>
-
+	
+	<!-- Swagger 2.0 API hook  -->
+    <bean id="swagger" class="io.swagger.jaxrs.listing.ApiListingResource" />
+    
+	<bean id="swaggerConfig" class="io.swagger.jaxrs.config.BeanConfig">
+	    <property name="resourcePackage" value="com.sap.hana.cloud.samples.granny.api.impl"/>
+	    <property name="version" value="2.1.1"/>
+	    <property name="basePath" value="api/v1"/>
+	    <property name="title" value="Granny's Addressbook Service"/>
+	    <property name="description" value="Granny's Addressbook Service"/>
+	    <property name="license" value="Apache 2.0"/>
+	    <property name="licenseUrl" value="http://www.apache.org/licenses/LICENSE-2.0.html"/>
+	    <property name="scan" value="true"/>
+	    <property name="host" value="#{servletContext.contextPath}" />
+	</bean>
+	
 </beans>
