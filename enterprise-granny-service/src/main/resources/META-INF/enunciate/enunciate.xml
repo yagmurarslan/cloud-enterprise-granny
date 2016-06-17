@@ -1,13 +1,15 @@
 <enunciate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="http://enunciate.webcohesion.com/schemas/enunciate-2.0.0.xsd">
+	xsi:noNamespaceSchemaLocation="http://enunciate.webcohesion.com/schemas/enunciate-2.5.0.xsd">
 
 	
-	<title>Granny's Addressbook</title>
-	<copyright>SAP SE</copyright>
+	<title>Granny's Addressbook - Contact Management Service</title>
 	<description>Provides REST endpoints to manage address data.</description>
+	<copyright>SAP SE</copyright>
+	
 	<terms>Apache License, Version 2.0 </terms>
-	<application>/api/v1</application>
 
+	<application root="/api/v1" />
+	
 	<api-classes>
 		<include pattern="com.sap.hana.cloud.samples.granny.model.*" />
 
@@ -17,13 +19,16 @@
 		<exclude pattern="org.eclipse.persistence.jpa.rs.**" />
 	</api-classes>
 
-
 	<modules>
 		<jaxrs datatype-detection="aggressive" />
 		<jackson />
-		<docs docsDir="../../../webapp/docs" docsSubdir="/" disableRestMountpoint="true"/>
-
-		<swagger disabled="true" />
+		<docs docsDir="../../../webapp/docs" docsSubdir="../docs" 
+		      faviconUri="/resources/img/favicon.ico" 
+		      freemarkerTemplate="docs.fmt"
+		      includeApplicationPath="true"
+		      disableResourceLinks="false" />
+		      
+		<swagger disabled="true"/>
 
 		<gwt-json-overlay disabled="true" />
 		<idl disabled="true" />

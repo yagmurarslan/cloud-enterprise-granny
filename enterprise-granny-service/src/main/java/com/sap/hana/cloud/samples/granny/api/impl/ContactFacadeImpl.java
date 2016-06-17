@@ -30,6 +30,7 @@ import com.sap.hana.cloud.samples.granny.srv.ContactService;
 @Produces({ "application/json" })
 @com.webcohesion.enunciate.metadata.Facet(value="Addressbook API", documentation="Provides REST endpoints to manage address data.")
 @com.webcohesion.enunciate.metadata.rs.ResourceLabel(value="Contact Service")
+@com.webcohesion.enunciate.metadata.rs.ServiceContextRoot(value="/api/v1")
 public class ContactFacadeImpl extends BaseFacade 
 {
 	@Autowired
