@@ -7,9 +7,9 @@
 		<version>2.3.2-BUILD-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>enterprise-granny-service</artifactId>
-	<name>enterprise-granny-service</name>
-	<description>The addressbook (micro-) service</description>
+	<artifactId>enterprise-granny-phonelib</artifactId>
+	<name>enterprise-granny-phonelib</name>
+	<description>RESTful micro-service for the Google phonelib library</description>
 	<packaging>war</packaging>
 
 	<repositories>
@@ -30,12 +30,6 @@
 			<url>http://repository.springsource.com/maven/bundles/external</url>
 		</repository>
 
-		<repository>
-			<id>eclipselink</id>
-			<name>EclipseLink Maven Repository</name>
-			<url>http://download.eclipse.org/rt/eclipselink/maven.repo/</url>
-		</repository>
-
 	</repositories>
 
 	<dependencies>
@@ -44,6 +38,20 @@
 			<artifactId>enterprise-granny-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		
+		<!-- Google Phone Lib -->
+		<dependency>
+			<groupId>com.googlecode.libphonenumber</groupId>
+			<artifactId>libphonenumber</artifactId>
+			<version>7.4.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.libphonenumber</groupId>
+			<artifactId>carrier</artifactId>
+			<version>1.35</version>
+		</dependency>
+		
+		
 
 		<!-- Spring -->
 		<dependency>
@@ -75,64 +83,9 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-        <dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-commons</artifactId>
-			<version>${org.springframework.data-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>${org.springframework.data-jpa-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework-version}</version>
 			<scope>test</scope>
-		</dependency>
-
-		<!-- Apache Jakarta Commons -->
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-			<scope>runtime</scope>
-		</dependency>
-
-		<!-- Derby -->
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derbyclient</artifactId>
-			<version>10.9.1.0</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derby</artifactId>
-			<version>10.9.1.0</version>
-			<scope>runtime</scope>
-		</dependency>
-
-		<!-- EclipseLink (and JPA) -->
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>eclipselink</artifactId>
-			<version>2.5.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>javax.persistence</artifactId>
-			<version>2.1.0</version>
 		</dependency>
 				
 		<!-- AspectJ -->
@@ -282,51 +235,7 @@
 		    <artifactId>cxf-rt-rs-service-description</artifactId>
 		    <version>${org.apache.cxf-version}</version>
 		</dependency>
-        
-        <!-- Swagger v2 -->
-        <dependency>
-		    <groupId>io.swagger</groupId>
-		    <artifactId>swagger-jaxrs</artifactId>
-		    <version>1.5.7</version>
-		</dependency>
-		<dependency>
-		    <groupId>io.swagger</groupId>
-		    <artifactId>swagger-annotations</artifactId>
-		    <version>1.5.7</version>
-		</dependency>
-		
-		<!-- Validation -->
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>1.1.0.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>5.2.2.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator-cdi</artifactId>
-			<version>5.2.2.Final</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.el</artifactId>
-			<version>3.0.1-b08</version>
-			<scope>test</scope>
-		</dependency>
-		
-		<!-- Google Phone Lib -->
-		<dependency>
-			<groupId>com.googlecode.libphonenumber</groupId>
-			<artifactId>libphonenumber</artifactId>
-			<version>5.7</version>
-		</dependency>
-		
-		  
+				  
 		<!-- enunciate (REST API documentation tool) -->
 		<dependency>
 	      	<groupId>com.webcohesion.enunciate</groupId>
@@ -334,47 +243,6 @@
 	      	<version>${com.webcohesion.enunciate-version}</version>
 	    </dependency>
 		  
-		<!-- CloudFoundry/Heroku -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-cloudfoundry-connector</artifactId>
-			<version>${org.springframework.cloud-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-heroku-connector</artifactId>
-			<version>${org.springframework.cloud-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-spring-service-connector</artifactId>
-			<version>${org.springframework.cloud-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-
-		<!-- SAP HANA Cloud Platform -->
-		<dependency>
-			<groupId>com.sap.hana.cloud</groupId>
-			<artifactId>spring-cloud-sap-connector</artifactId>
-			<version>${com.sap.hana.cloud-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.sap.hana.cloud</groupId>
-			<artifactId>spring-cloud-cloudfoundry-hana-service-connector</artifactId>
-			<version>${com.sap.hana.cloud-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sap.cloud</groupId>
-			<artifactId>neo-java-web-api</artifactId>
-			<version>${com.sap.cloud.neo.api-version}</version>
-			<scope>provided</scope>
-		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -394,7 +262,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<warName>ROOT</warName>
+					<warName>phonelib</warName>
 				</configuration>
 			</plugin>
 			<plugin>
