@@ -1,47 +1,49 @@
-<enunciate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://enunciate.webcohesion.com/schemas/enunciate-2.0.0.xsd">
+<enunciate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://enunciate.webcohesion.com/schemas/enunciate-2.0.0.xsd">
+
+	
+	<title>Granny's Addressbook</title>
+	<copyright>SAP SE</copyright>
+	<description>Provides REST endpoints to manage address data.</description>
+	<terms>Apache License, Version 2.0 </terms>
+	<application>/api/v1</application>
 
 	<api-classes>
-    	<include pattern="com.sap.hana.cloud.samples.granny.model.*"/>
-    	 
-    	<exclude pattern="com.sap.hana.cloud.samples.granny.api.*"/>  
-    	
-    	<exclude pattern="io.swagger.jaxrs.listing.**" />
-    	<exclude pattern="org.eclipse.persistence.jpa.rs.**" /> 	
-  	</api-classes>
+		<include pattern="com.sap.hana.cloud.samples.granny.model.*" />
+
+		<exclude pattern="com.sap.hana.cloud.samples.granny.api.*" />
+
+		<exclude pattern="io.swagger.jaxrs.listing.**" />
+		<exclude pattern="org.eclipse.persistence.jpa.rs.**" />
+	</api-classes>
 
 
-  <modules>
-    <jaxrs datatype-detection="aggressive"/>
-    <jackson />
-    <docs docsDir="../../../webapp/docs" docsSubdir="/"/>
-    
-    <swagger disabled="true"/>
-    
-    <gwt-json-overlay disabled="true" />
-    <idl disabled="true" />
+	<modules>
+		<jaxrs datatype-detection="aggressive" />
+		<jackson />
+		<docs docsDir="../../../webapp/docs" docsSubdir="/" disableRestMountpoint="true"/>
 
-    <jackson1 disabled="true"/>
-    <jaxb disabled="true"/>
-    <jaxws disabled="true"/>
-    <spring-web disabled="true"/>
-    
-    <c-xml-client disabled="true" />
-    <csharp-xml-client disabled="true" />
-    <java-json-client disabled="true" />
-    <java-xml-client disabled="true"/>
-    <javascript-client disabled="true"/>
-    <obj-c-xml-client disabled="true"/>
-    <php-json-client disabled="true"/>
-    <php-xml-client disabled="true" />
-    <ruby-json-client disabled="true"/>
-  </modules>
-  
+		<swagger disabled="true" />
+
+		<gwt-json-overlay disabled="true" />
+		<idl disabled="true" />
+
+		<jackson1 disabled="true" />
+		<jaxb disabled="true" />
+		<jaxws disabled="true" />
+		<spring-web disabled="true" />
+
+		<!-- disable all the client generation tools -->
+		<c-xml-client disabled="true" />
+		<csharp-xml-client disabled="true" />
+		<java-json-client disabled="true" />
+		<java-xml-client disabled="true" />
+		<javascript-client disabled="true" />
+		<obj-c-xml-client disabled="true" />
+		<php-json-client disabled="true" />
+		<php-xml-client disabled="true" />
+		<ruby-json-client disabled="true" />
+	</modules>
+
 </enunciate>
-
-<!-- 
-	splashPackage="com.sap.hana.cloud.samples.granny.api.impl" title="Granny's Addressbook Service"
-			copyright="SAP SE" includeDefaultDownloads="false" includeExampleXml="false"
-			includeExampleJson="true" groupRestResources="grouping" applyWsdlFilter="false"
-			docsDir="docs" freemarkerXMLProcessingTemplate="docs.fmt" base="docs-base.zip"
- -->
  
