@@ -33,11 +33,6 @@
 	</repositories>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.sap.hana.cloud.samples</groupId>
-			<artifactId>enterprise-granny-core</artifactId>
-			<version>${project.version}</version>
-		</dependency>
 		
 		<!-- Google Phone Lib -->
 		<dependency>
@@ -50,8 +45,6 @@
 			<artifactId>carrier</artifactId>
 			<version>1.35</version>
 		</dependency>
-		
-		
 
 		<!-- Spring -->
 		<dependency>
@@ -88,39 +81,6 @@
 			<scope>test</scope>
 		</dependency>
 				
-		<!-- AspectJ -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>${org.aspectj-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>${org.aspectj-version}</version>
-		</dependency>
-
-		<!-- AOP -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aspects</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>asm</groupId>
-			<artifactId>asm</artifactId>
-			<version>2.2.3</version>
-		</dependency>
-		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib-nodep</artifactId>
-			<version>2.1_3</version>
-		</dependency>
 
 		<!-- Logging -->
 		<dependency>

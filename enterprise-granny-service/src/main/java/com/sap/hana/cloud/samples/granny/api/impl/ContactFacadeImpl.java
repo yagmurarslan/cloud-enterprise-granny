@@ -18,6 +18,8 @@ import javax.ws.rs.core.Response.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sap.hana.cloud.samples.granny.dao.PhoneNumberValidationDAO;
+import com.sap.hana.cloud.samples.granny.dao.PhoneNumberValidationResult;
 import com.sap.hana.cloud.samples.granny.model.Address;
 import com.sap.hana.cloud.samples.granny.model.Contact;
 import com.sap.hana.cloud.samples.granny.srv.ContactService;
@@ -35,6 +37,9 @@ public class ContactFacadeImpl extends BaseFacade
 {
 	@Autowired
 	ContactService contactSrv = null;
+	
+	@Autowired 
+	PhoneNumberValidationDAO phoneNumberValidation = null;
 	
 	/**
 	 * Returns a {@link List} of all {@link Contact} objects.
@@ -64,10 +69,14 @@ public class ContactFacadeImpl extends BaseFacade
 	@com.webcohesion.enunciate.metadata.rs.TypeHint(Contact.class)
 	public Response create(@Valid Contact contact) 
 	{	
+		contact = validatePhoneNumbers(contact);
+		
 		contact = contactSrv.createContact(contact);
 		return Response.ok(contact).status(Status.CREATED).build();
 	}
 	
+
+
 	/**
 	 * Returns the {@link Contact} with the specified ID or a {@link Status.NOT_FOUND} (404) error code if no {@link Contact} object with the specified ID exists.
 	 * 
@@ -115,6 +124,8 @@ public class ContactFacadeImpl extends BaseFacade
 	@com.webcohesion.enunciate.metadata.rs.TypeHint(Contact.class)
 	public Response update(@PathParam("id") String id, @Valid Contact contact) 
 	{
+		contact = validatePhoneNumbers(contact);
+		
 		contact = contactSrv.updateContact(contact);
 		return Response.ok(contact).build();
 	}
@@ -160,6 +171,54 @@ public class ContactFacadeImpl extends BaseFacade
 	{
 		List<Address> addresses = contactSrv.getContactById(id).getAddresses();
 		return  Response.ok(addresses).build();
+	}
+	
+	/**
+	 * Validates the phone numbers of the specified {@link Contact}.
+	 * 
+	 * @param contact The {@link Contact} owning the phone numbers to validate
+	 * 
+	 * @return The {@link Contact} with the validated phone numbers
+	 */
+	private Contact validatePhoneNumbers(Contact contact)
+	{
+		Contact retVal = contact;
 		
+		String phoneNumber = null;
+		String region = null;
+		
+		// TODO validate all phone numbers, not only the first one
+		
+		try 
+		{
+			phoneNumber = contact.getPhoneNumbers().get(0).getNumber(); 
+		}
+		catch (Exception ex) {} // ignore
+		
+		try
+		{
+			region = contact.getAddresses().get(0).getCountry(); 
+		}
+		catch (Exception ex) {} // ignore
+		
+		try
+		{
+			PhoneNumberValidationResult result = phoneNumberValidation.validatePhoneNumber(phoneNumber, region);
+			
+			if (result != null)
+			{
+				if (result.isValid())
+				{
+					phoneNumber = result.getNumber();
+					contact.getPhoneNumbers().get(0).setNumber(phoneNumber);
+				}
+			}
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace(System.out);
+		}
+					
+		return retVal;
 	}
 }

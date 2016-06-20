@@ -10,6 +10,7 @@
 	
 	<api-classes>
 		<include pattern="ccom.sap.hana.cloud.samples.granny.libphonenumber.*" />
+		<exclude pattern="com.sap.hana.cloud.samples.granny.api.*" />
 	</api-classes>
 
 	<modules>

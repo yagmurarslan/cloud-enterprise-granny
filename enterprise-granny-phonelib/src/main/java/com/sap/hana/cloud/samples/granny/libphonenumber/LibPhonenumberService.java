@@ -24,7 +24,11 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil.PhoneNumberType;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 
 /**
- *  .
+ *  Service for validating & formatting phone numbers.
+ *  
+ *  Basically an HTTP-based wrapper around the Google I18N <code>libphonenumber</code> library.
+ *  
+ *  @see https://github.com/googlei18n/libphonenumber
  */
 @Service("libPhonenumberService")
 @Path("/phone")
@@ -35,11 +39,11 @@ import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 public class LibPhonenumberService
 {
 	/**
+	 * Validates the specified phone number taking into account the specified region code.
 	 * 
-	 * @param phoneNumber
+	 * @param phoneNumber The phone number to validate
 	 * @param region Region Code string using ISO 3166-1 two-letter country-code format in upper-case. 
-	 * @param header
-	 * @return
+	 * @return The validation result
 	 * 
 	 * @see The list of the codes can be found here: http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm
 	 */
@@ -63,7 +67,6 @@ public class LibPhonenumberService
 		
 		try 
 		{
-			Locale locale = null;
 			boolean knownCountry = false;
 			String country = null;
 			

@@ -7,6 +7,10 @@
 		<res-ref-name>jdbc/DefaultDB</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
 	</resource-ref>
+	<resource-ref>
+    	<res-ref-name>PhoneNumber-Service</res-ref-name>
+    	<res-type>com.sap.core.connectivity.api.http.HttpDestination</res-type>
+  	</resource-ref>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/spring-context.xml</param-value>
